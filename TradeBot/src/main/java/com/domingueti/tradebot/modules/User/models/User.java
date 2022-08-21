@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.User.model;
+package com.domingueti.tradebot.modules.User.models;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -18,11 +18,17 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
+
+import com.domingueti.tradebot.modules.Document.models.Document;
+import com.domingueti.tradebot.modules.Investment.models.CashBalance;
+import com.domingueti.tradebot.modules.Investment.models.Investment;
+import com.domingueti.tradebot.modules.Investment.models.InvestmentBalance;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -39,7 +45,7 @@ import lombok.ToString;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "update tb_user set deleted_at = current_timestamp where id=?")
-public class User implements Serializable{
+public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -70,12 +76,13 @@ public class User implements Serializable{
 	@JoinColumn(name = "userTypeId", insertable = false, updatable = false)
 	private @Getter UserType userType;
 	
-	private @Getter CashBalance cashBalance;
-	
-	private @Getter List<Transaction> transactions = new ArrayList<>();
-	
 	@ToString.Exclude
-	@ManyToMany(mappedBy = "user")
+	@OneToOne(optional = false)
+	@JoinColumn(name = "cashBalanceId", insertable = false, updatable = false)
+	private @Getter CashBalance cashBalance;
+		
+	@ToString.Exclude
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private @Getter List<Investment> investments = new ArrayList<>();
 	
 	@ToString.Exclude

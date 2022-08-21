@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.User.model;
+package com.domingueti.tradebot.modules.User.models;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
