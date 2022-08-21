@@ -15,7 +15,6 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.type.CurrencyType;
 
 import com.domingueti.tradebot.modules.User.models.User;
 
@@ -64,8 +63,4 @@ public class CashBalance implements Serializable{
 	@JoinColumn(name = "cashBalanceTypeId", insertable = false, updatable = false)
 	private @Getter CashBalanceType cashBalanceType;
 	
-	@ToString.Exclude
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "currencyTypeId", insertable = false, updatable = false)
-	private @Getter CurrencyType currencyType;
 }

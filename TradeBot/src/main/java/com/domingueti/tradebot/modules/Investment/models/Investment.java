@@ -3,6 +3,7 @@ package com.domingueti.tradebot.modules.Investment.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -43,21 +44,17 @@ public class Investment implements Serializable {
 	@Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
-	
+
 	private @Getter @Setter Long userId;
-	
+
 	private @Getter @Setter Long cryptocurrencyId;
-	
-	private @Getter @Setter Long investmentTransactionId;
-	
-	private @Getter @Setter Long investmentBalanceId;
-	
+
 	private @Getter @Setter BigDecimal initialValue;
-	
+
 	private @Getter @Setter BigDecimal unitValue;
-	
+
 	private @Getter @Setter Double units;
-	
+
 	private @Getter @Setter Boolean active;
 
 	@CreationTimestamp
@@ -67,21 +64,24 @@ public class Investment implements Serializable {
 	private @Getter Timestamp updatedAt;
 
 	private @Getter @Setter Timestamp deletedAt;
-	
+
 	@ToString.Exclude
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "userId", insertable = false, updatable = false)
 	private @Getter User user;
-	
+
 	@ToString.Exclude
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "cryptocurrencyId", insertable = false, updatable = false)
 	private @Getter Cryptocurrency cryptocurrency;
+
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "investmentBalanceId")
+	private @Getter InvestmentBalance investmentBalance;
 	
 	@ToString.Exclude
 	@OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
-	private @Getter InvestmentTransaction investmentTransaction;
-	
-	@ToString.Exclude
-	@OneToOne(mappedBy = "investment")
-	private @Getter InvestmentBalance investmentBalance;
+	private @Getter List<InvestmentTransaction> investmentTransactions;
+
 }

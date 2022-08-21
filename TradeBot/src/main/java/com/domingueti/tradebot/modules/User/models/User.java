@@ -28,7 +28,6 @@ import org.hibernate.annotations.Where;
 import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Investment.models.CashBalance;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
-import com.domingueti.tradebot.modules.Investment.models.InvestmentBalance;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -85,10 +84,6 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private @Getter List<Investment> investments = new ArrayList<>();
 	
-	@ToString.Exclude
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private @Getter List<InvestmentBalance> investmentBalance = new ArrayList<>();
-
 	@ToString.Exclude
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private @Getter List<Document> documents = new ArrayList<>();
