@@ -3,7 +3,6 @@ package com.domingueti.tradebot.modules.Investment.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,6 +18,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
+import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
+import com.domingueti.tradebot.modules.InvestmentBalance.models.InvestmentBalance;
 import com.domingueti.tradebot.modules.User.models.User;
 
 import lombok.AllArgsConstructor;
@@ -80,8 +80,4 @@ public class Investment implements Serializable {
 	@JoinColumn(name = "investmentBalanceId")
 	private @Getter InvestmentBalance investmentBalance;
 	
-	@ToString.Exclude
-	@OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
-	private @Getter List<InvestmentTransaction> investmentTransactions;
-
 }

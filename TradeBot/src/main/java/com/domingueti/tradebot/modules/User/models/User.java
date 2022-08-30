@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,8 +24,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
+import com.domingueti.tradebot.modules.CashBalance.models.CashBalance;
 import com.domingueti.tradebot.modules.Document.models.Document;
-import com.domingueti.tradebot.modules.Investment.models.CashBalance;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
 
 import lombok.AllArgsConstructor;
@@ -52,8 +51,6 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 	
-	private @Getter @Setter Long userTypeId;
-	
 	private @Getter @Setter Long cashBalanceId;
 
 	private @Getter @Setter String name;
@@ -70,11 +67,6 @@ public class User implements Serializable {
 
 	private @Getter @Setter Timestamp deletedAt;
 
-	@ToString.Exclude
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "userTypeId", insertable = false, updatable = false)
-	private @Getter UserType userType;
-	
 	@ToString.Exclude
 	@OneToOne(optional = false)
 	@JoinColumn(name = "cashBalanceId", insertable = false, updatable = false)
