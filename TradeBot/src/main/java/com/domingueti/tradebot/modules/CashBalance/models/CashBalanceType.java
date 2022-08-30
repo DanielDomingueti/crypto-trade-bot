@@ -1,11 +1,10 @@
-package com.domingueti.tradebot.modules.Investment.models;
+package com.domingueti.tradebot.modules.CashBalance.models;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,35 +14,34 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
+import org.springframework.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.EqualsAndHashCode.Include;
 
-@Entity(name = "tb_investment_transaction_type")
+@Entity(name = "tb_cash_balance_type")
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "update tb_investment_transaction_type set deleted_at = current_timestamp where id=?")
-public class InvestmentTransactionType implements Serializable {
+@SQLDelete(sql = "update tb_cash_balance_type set deleted_at = current_timestamp where id=?")
+public class CashBalanceType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
-	
-	private @Getter @Setter String type;
 
-	private @Getter @Setter String description;
+	private @Getter @Setter String type;
 	
+	private @Getter @Setter String description;
+
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;
 
@@ -52,7 +50,8 @@ public class InvestmentTransactionType implements Serializable {
 
 	private @Getter @Setter Timestamp deletedAt;
 	
+	@Nullable
 	@ToString.Exclude
-	@OneToMany(mappedBy = "investmentTransactionType", cascade = CascadeType.ALL)
-	private @Getter List<InvestmentTransaction> investmentTransactions = new ArrayList<>();
+	@OneToMany(mappedBy = "cashBalanceType")
+	private @Getter List<CashBalance> cashBalances = new ArrayList<>();
 }

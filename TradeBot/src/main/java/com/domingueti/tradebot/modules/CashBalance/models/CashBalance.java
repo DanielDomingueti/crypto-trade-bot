@@ -1,20 +1,22 @@
-package com.domingueti.tradebot.modules.Investment.models;
+package com.domingueti.tradebot.modules.CashBalance.models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.domingueti.tradebot.modules.User.models.User;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -24,13 +26,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity(name = "tb_cryptocurrency")
+@Entity(name = "tb_cash_balance")
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "update tb_cryptocurrency set deleted_at = current_timestamp where id=?")
-public class Cryptocurrency implements Serializable{
+@SQLDelete(sql = "update tb_cash_balance set deleted_at = current_timestamp where id=?")
+public class CashBalance implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,10 +40,12 @@ public class Cryptocurrency implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 	
-	private @Getter @Setter String symbol;
-
-	private @Getter @Setter String name;
+	private @Getter @Setter Long userId;
 	
+	private @Getter @Setter Long cashBalanceTypeId;
+
+	private @Getter @Setter BigDecimal value;
+
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;
 
@@ -51,6 +55,12 @@ public class Cryptocurrency implements Serializable{
 	private @Getter @Setter Timestamp deletedAt;
 	
 	@ToString.Exclude
-	@OneToMany(mappedBy = "cryptocurrency", cascade = CascadeType.ALL)
-	private @Getter List<Investment> investments = new ArrayList<>();
+	@OneToOne(mappedBy = "cashBalance")
+	private @Getter User user;
+	
+	@ToString.Exclude
+	@ManyToOne
+	@JoinColumn(name = "cashBalanceTypeId", insertable = false, updatable = false)
+	private @Getter CashBalanceType cashBalanceType;
+	
 }
