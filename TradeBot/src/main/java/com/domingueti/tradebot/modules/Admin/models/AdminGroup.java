@@ -1,13 +1,11 @@
-package com.domingueti.tradebot.modules.User.models;
+package com.domingueti.tradebot.modules.Admin.models;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,13 +25,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity(name = "tb_user_group")
+@Entity(name = "tb_admin_group")
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "update tb_user_group set deleted_at = current_timestamp where id=?")
-public class UserGroup implements Serializable {
+@SQLDelete(sql = "update tb_admin_group set deleted_at = current_timestamp where id=?")
+public class AdminGroup implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -54,15 +52,14 @@ public class UserGroup implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 	
 	@ToString.Exclude
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "tb_pivot_user_group_user_route", 
-		joinColumns = @JoinColumn(name = "userGroupId"),
-		inverseJoinColumns = @JoinColumn(name = "userRouteId")
+	@ManyToMany
+	@JoinTable(name = "tb_pivot_admin_group_admin_route", 
+		joinColumns = @JoinColumn(name = "adminGroupId"),
+		inverseJoinColumns = @JoinColumn(name = "adminRouteId")
 	)
-	private @Getter List<UserRoute> userRoutes = new ArrayList<>();
+	private @Getter List<AdminRoute> adminRoutes = new ArrayList<>();
 	
 	@ToString.Exclude
-	@ManyToMany(mappedBy = "userGroups")
-	private @Getter List<User> users = new ArrayList<>();
-	
+	@ManyToMany(mappedBy = "adminGroups")
+	private @Getter List<Admin> admins = new ArrayList<>();
 }
