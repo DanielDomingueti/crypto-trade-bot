@@ -1,9 +1,11 @@
-package com.domingueti.tradebot.modules.User.models;
+package com.domingueti.tradebot.modules.Admin.models;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,10 +16,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
+
+import com.domingueti.tradebot.modules.Document.models.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,24 +33,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity(name = "tb_user_group")
+@Entity(name = "tb_admin")
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "update tb_user_group set deleted_at = current_timestamp where id=?")
-public class UserGroup implements Serializable {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "update tb_admin set deleted_at = current_timestamp where id=?")
+public class Admin implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
-
+	
 	private @Getter @Setter String name;
 
-	private @Getter @Setter String description;
+	private @Getter @Setter String email;
 
+	private @Getter @Setter String password;
+	
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;
 
@@ -54,15 +63,13 @@ public class UserGroup implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 	
 	@ToString.Exclude
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "tb_pivot_user_group_user_route", 
-		joinColumns = @JoinColumn(name = "userGroupId"),
-		inverseJoinColumns = @JoinColumn(name = "userRouteId")
-	)
-	private @Getter List<UserRoute> userRoutes = new ArrayList<>();
+	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+	private @Getter List<Document> documents = new ArrayList<>();
 	
 	@ToString.Exclude
-	@ManyToMany(mappedBy = "userGroups")
-	private @Getter List<User> users = new ArrayList<>();
-	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_pivot_admin_group_admin", 
+		joinColumns = @JoinColumn(name="adminId"),
+		inverseJoinColumns = @JoinColumn(name = "adminGroupId"))
+	private @Getter Set<AdminGroup> adminGroups = new HashSet<>();
 }
