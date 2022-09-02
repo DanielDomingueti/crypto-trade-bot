@@ -52,6 +52,7 @@ public class Cryptocurrency implements Serializable{
 
 	private @Getter @Setter Timestamp deletedAt;
 	
+	//turn into unidirectional
 	@ToString.Exclude
 	@OneToMany(mappedBy = "cryptocurrency", cascade = CascadeType.ALL)
 	private @Getter List<Investment> investments = new ArrayList<>();
