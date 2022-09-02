@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -71,7 +72,7 @@ public class Document {
 	private @Getter User user;
 	
 	@ToString.Exclude
-	@ManyToOne(optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "documentTypeId", insertable = false, updatable = false)
 	private @Getter DocumentType documentType;
 }

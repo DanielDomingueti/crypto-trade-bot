@@ -81,7 +81,7 @@ public class User implements Serializable {
 	private @Getter List<Document> documents = new ArrayList<>();
 	
 	@ToString.Exclude
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany //originally EAGER
 	@JoinTable(name = "tb_pivot_user_group_user", joinColumns = {
 			@JoinColumn(name = "userId") }, inverseJoinColumns = { @JoinColumn(name = "userGroupId") })
 	private @Getter Set<UserGroup> userGroups = new HashSet<>();

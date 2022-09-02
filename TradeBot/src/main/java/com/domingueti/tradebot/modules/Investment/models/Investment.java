@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -71,7 +72,7 @@ public class Investment implements Serializable {
 	private @Getter User user;
 
 	@ToString.Exclude
-	@ManyToOne(optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "cryptocurrencyId", insertable = false, updatable = false)
 	private @Getter Cryptocurrency cryptocurrency;
 

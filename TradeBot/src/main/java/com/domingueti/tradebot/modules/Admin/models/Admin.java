@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -67,7 +66,7 @@ public class Admin implements Serializable {
 	private @Getter List<Document> documents = new ArrayList<>();
 	
 	@ToString.Exclude
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany //fetch = FetchType.EAGER
 	@JoinTable(name = "tb_pivot_admin_group_admin", 
 		joinColumns = @JoinColumn(name="adminId"),
 		inverseJoinColumns = @JoinColumn(name = "adminGroupId"))

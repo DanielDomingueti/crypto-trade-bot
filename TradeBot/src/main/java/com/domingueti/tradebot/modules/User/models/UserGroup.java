@@ -54,7 +54,7 @@ public class UserGroup implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 	
 	@ToString.Exclude
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "tb_pivot_user_group_user_route", 
 		joinColumns = @JoinColumn(name = "userGroupId"),
 		inverseJoinColumns = @JoinColumn(name = "userRouteId")
