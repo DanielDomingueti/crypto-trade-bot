@@ -2,12 +2,9 @@ package com.domingueti.tradebot.modules.Admin.models;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,14 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
-
-import com.domingueti.tradebot.modules.Document.models.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -60,10 +54,6 @@ public class Admin implements Serializable {
 	private @Getter Timestamp updatedAt;
 
 	private @Getter @Setter Timestamp deletedAt;
-	
-	@ToString.Exclude
-	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
-	private @Getter List<Document> documents = new ArrayList<>();
 	
 	@ToString.Exclude
 	@ManyToMany //fetch = FetchType.EAGER
