@@ -50,8 +50,6 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 	
-	private @Getter @Setter Long cashBalanceId;
-
 	private @Getter @Setter String name;
 
 	private @Getter @Setter String email;
