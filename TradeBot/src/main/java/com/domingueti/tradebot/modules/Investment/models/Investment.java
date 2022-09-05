@@ -57,6 +57,8 @@ public class Investment implements Serializable {
 	private @Getter @Setter Double units;
 
 	private @Getter @Setter Boolean active;
+	
+	private @Getter @Setter Boolean simulated;
 
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;

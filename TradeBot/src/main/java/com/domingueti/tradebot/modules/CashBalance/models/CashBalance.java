@@ -46,6 +46,8 @@ public class CashBalance implements Serializable{
 	private @Getter @Setter Long cashBalanceTypeId;
 
 	private @Getter @Setter BigDecimal value;
+	
+	private @Getter @Setter Boolean simulated;
 
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;

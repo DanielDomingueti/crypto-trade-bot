@@ -56,7 +56,7 @@ public class Document {
 	@Column(columnDefinition = "TEXT")
 	private @Getter @Setter String link;
 	
-	private @Getter @Setter boolean main;
+	private @Getter @Setter Boolean main;
 
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;
