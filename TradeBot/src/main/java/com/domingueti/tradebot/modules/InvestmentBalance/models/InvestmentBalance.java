@@ -53,8 +53,10 @@ public class InvestmentBalance implements Serializable{
 	
 	private @Getter @Setter Boolean profitable;
 	
-	private @Getter @Setter LocalDate referenceDate;
+	private @Getter @Setter Boolean simulated;
 	
+	private @Getter @Setter LocalDate referenceDate;
+		
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;
 
