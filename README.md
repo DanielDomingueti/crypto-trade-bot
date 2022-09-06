@@ -12,7 +12,7 @@ Automated cryptocurrency trading system
 </p>
 -->
   
-Crypto-trade-bot is an open‑source cryptocurrency trading tool. In the first place this tool can <b>simulate</b> crypto tradings according to real market cap data. A math indicator was implemented do analyse data and decide whether it should buy or sell a given cryptocurrency.
+Crypto-trade-bot is an open‑source cryptocurrency trading tool. In the first place this tool can <b>simulate</b> crypto tradings according to real market cap data. A math indicator will be implemented do analyse data and decide whether it should buy or sell a given cryptocurrency.
 
 Upcoming versions will provide real trading though Binance API using your account's balance.   
   
@@ -41,7 +41,8 @@ Alternatively you can set up a local development environment.
 - [Docker](https://docs.docker.com/desktop/)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
-### Running the app
+### ATTENTION: THE SESSION BELOW IS STILL BEING BUILD
+### Running the app 
 
 Crypto-trade-bot is running with a PostgreSQL database. 
 
