@@ -22,6 +22,8 @@ public class GetDocumentsByUserIdService {
 		
 		return documentRepository.findAllByUserId(userId).stream()
 				.map(DocumentDTO::new).toList();
+//		return documentRepository.findAll().stream()
+//				.map(DocumentDTO::new).toList();
 	}
 
 }
