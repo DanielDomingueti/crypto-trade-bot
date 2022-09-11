@@ -22,5 +22,4 @@ public class AdminLoginResponseDTO implements Serializable {
 	
 	private @Getter @Setter String[] authorities;	
 	
-	private @Getter @Setter Boolean pendingTasks;
 }
