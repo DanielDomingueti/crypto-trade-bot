@@ -62,4 +62,46 @@ public class SecurityConstants {
 
 		return Long.parseLong(config.getValue());
 	}
+	
+	@Cacheable("signInUserUrl")
+	public String getSignInUserUrl() {
+		ConfigDTO config = getConfig.execute("SIGN_IN_USER_URL");
+
+		return config.getValue();
+	}
+	
+	@Cacheable("userForgotPasswordUrl")
+	public String getUserForgotPassUrl() {
+		ConfigDTO config = getConfig.execute("USER_FORGOT_PASSWORD_URL");
+
+		return config.getValue();
+	}
+	
+	@Cacheable("userResetPasswordUrl")
+	public String getUserResetPassUrl() {
+		ConfigDTO config = getConfig.execute("USER_RESET_PASSWORD_URL");
+
+		return config.getValue();
+	}
+	
+	@Cacheable("signInAdminUrl")
+	public String getSignInAdminUrl() {
+		ConfigDTO config = getConfig.execute("SIGN_IN_ADMIN_URL");
+
+		return config.getValue();
+	}
+	
+	@Cacheable("adminForgotPasswordUrl")
+	public String getAdminForgotPassUrl() {
+		ConfigDTO config = getConfig.execute("ADMIN_FORGOT_PASSWORD_URL");
+
+		return config.getValue();
+	}
+	
+	@Cacheable("adminResetPasswordUrl")
+	public String getAdminResetPassUrl() {
+		ConfigDTO config = getConfig.execute("ADMIN_RESET_PASSWORD_URL");
+
+		return config.getValue();
+	}
 }

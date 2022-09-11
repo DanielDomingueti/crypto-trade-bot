@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.domingueti.tradebot.modules.Admin.dtos.AdminRouteOnlyDataDTO;
+import com.domingueti.tradebot.modules.Admin.repositories.AdminRouteRepository;
+import com.domingueti.tradebot.modules.User.dtos.UserRouteDTO;
 import com.domingueti.tradebot.modules.User.repositories.UserRouteRepository;
 import com.domingueti.tradebot.security.exceptions.AuthenticationExceptionHandler;
 import com.domingueti.tradebot.security.filters.AdminAuthenticationFilter;
@@ -32,7 +35,6 @@ public class WebSecurity {
 	private AdminDetailsServiceImpl adminDetailsServiceImpl;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private SecurityConstants securityConstants;
-	private ConfigService configService;
 	
 	private UserRouteRepository userRouteRepository;
 	private AdminRouteRepository adminRouteRepository;
@@ -47,22 +49,10 @@ public class WebSecurity {
 
 			http.cors();
 
-			// AWS Health
-			http.requestMatchers().antMatchers(HttpMethod.GET, securityConstants.getHealthUrl()).and()
-					.authorizeRequests().antMatchers(HttpMethod.GET, securityConstants.getHealthUrl()).permitAll();
-
-			// D4Sign Webhook
-			http.requestMatchers().antMatchers(HttpMethod.POST, configService.getD4SignWebHookUrl()).and()
-					.authorizeRequests().antMatchers(HttpMethod.POST, configService.getD4SignWebHookUrl()).permitAll();
-
 			// Login de usuário
 			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getSignInUserUrl())
 				.and().authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getSignInUserUrl()).permitAll();
 
-			// Login de usuário como admin
-			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getPortalAdminLoginUrl())
-					.and().authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getPortalAdminLoginUrl()).permitAll();
-			
 			// Esqueceu senha
 			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getUserForgotPassUrl()).and()
 					.authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getUserForgotPassUrl())
@@ -107,26 +97,6 @@ public class WebSecurity {
 			http.csrf().disable();
 
 			http.cors();
-
-			// Cron Rendimentos
-			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getCronIncomesUrl()).and()
-					.authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getCronIncomesUrl())
-					.permitAll();
-
-			// Cron Balances
-			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getCronBalancesUrl()).and()
-					.authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getCronBalancesUrl())
-					.permitAll();
-
-			// Cron Sidebar
-			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getCronSidebarUrl()).and()
-					.authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getCronSidebarUrl())
-					.permitAll();
-			
-			// Login de Administrador 2FA
-			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl2Fa()).and()
-					.authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl2Fa())
-					.permitAll();
 
 			// Login de Administrador
 			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl()).and()
