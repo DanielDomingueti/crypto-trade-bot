@@ -15,7 +15,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+	
 	private static final String[] PUBLIC_MATCHERS = {
 
 	};
@@ -23,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String[] PUBLIC_MATCHERS_GET = {
 			"/documents/**"
 	};
+
+	//separate two different configure() methods for users and admins
+	//find on route repositories all methods related to the HTTP operation and convert them all into an array.
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
