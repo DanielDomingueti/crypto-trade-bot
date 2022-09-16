@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,7 +17,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.domingueti.tradebot.modules.Admin.dtos.AdminRouteDTO;
 import com.domingueti.tradebot.modules.Admin.repositories.AdminRouteRepository;
+import com.domingueti.tradebot.modules.User.dtos.UserRouteDTO;
 import com.domingueti.tradebot.modules.User.repositories.UserRouteRepository;
+import com.domingueti.tradebot.security.jwt.SecurityConstants;
 
 import lombok.AllArgsConstructor;
 
@@ -25,7 +28,10 @@ import lombok.AllArgsConstructor;
 public class WebSecurity {
 
 	private UserRouteRepository userRouteRepository;
+	
 	private AdminRouteRepository adminRouteRepository;
+	
+	private SecurityConstants securityConstants;
 	
 	@Configuration
 	@Order(1)
@@ -38,8 +44,8 @@ public class WebSecurity {
 			http.cors().and().csrf().disable();
 			
 			//User Login
-//			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getSignInUserUrl())
-//				.and().authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getSignInUserUrl()).permitAll();
+			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getSignInUserUrl())
+				.and().authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getSignInUserUrl()).permitAll();
 			
 //			UserAuthenticationFilter authenticationFilter = new UserAuthenticationFilter(authenticationManager());
 //			authenticationFilter.setAuthenticationFailureHandler(new AuthenticationExceptionHandler());
@@ -49,8 +55,7 @@ public class WebSecurity {
 			
 			for (UserRouteDTO eachRoute : userRoutes) {
 				http.requestMatchers().antMatchers(eachRoute.getMethod(), eachRoute.getRoute()).and()
-					.authorizeRequests().antMatchers(eachRoute.getMethod(), eachRoute.getRoute()).authenticated()
-					.and().addFilter(new UserAuthorizationFilter(authenticationManager()));
+					.authorizeRequests().antMatchers(eachRoute.getMethod(), eachRoute.getRoute()).permitAll();
 			}
 			
 			http.requestMatchers().antMatchers(securityConstants.getSignInUserUrl()).and()
@@ -86,8 +91,8 @@ public class WebSecurity {
 			http.cors().and().csrf().disable();
 			
 			//Admin Login
-//			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl())
-//				.and().authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl()).permitAll();
+			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl())
+				.and().authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl()).permitAll();
 			
 //			AdminAuthenticationFilter authenticationFilter = new AdminAuthenticationFilter(authenticationManager());
 //			authenticationFilter.setAuthenticationFailureHandler(new AuthenticationExceptionHandler());
@@ -97,8 +102,7 @@ public class WebSecurity {
 			
 			for (AdminRouteDTO eachRoute : adminRoutes) {
 				http.requestMatchers().antMatchers(eachRoute.getMethod(), eachRoute.getRoute()).and()
-					.authorizeRequests().antMatchers(eachRoute.getMethod(), eachRoute.getRoute()).authenticated()
-					.and().addFilter(new AdminAuthorizationFilter(authenticationManager()));
+					.authorizeRequests().antMatchers(eachRoute.getMethod(), eachRoute.getRoute()).permitAll();
 			}
 			
 			http.requestMatchers().antMatchers(securityConstants.getSignInAdminUrl()).and()
