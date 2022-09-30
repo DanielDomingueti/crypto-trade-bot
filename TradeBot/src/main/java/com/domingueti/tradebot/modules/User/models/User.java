@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -78,7 +79,7 @@ public class User implements Serializable {
 	private @Getter List<Document> documents = new ArrayList<>();
 	
 	@ToString.Exclude
-	@ManyToMany //originally EAGER
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_pivot_user_group_user", joinColumns = {
 			@JoinColumn(name = "userId") }, inverseJoinColumns = { @JoinColumn(name = "userGroupId") })
 	private @Getter Set<UserGroup> userGroups = new HashSet<>();

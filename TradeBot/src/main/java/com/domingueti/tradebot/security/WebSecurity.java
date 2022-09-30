@@ -75,7 +75,7 @@ public class WebSecurity {
 				
 			}
 			
-//			http.requestMatchers().antMatchers("/**").and().authorizeRequests().anyRequest().authenticated();
+			http.requestMatchers().antMatchers("/**").and().authorizeRequests().anyRequest().authenticated();
 
 			http.requestMatchers().antMatchers(securityConstants.getSignInUserUrl()).and()
 				.addFilter(authenticationFilter);

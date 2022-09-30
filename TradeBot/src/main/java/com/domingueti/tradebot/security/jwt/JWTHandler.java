@@ -14,7 +14,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
 
-@Component
+@Component(value= "jwtHandler")
 public class JWTHandler {
 
 	private SecurityConstants securityConstants;

@@ -24,7 +24,7 @@ public class AuthenticationExceptionHandler implements AuthenticationFailureHand
 				UnauthorizedException.STATUS_ERROR_MESSAGE, request.getRequestURI());
 		
 		if (exception instanceof DisabledException) {
-			if (request.getRequestURI().equals("/admin/login")) {
+			if (request.getRequestURI().equals("/user/login")) {
 				exceptionResponse.setMessage(UnauthorizedException.STATUS_ERROR_ADMIN_DEACTIVATED_MESSAGE);
 			} else {
 				exceptionResponse.setMessage(UnauthorizedException.STATUS_ERROR_USER_DEACTIVATED_MESSAGE);
