@@ -66,7 +66,7 @@ public class User implements Serializable {
 
 	@ToString.Exclude
 	@OneToOne(optional = false)
-	@JoinColumn(name = "cashBalanceId", insertable = false, updatable = false)
+	@JoinColumn(name = "cashBalanceId", updatable = false)
 	private @Getter CashBalance cashBalance;
 		
 	@ToString.Exclude

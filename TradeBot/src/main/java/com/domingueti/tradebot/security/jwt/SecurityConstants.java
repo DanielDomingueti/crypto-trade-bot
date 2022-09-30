@@ -48,5 +48,26 @@ public class SecurityConstants {
 
 		return config.getValue();
 	}
+
+	@Cacheable("headerString")
+	public String getHeaderString() {
+		ConfigDTO config = getConfig.execute("HEADER_STRING");
+
+		return config.getValue();
+	}
+	
+	@Cacheable("tokenType")
+	public String getTokenType() {
+		ConfigDTO config = getConfig.execute("TOKEN_TYPE");
+
+		return config.getValue();
+	}
+	
+	@Cacheable("tokenExpirationTime")
+	public long getExpirationTime() {
+		ConfigDTO config = getConfig.execute("TOKEN_EXPIRATION_TIME");
+
+		return Long.parseLong(config.getValue());
+	}
 	
 }

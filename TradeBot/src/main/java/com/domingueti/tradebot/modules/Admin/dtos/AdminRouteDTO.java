@@ -13,5 +13,4 @@ public interface AdminRouteDTO extends Serializable {
 	String getMethod();
 	
 	String getDescription();
-
 }
