@@ -23,20 +23,19 @@ public final class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String credential) throws UsernameNotFoundException {
-		User applicationUser = userRepository.findByEmailOrDocument(credential);
+		User applicationUser = userRepository.findByEmail(credential);
 
 		if (applicationUser == null) {
 			throw new UsernameNotFoundException(credential);
 		}
 		
 		String userPassword = applicationUser.getPassword() == null ? "" : applicationUser.getPassword();
-		boolean enabled = !applicationUser.getUserStatus().isBlock();
 
 		Collection<GrantedAuthority> userGroups = applicationUser.getUserGroups().stream()
 				.map(group -> new SimpleGrantedAuthority(group.getName().toUpperCase()))
 				.collect(Collectors.toList());
 
 		return new org.springframework.security.core.userdetails.User(credential,
-				userPassword, enabled, true, true, true, userGroups);
+				userPassword, true, true, true, true, userGroups);
 	}
 }

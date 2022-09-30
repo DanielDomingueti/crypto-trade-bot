@@ -17,9 +17,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.domingueti.tradebot.modules.User.dtos.UserAuthenticationDTO;
 import com.domingueti.tradebot.modules.User.dtos.UserOnlyDataDTO;
 import com.domingueti.tradebot.modules.User.repositories.UserRepository;
+import com.domingueti.tradebot.security.dtos.UserLoginDTO;
 import com.domingueti.tradebot.security.dtos.UserLoginResponseDTO;
 import com.domingueti.tradebot.security.jwt.JWTHandler;
 import com.domingueti.tradebot.security.jwt.SecurityConstants;
@@ -33,13 +33,10 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
 	private AuthenticationManager authenticationManager;
 
 	private ApplicationContext appCtx;
-
-	private MigratedUserFilter migratedUserFilter;
-
+	
 	public UserAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 		appCtx = ApplicationContextUtils.getAppContext();
-		migratedUserFilter = (MigratedUserFilter) appCtx.getBean("migratedUserFilter");
 	}
 	
 	@Override
@@ -51,12 +48,10 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
 			ObjectMapper mapper = new ObjectMapper();			
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			UserAuthenticationDTO user = mapper.readValue(req.getInputStream(), UserAuthenticationDTO.class);
+			UserLoginDTO user = mapper.readValue(req.getInputStream(), UserLoginDTO.class);
 
-			migratedUserFilter.verifyNullPassword(user);
-			
 			return authenticationManager
-						.authenticate(new UsernamePasswordAuthenticationToken(user.getCredential().toLowerCase(), user.getPassword()));
+						.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail().toLowerCase(), user.getPassword()));
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -82,7 +77,7 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
 		
 		String token = jwtHandler.createToken(credential, authorities, expirationTime);			
 		
-		UserOnlyDataDTO user = userRepository.findTop1ByEmailOrDocuments_NumberAndDocuments_MainIsTrue(credential, credential);
+		UserOnlyDataDTO user = userRepository.findTop1ByEmail(credential);
 
 		UserLoginResponseDTO loginResponse = new UserLoginResponseDTO(user.getId(), user.getName(), false, token, securityConstants.getTokenType(),
 				expirationTime, authorities);

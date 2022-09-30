@@ -7,12 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.domingueti.tradebot.security.jwt.JWTHandler;
 import com.domingueti.tradebot.utils.statics.TransformObjectToString;
 
+import lombok.AllArgsConstructor;
+
+@Component
+@AllArgsConstructor
 public class TokenExceptionHandler {
 
 	private JWTHandler jwtHandler;
@@ -57,5 +62,5 @@ public class TokenExceptionHandler {
 
 		return true;
 	}
-	
+
 }

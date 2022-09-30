@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public class AdminLoginDTO {
+public class UserPrincipalDTO {
 
     private @Getter Long id;
 
     private @Getter String name;
 
-    private @Getter String email;
-    
+    private @Getter String credential;
+
 }

@@ -9,6 +9,6 @@ import com.domingueti.tradebot.modules.Admin.models.AdminRoute;
 
 public interface AdminRouteRepository extends JpaRepository<AdminRoute, Long> {
 
-	List<AdminRouteOnlyDataDTO> findAllByDeletedAtIsNull();
+	List<AdminRouteOnlyDataDTO> findByDeletedAtIsNull();
 	
 }

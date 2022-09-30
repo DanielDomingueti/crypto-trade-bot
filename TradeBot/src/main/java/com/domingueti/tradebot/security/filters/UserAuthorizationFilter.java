@@ -27,7 +27,7 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 	private JWTHandler jwtHandler;
 	private SecurityConstants securityConstants;
 	private TokenExceptionHandler tokenExceptionHandler;
-
+	
 	public UserAuthorizationFilter(AuthenticationManager authManager) {
 		super(authManager);
 		jwtAuth = new JWTAuthentication();
@@ -36,7 +36,7 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 		securityConstants = (SecurityConstants) appCtx.getBean("securityConstants");
 		tokenExceptionHandler = (TokenExceptionHandler) appCtx.getBean("tokenExceptionHandler");
 	}
-
+	
 	@Override
 	protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
@@ -44,7 +44,9 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 		String header = req.getHeader(securityConstants.getHeaderString());
 		UsernamePasswordAuthenticationToken authentication;
 
-		System.out.println(req.getMethod() + ": " + req.getRequestURI());
+		if (!req.getRequestURI().equals("/health")) {
+			System.out.println(req.getMethod() + ": " + req.getRequestURI());
+		}
 
 		if (header == null || !header.startsWith(securityConstants.getTokenType())) {
 			chain.doFilter(req, res);
@@ -71,7 +73,7 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		chain.doFilter(req, res);
 	}
-
+	
 	private boolean isAdminAccess(HttpServletRequest request) {
 		String token = request.getHeader(securityConstants.getHeaderString())
 				.replace(securityConstants.getTokenType(), "");
@@ -79,10 +81,13 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 		if (token != null) {
 			List<String> authorities = jwtHandler.getAuthoritiesString(token);
 			
-			if(authorities.contains("ADMINISTRADOR"))
+			if(authorities.contains("ADMIN"))
 				return true;
 		}
 		
 		return false;
 	}
+
+
+
 }

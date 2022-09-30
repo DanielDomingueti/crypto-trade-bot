@@ -22,13 +22,13 @@ public class AuthenticationExceptionHandler implements AuthenticationFailureHand
 		UnauthorizedException exceptionResponse = new UnauthorizedException(new Date(),
 				HttpStatus.UNAUTHORIZED.getReasonPhrase(), HttpStatus.UNAUTHORIZED.value(),
 				UnauthorizedException.STATUS_ERROR_MESSAGE, request.getRequestURI());
-
+		
 		if (exception instanceof DisabledException) {
 			if (request.getRequestURI().equals("/admin/login")) {
 				exceptionResponse.setMessage(UnauthorizedException.STATUS_ERROR_ADMIN_DEACTIVATED_MESSAGE);
 			} else {
 				exceptionResponse.setMessage(UnauthorizedException.STATUS_ERROR_USER_DEACTIVATED_MESSAGE);
-			}
+			}			
 		}
 
 		if (exception instanceof ExpiredPasswordException) {

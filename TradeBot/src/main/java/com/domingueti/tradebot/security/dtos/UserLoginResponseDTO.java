@@ -5,9 +5,11 @@ import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @AllArgsConstructor
-public class UserLoginResponseDTO implements Serializable {
+public class UserLoginResponseDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private @Getter @Setter Long id;
@@ -23,5 +25,4 @@ public class UserLoginResponseDTO implements Serializable {
 	private @Getter @Setter Long expirationTime;
 	
 	private @Getter @Setter String[] authorities;
-
 }

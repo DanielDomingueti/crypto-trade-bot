@@ -8,10 +8,10 @@ import lombok.Setter;
 
 @AllArgsConstructor
 public class TokenException {
-
-	public static final String STATUS_EXPIRED_MESSAGE = "Acesso negado, token expirado";
 	
-	public static final String STATUS_INVALID_MESSAGE = "Acesso negado, token inválido";
+	public static final String STATUS_EXPIRED_MESSAGE = "Token expired. Access denied";
+	
+	public static final String STATUS_INVALID_MESSAGE = "Token expired. Access denied";
 	
 	private @Getter @Setter Date timestamp;
 

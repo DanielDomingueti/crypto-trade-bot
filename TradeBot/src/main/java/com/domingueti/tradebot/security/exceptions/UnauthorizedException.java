@@ -10,11 +10,11 @@ import lombok.Setter;
 public class UnauthorizedException {
 	
 	public static final String STATUS_ERROR_MESSAGE = "Login não autorizado com as credenciais informadas";
-
+	
 	public static final String STATUS_ERROR_ADMIN_DEACTIVATED_MESSAGE = "Login não autorizado: Administrador desativado";
-
+	
 	public static final String STATUS_ERROR_USER_DEACTIVATED_MESSAGE = "Login não autorizado: Usuário desativado";
-
+	
 	private @Getter @Setter Date timestamp;
 
 	private @Getter @Setter String error;
@@ -24,4 +24,5 @@ public class UnauthorizedException {
 	private @Getter @Setter String message;
 
 	private @Getter @Setter String path;
+
 }

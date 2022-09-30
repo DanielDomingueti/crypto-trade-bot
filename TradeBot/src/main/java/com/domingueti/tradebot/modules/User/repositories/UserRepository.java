@@ -8,20 +8,25 @@ import com.domingueti.tradebot.modules.User.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 
-	UserOnlyDataDTO findOneByEmailOrDocumentAndDeletedAtIsNull(String emailOrDocument, String method,
-			String requestURI);
-	
-	@Query(value = ""
-			+ "SELECT userObj.* FROM tb_user userObj "
-			+ "INNER JOIN tb_document docObj "
-			+ "ON userObj.id = docObj.user_id "
-			+ "WHERE (userObj.email = :emailOrDocument "
-			+ "OR (docObj.number = :emailOrDocument AND docObj.main = TRUE)) "
-			+ "AND userObj.deleted_at IS NULL "
-			+ "LIMIT 1",
-			nativeQuery = true)
-	User findByEmailOrDocument(String emailOrDocument);
-	
-    UserOnlyDataDTO findTop1ByEmailOrDocuments_NumberAndDocuments_MainIsTrue(String email, String document);
+	User findByEmail(String email);
 
+    @Query(value = ""
+    		+ "SELECT DISTINCT userObj.id, userObj.name "
+    		+ "FROM tb_user userObj "
+    		+ "INNER JOIN tb_pivot_user_group_user userGroupUser "
+    		+ "ON (userObj.id = userGroupUser.user_id) "
+    		+ "INNER JOIN tb_user_group userGroup "
+    		+ "ON (userGroup.id = userGroupUser.user_group_id) "
+    		+ "INNER JOIN tb_pivot_user_group_user_route userGroupUserRoute "
+    		+ "ON (userGroup.id = userGroupUserRoute.user_group_id) "
+    		+ "INNER JOIN tb_user_route userRoute "
+    		+ "ON (userRoute.id = userGroupUserRoute.user_route_id) "
+    		+ "WHERE (userObj.email = :email "
+    		+ "AND userRoute.method = :method AND userRoute.route = :route "
+    		+ "AND userObj.deleted_at IS NULL ",
+    		nativeQuery = true)
+	UserOnlyDataDTO findOneByEmailAndDeletedAtIsNull(String email, String method, String route);
+
+	UserOnlyDataDTO findTop1ByEmail(String email);
+	
 }

@@ -1,19 +1,20 @@
 package com.domingueti.tradebot.security.dtos;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
 @AllArgsConstructor
-public class UserLoginDTO {
+@Getter
+@Setter
+public class UserLoginDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private @Getter Long id;
-
-	private @Getter String name;
-
-	private @Getter String credential;
-
-    private @Getter boolean adminLogin;
-
-    private @Getter Long adminId;
-    
+	private String email;
+	private String password;
+	
 }
