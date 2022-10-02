@@ -14,8 +14,8 @@ INSERT INTO tb_pivot_user_group_user_route(user_group_id, user_route_id) VALUES 
 
 INSERT INTO tb_admin(name, email, password) VALUES ('admin', 'admin@gmail.com', '$2a$10$medjTjDZUjmYCiIiIudiYugjbT90A7pMMVZFYx/bhbUS4GOS/KQ4e');
 INSERT INTO tb_admin_group(name, description) VALUES ('admin', 'ADMIN');
-INSERT INTO tb_pivot_user_group_user(admin_id, admin_group_id) VALUES (1, 1);
+INSERT INTO tb_pivot_admin_group_admin(admin_id, admin_group_id) VALUES (1, 1);
 INSERT INTO tb_admin_route(route, method, description) VALUES ('/admin/teste/**', 'GET', 'Testing full access to admins');
-INSERT INTO tb_pivot_admin_group_admin_admin_route(admin_group_id, admin_route_id) VALUES (1, 1);
+INSERT INTO tb_pivot_admin_group_admin_route(admin_group_id, admin_route_id) VALUES (1, 1);
 
 

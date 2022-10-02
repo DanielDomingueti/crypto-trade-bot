@@ -3,6 +3,7 @@ package com.domingueti.tradebot.modules.Admin.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.domingueti.tradebot.modules.Admin.dtos.AdminOnlyDataDTO;
 import com.domingueti.tradebot.modules.Admin.dtos.AdminRouteDTO;
 import com.domingueti.tradebot.modules.Admin.models.Admin;
 
@@ -20,5 +21,7 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
 			+ "WHERE adm.email = :email AND adminRoute.method = :method AND adminRoute.route = :route "
 			+ "AND adm.deleted_at IS NULL AND adm.active IS TRUE", nativeQuery = true)
 	AdminRouteDTO findOneByEmailAndDeletedAtIsNull(String email, String route, String method);
+
+	AdminOnlyDataDTO findByEmailAndDeletedAtIsNull(String email);
 
 }

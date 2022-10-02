@@ -23,6 +23,7 @@ import com.domingueti.tradebot.modules.Admin.repositories.AdminRouteRepository;
 import com.domingueti.tradebot.modules.User.dtos.UserRouteDTO;
 import com.domingueti.tradebot.modules.User.repositories.UserRouteRepository;
 import com.domingueti.tradebot.security.exceptions.AuthenticationExceptionHandler;
+import com.domingueti.tradebot.security.filters.AdminAuthenticationFilter;
 import com.domingueti.tradebot.security.filters.UserAuthenticationFilter;
 import com.domingueti.tradebot.security.filters.UserAuthorizationFilter;
 import com.domingueti.tradebot.security.jwt.JWTHandler;
@@ -75,11 +76,11 @@ public class WebSecurity {
 				
 			}
 			
-			http.requestMatchers().antMatchers("/**").and().authorizeRequests().anyRequest().authenticated();
-
 			http.requestMatchers().antMatchers(securityConstants.getSignInUserUrl()).and()
 				.addFilter(authenticationFilter);
 
+			http.requestMatchers().antMatchers("/**").and().authorizeRequests().anyRequest().authenticated();
+			
 			//Ensure the backend won't create an user session.
 			http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		}
@@ -107,9 +108,9 @@ public class WebSecurity {
 			http.requestMatchers().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl())
 				.and().authorizeRequests().antMatchers(HttpMethod.POST, securityConstants.getSignInAdminUrl()).permitAll();
 			
-//			AdminAuthenticationFilter authenticationFilter = new AdminAuthenticationFilter(authenticationManager());
-//			authenticationFilter.setAuthenticationFailureHandler(new AuthenticationExceptionHandler());
-//			authenticationFilter.setFilterProcessesUrl(securityConstants.getSignInAdminUrl());
+			AdminAuthenticationFilter authenticationFilter = new AdminAuthenticationFilter(authenticationManager());
+			authenticationFilter.setAuthenticationFailureHandler(new AuthenticationExceptionHandler());
+			authenticationFilter.setFilterProcessesUrl(securityConstants.getSignInAdminUrl());
 			
 			List<AdminRouteOnlyDataDTO> adminRoutes = adminRouteRepository.findByDeletedAtIsNull();
 			
@@ -133,7 +134,7 @@ public class WebSecurity {
 		}
 		
 	}
-	
+
 	//Give access to the app's endpoints from multiple sources based on basic configurations.
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {

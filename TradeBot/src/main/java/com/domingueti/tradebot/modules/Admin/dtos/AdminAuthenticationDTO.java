@@ -12,6 +12,4 @@ public class AdminAuthenticationDTO implements Serializable {
 
 	private @Getter @Setter String password;
 
-	private @Getter @Setter String code;
-
 }

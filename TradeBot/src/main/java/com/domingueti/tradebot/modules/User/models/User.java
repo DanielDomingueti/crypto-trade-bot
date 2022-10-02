@@ -66,8 +66,8 @@ public class User implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToOne(optional = false)
-	@JoinColumn(name = "cashBalanceId", updatable = false)
+	@OneToOne
+	@JoinColumn(name = "cashBalanceId")
 	private @Getter CashBalance cashBalance;
 		
 	@ToString.Exclude

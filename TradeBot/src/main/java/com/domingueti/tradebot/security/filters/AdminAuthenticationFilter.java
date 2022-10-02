@@ -17,10 +17,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.domingueti.tradebot.modules.User.dtos.UserOnlyDataDTO;
-import com.domingueti.tradebot.modules.User.repositories.UserRepository;
-import com.domingueti.tradebot.security.dtos.UserLoginDTO;
-import com.domingueti.tradebot.security.dtos.UserLoginResponseDTO;
+import com.domingueti.tradebot.modules.Admin.dtos.AdminAuthenticationDTO;
+import com.domingueti.tradebot.modules.Admin.dtos.AdminOnlyDataDTO;
+import com.domingueti.tradebot.modules.Admin.repositories.AdminRepository;
+import com.domingueti.tradebot.security.dtos.AdminLoginResponseDTO;
 import com.domingueti.tradebot.security.jwt.JWTHandler;
 import com.domingueti.tradebot.security.jwt.SecurityConstants;
 import com.domingueti.tradebot.utils.statics.ApplicationContextUtils;
@@ -28,11 +28,11 @@ import com.domingueti.tradebot.utils.statics.TransformObjectToString;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class AdminAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	private AuthenticationManager authenticationManager;
 
-	public UserAuthenticationFilter(AuthenticationManager authenticationManager) {
+	public AdminAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 	}
 	
@@ -42,13 +42,13 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
 		
 		try {
 			
-			ObjectMapper mapper = new ObjectMapper();			
+			ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			UserLoginDTO user = mapper.readValue(req.getInputStream(), UserLoginDTO.class);
-
+			AdminAuthenticationDTO adminDto = mapper.readValue(req.getInputStream(), AdminAuthenticationDTO.class);
+		
 			return authenticationManager
-						.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail().toLowerCase(), user.getPassword()));
+						.authenticate(new UsernamePasswordAuthenticationToken(adminDto.getEmail(), adminDto.getPassword()));
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -62,25 +62,24 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
 		ApplicationContext appCtx = ApplicationContextUtils.getAppContext();
 		JWTHandler jwtHandler = (JWTHandler) appCtx.getBean("jwtHandler");
 		SecurityConstants securityConstants = (SecurityConstants) appCtx.getBean("securityConstants");
+		AdminRepository adminRepository = (AdminRepository) appCtx.getBean("adminRepository");
 
-		UserRepository userRepository = (UserRepository) appCtx.getBean("userRepository");
-		
 		String credential = ((User) auth.getPrincipal()).getUsername();
-		long expirationTime = securityConstants.getExpirationTime();
+		long expirationTime = securityConstants.getAdminExpirationTime();
 
 		List<String> authList = new ArrayList<>();
 		auth.getAuthorities().forEach(authority -> authList.add(authority.getAuthority()));
 		String[] authorities = authList.toArray(String[]::new);
-		
-		String token = jwtHandler.createToken(credential, authorities, expirationTime);			
-		
-		UserOnlyDataDTO user = userRepository.findTop1ByEmail(credential);
 
-		UserLoginResponseDTO loginResponse = new UserLoginResponseDTO(user.getId(), user.getName(), false, token, securityConstants.getTokenType(),
-				expirationTime, authorities);
-		
+		String token = jwtHandler.createToken(credential, authorities, expirationTime);
+
+		AdminOnlyDataDTO admin = adminRepository.findByEmailAndDeletedAtIsNull(credential);
+
+		AdminLoginResponseDTO loginResponse = new AdminLoginResponseDTO(admin.getId(), admin.getName(), token,
+				securityConstants.getTokenType(), expirationTime, authorities);
+
 		String responseBody = TransformObjectToString.execute(loginResponse);
-		
+
 		res.setContentType("application/json");
 		res.setCharacterEncoding("UTF-8");
 		res.getWriter().write(responseBody);

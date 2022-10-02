@@ -1,7 +1,6 @@
 package com.domingueti.tradebot.modules.Admin.dtos;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 public interface AdminOnlyDataDTO extends Serializable {
 	
@@ -10,13 +9,5 @@ public interface AdminOnlyDataDTO extends Serializable {
 	String getName();
 
 	String getEmail();
-
-	Boolean getActive();
-
-	Timestamp getCreatedAt();
-
-	Timestamp getUpdatedAt();
-
-	Timestamp getDeletedAt();
 
 }
