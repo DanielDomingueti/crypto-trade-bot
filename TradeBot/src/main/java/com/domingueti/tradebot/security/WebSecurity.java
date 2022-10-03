@@ -73,12 +73,12 @@ public class WebSecurity {
 				http.requestMatchers().antMatchers(eachRoute.getMethod(), eachRoute.getRoute()).and()
 					.authorizeRequests().antMatchers(eachRoute.getMethod(), eachRoute.getRoute()).authenticated()
 					.and().addFilter(new UserAuthorizationFilter(authenticationManager()));
-				
+
 			}
 			
 			http.requestMatchers().antMatchers(securityConstants.getSignInUserUrl()).and()
 				.addFilter(authenticationFilter);
-
+			
 			http.requestMatchers().antMatchers("/**").and().authorizeRequests().anyRequest().authenticated();
 			
 			//Ensure the backend won't create an user session.

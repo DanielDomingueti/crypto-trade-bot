@@ -45,10 +45,6 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 		String header = req.getHeader(securityConstants.getHeaderString());
 		UsernamePasswordAuthenticationToken authentication;
 
-		if (!req.getRequestURI().equals("/health")) {
-			System.out.println(req.getMethod() + ": " + req.getRequestURI());
-		}
-
 		if (header == null || !header.startsWith(securityConstants.getTokenType())) {
 			chain.doFilter(req, res);
 			return;
