@@ -2,7 +2,6 @@ package com.domingueti.tradebot.security;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
@@ -12,9 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.domingueti.tradebot.modules.Admin.dtos.AdminRouteOnlyDataDTO;
 import com.domingueti.tradebot.modules.Admin.repositories.AdminRouteRepository;
@@ -45,9 +41,11 @@ public class WebSecurity {
 	
 	private AdminDetailsServiceImpl adminDetailsService;
 	
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@Configuration
 	@Order(1)
-	public class FirstSecurityConfig extends WebSecurityConfigurerAdapter {
+	public class WebSecurityFirstEndpoint extends WebSecurityConfigurerAdapter {
 		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
@@ -85,14 +83,14 @@ public class WebSecurity {
 		
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+			auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
 		}
 
 	}
 
 	@Configuration
 	@Order(2)
-	public class SecondSecurityConfig extends WebSecurityConfigurerAdapter {
+	public class WebSecuritySecondEndpoint extends WebSecurityConfigurerAdapter {
 		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
@@ -130,22 +128,9 @@ public class WebSecurity {
 		
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.userDetailsService(adminDetailsService).passwordEncoder(bCryptPasswordEncoder());
+			auth.userDetailsService(adminDetailsService).passwordEncoder(bCryptPasswordEncoder);
 		}
 		
-	}
-
-	//Give access to the app's endpoints from multiple sources based on basic configurations.
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-		return source;
-	}
-	
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 
 }
