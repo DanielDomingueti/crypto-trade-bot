@@ -56,12 +56,7 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 			return;
 		}
 
-		if (isAdminAccess(req)) {
-			authentication = jwtAuth.getAdminAuthentication(req, true);
-		}
-		else {
 			authentication = jwtAuth.getUserAuthentication(req);
-		}
 		
 		if (authentication == null) {
 			return;
@@ -71,20 +66,4 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 		chain.doFilter(req, res);
 	}
 	
-	private boolean isAdminAccess(HttpServletRequest request) {
-		String token = request.getHeader(securityConstants.getHeaderString())
-				.replace(securityConstants.getTokenType(), "");
-		
-		if (token != null) {
-			List<String> authorities = jwtHandler.getAuthoritiesString(token);
-			
-			if(authorities.contains("ADMIN"))
-				return true;
-		}
-		
-		return false;
-	}
-
-
-
 }

@@ -57,6 +57,8 @@ public class User implements Serializable {
 
 	private @Getter @Setter String password;
 	
+	private @Getter @Setter Boolean isAdmin;
+	
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;
 
