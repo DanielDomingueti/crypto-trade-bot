@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +14,11 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
 
-@Component
+
+@Component(value= "jwtHandler")
 public class JWTHandler {
 
+	@Autowired
 	private SecurityConstants securityConstants;
 	
 	public Long getAdminId(String token) {

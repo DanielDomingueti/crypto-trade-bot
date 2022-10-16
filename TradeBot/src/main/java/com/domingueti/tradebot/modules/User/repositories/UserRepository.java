@@ -21,9 +21,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
     		+ "ON (userGroup.id = userGroupUserRoute.user_group_id) "
     		+ "INNER JOIN tb_user_route userRoute "
     		+ "ON (userRoute.id = userGroupUserRoute.user_route_id) "
-    		+ "WHERE (userObj.email = :email "
+    		+ "WHERE userObj.email = :email "
     		+ "AND userRoute.method = :method AND userRoute.route = :route "
-    		+ "AND userObj.deleted_at IS NULL ",
+    		+ "AND userObj.deleted_at IS NULL", 
     		nativeQuery = true)
 	UserOnlyDataDTO findOneByEmailAndDeletedAtIsNull(String email, String method, String route);
 

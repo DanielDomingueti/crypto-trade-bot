@@ -32,11 +32,8 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
 
 	private AuthenticationManager authenticationManager;
 
-	private ApplicationContext appCtx;
-	
 	public UserAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
-		appCtx = ApplicationContextUtils.getAppContext();
 	}
 	
 	@Override

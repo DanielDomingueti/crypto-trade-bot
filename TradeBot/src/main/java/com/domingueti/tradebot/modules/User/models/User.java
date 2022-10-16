@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,6 +57,8 @@ public class User implements Serializable {
 
 	private @Getter @Setter String password;
 	
+	private @Getter @Setter Boolean isAdmin;
+	
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;
 
@@ -65,8 +68,8 @@ public class User implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToOne(optional = false)
-	@JoinColumn(name = "cashBalanceId", updatable = false)
+	@OneToOne
+	@JoinColumn(name = "cashBalanceId")
 	private @Getter CashBalance cashBalance;
 		
 	@ToString.Exclude
@@ -78,7 +81,7 @@ public class User implements Serializable {
 	private @Getter List<Document> documents = new ArrayList<>();
 	
 	@ToString.Exclude
-	@ManyToMany //originally EAGER
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_pivot_user_group_user", joinColumns = {
 			@JoinColumn(name = "userId") }, inverseJoinColumns = { @JoinColumn(name = "userGroupId") })
 	private @Getter Set<UserGroup> userGroups = new HashSet<>();

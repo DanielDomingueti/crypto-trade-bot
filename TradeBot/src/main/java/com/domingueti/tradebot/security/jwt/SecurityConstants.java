@@ -70,4 +70,11 @@ public class SecurityConstants {
 		return Long.parseLong(config.getValue());
 	}
 	
+	@Cacheable("tokenAdminExpirationTime")
+	public long getAdminExpirationTime() {
+		ConfigDTO config = getConfig.execute("TOKEN_ADMIN_EXPIRATION_TIME");
+
+		return Long.parseLong(config.getValue());
+	}
+	
 }
