@@ -1,7 +1,6 @@
 package com.domingueti.tradebot.security.filters;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,7 +23,6 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 
 	private JWTAuthentication jwtAuth;
 	private ApplicationContext appCtx;
-	private JWTHandler jwtHandler;
 	private SecurityConstants securityConstants;
 	private TokenExceptionHandler tokenExceptionHandler;
 	
@@ -33,7 +30,6 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 		super(authManager);
 		jwtAuth = new JWTAuthentication();
 		appCtx = ApplicationContextUtils.getAppContext();
-		jwtHandler = (JWTHandler) appCtx.getBean("jwtHandler");
 		securityConstants = (SecurityConstants) appCtx.getBean("securityConstants");
 		tokenExceptionHandler = (TokenExceptionHandler) appCtx.getBean("tokenExceptionHandler");
 	}

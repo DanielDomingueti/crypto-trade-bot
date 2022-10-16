@@ -15,7 +15,7 @@ INSERT INTO tb_pivot_user_group_user(user_id, user_group_id) VALUES (1, 1);
 INSERT INTO tb_pivot_user_group_user(user_id, user_group_id) VALUES (2, 1);
 INSERT INTO tb_pivot_user_group_user(user_id, user_group_id) VALUES (2, 2);
 
-INSERT INTO tb_user_route(route, method, description) VALUES ('/documents/all/*', 'GET', 'Fetch documents by user id');
+INSERT INTO tb_user_route(route, method, description) VALUES ('/documents/user/*', 'GET', 'Fetch documents by user id');
 INSERT INTO tb_user_route(route, method, description) VALUES ('/admin/documents/*', 'GET', 'Testing full access to admins');
 
 INSERT INTO tb_pivot_user_group_user_route(user_group_id, user_route_id) VALUES (1, 1);

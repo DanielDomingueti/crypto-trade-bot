@@ -2,7 +2,6 @@ package com.domingueti.tradebot.modules.Document.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,26 +20,24 @@ import com.domingueti.tradebot.modules.Document.services.GetDocumentsByUserIdSer
 import com.domingueti.tradebot.modules.Document.services.InsertDocumentService;
 import com.domingueti.tradebot.modules.Document.services.PatchDocumentByIdService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @RestController
 @RequestMapping(value = "/documents")
 public class DocumentController {
 
-	@Autowired
 	private GetDocumentsByUserIdService getDocumentsByUserIdService;
-	
-	@Autowired
+
 	private GetDocumentByIdService getDocumentByIdService;
 	
-	@Autowired
 	private InsertDocumentService insertDocumentService;
 	
-	@Autowired
 	private DeleteDocumentByIdService deleteDocumentByIdService;
 	
-	@Autowired
 	private PatchDocumentByIdService patchDocumentByIdService;
 	
-	@GetMapping("/all/{userId}")
+	@GetMapping("/user/{userId}")
 	public ResponseEntity<List<DocumentDTO>> getDocumentsByUserId(@PathVariable Long userId) {
 		List<DocumentDTO> documents = getDocumentsByUserIdService.execute(userId);
 		return ResponseEntity.ok().body(documents);
