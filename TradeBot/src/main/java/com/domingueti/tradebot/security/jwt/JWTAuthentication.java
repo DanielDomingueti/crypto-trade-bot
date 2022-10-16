@@ -49,7 +49,7 @@ public class JWTAuthentication {
 
 				return new UsernamePasswordAuthenticationToken(userPrincipal, email, authorities);
 			} else {
-				throw new IllegalAccessError();
+				throw new IllegalAccessError("Unexisting route: " + request.getMethod() + ", " + requestURI + " for the given user.");
 			}
 		}
 		
