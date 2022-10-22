@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/investmentBalance")
+@RequestMapping(value = "/investmentBalances")
 public class InvestmentBalanceController {
 
 	private GetInvestmentBalancesByUserIdService getInvestmentBalancesByUserIdService;
