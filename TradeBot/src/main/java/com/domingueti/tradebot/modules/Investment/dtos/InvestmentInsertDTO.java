@@ -3,6 +3,8 @@ package com.domingueti.tradebot.modules.Investment.dtos;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +15,16 @@ import lombok.Setter;
 public class InvestmentInsertDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@NotNull(message = "User ID is mandatory")
 	private @Getter @Setter Long userId;
-	
+
+	@NotNull(message = "Cryptocurrency ID is mandatory")
 	private @Getter @Setter Long cryptocurrencyId;
 
+	@NotNull(message = "Initial value is mandatory")
 	private @Getter @Setter BigDecimal initialValue;
 
+	@NotNull(message = "Simulated option is mandatory")
 	private @Getter @Setter Boolean simulated;
 	
 }

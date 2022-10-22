@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertDTO;
+import com.domingueti.tradebot.modules.Investment.dtos.InvestmentPatchDTO;
 import com.domingueti.tradebot.modules.Investment.services.DeleteInvestmentByIdService;
 import com.domingueti.tradebot.modules.Investment.services.GetInvestmentByIdService;
 import com.domingueti.tradebot.modules.Investment.services.GetInvestmentsByUserIdService;
@@ -62,7 +63,7 @@ public class InvestmentController {
 	}
 	
 	@PatchMapping("/{id}")
-	public ResponseEntity<InvestmentDTO> patchInvestmentById(@PathVariable Long id, @RequestBody InvestmentDTO dto) {
+	public ResponseEntity<InvestmentDTO> patchInvestmentById(@PathVariable Long id, @RequestBody InvestmentPatchDTO dto) {
 		InvestmentDTO investmentDTO = patchInvestmentByIdService.execute(id, dto);
 		return ResponseEntity.ok().body(investmentDTO);
 	}

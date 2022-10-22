@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.domingueti.tradebot.modules.Document.dtos.DocumentDTO;
 import com.domingueti.tradebot.modules.Document.dtos.DocumentInsertDTO;
+import com.domingueti.tradebot.modules.Document.dtos.DocumentPatchDTO;
 import com.domingueti.tradebot.modules.Document.services.DeleteDocumentByIdService;
 import com.domingueti.tradebot.modules.Document.services.GetDocumentByIdService;
 import com.domingueti.tradebot.modules.Document.services.GetDocumentsByUserIdService;
@@ -62,7 +63,7 @@ public class DocumentController {
 	}
 	
 	@PatchMapping("/{id}")
-	public ResponseEntity<DocumentDTO> patchDocumentById(@PathVariable Long id, @RequestBody DocumentDTO dto) {
+	public ResponseEntity<DocumentDTO> patchDocumentById(@PathVariable Long id, @RequestBody DocumentPatchDTO dto) {
 		DocumentDTO documentDTO = patchDocumentByIdService.execute(id, dto);
 		return ResponseEntity.ok().body(documentDTO);
 	}

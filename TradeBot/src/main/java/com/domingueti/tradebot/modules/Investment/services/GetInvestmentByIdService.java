@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 @Service
 public class GetInvestmentByIdService {
 	
-private InvestmentRepository investmentRepository;
+	private InvestmentRepository investmentRepository;
 	
 	@Transactional(readOnly = true)
 	public InvestmentDTO execute(Long id) {
