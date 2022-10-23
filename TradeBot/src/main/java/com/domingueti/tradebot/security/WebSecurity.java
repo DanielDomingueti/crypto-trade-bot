@@ -81,8 +81,14 @@ public class WebSecurity {
 
 			http.requestMatchers().antMatchers(securityConstants.getSignInUserUrl()).and()
 				.addFilter(authenticationFilter);
+
+			http.requestMatchers().antMatchers(HttpMethod.GET, "/v*/api-docs").and()
+			.authorizeRequests().antMatchers(HttpMethod.GET, "/v*/api-docs").permitAll();
 			
-			http.requestMatchers().antMatchers("/**").and().authorizeRequests().anyRequest().authenticated();
+			http.requestMatchers().antMatchers(HttpMethod.GET, "/swagger-ui.html").and()
+			.authorizeRequests().antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll();
+			
+//			http.requestMatchers().antMatchers("/**").and().authorizeRequests().anyRequest().authenticated();
 			
 			//Ensure the backend won't create an user session.
 			http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

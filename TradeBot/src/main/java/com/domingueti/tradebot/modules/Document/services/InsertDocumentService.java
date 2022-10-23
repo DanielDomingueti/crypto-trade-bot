@@ -27,15 +27,12 @@ public class InsertDocumentService {
 		return new DocumentDTO(document);
 	}
 
-	private void copyDtoToModel(DocumentInsertDTO documentInsertDTO, Document document) {
-		document.setUserId(documentInsertDTO.getUserId());
-		document.setDocumentTypeId(documentInsertDTO.getDocumentTypeId());
-		document.setNumber(documentInsertDTO.getNumber());
-		document.setIssuingEntity(documentInsertDTO.getIssuingEntity());
-		document.setIssueDate(documentInsertDTO.getIssueDate());
-		document.setDueDate(documentInsertDTO.getDueDate());
-		document.setLink(documentInsertDTO.getLink());
-		document.setMain(documentInsertDTO.getMain());
+	private void copyDtoToModel(DocumentInsertDTO dto, Document model) {
+		model.setDocumentTypeId(dto.getDocumentTypeId());
+		model.setNumber(dto.getNumber());
+		model.setIssuingEntity(dto.getIssuingEntity());
+		model.setIssueDate(dto.getIssueDate());
+		model.setDueDate(dto.getDueDate());
 	}
 	
 }
