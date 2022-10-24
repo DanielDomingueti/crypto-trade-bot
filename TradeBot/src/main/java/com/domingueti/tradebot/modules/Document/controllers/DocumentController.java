@@ -30,6 +30,8 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/documents", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DocumentController implements DocumentControllerOpenApi {
 
+	private GetDocumentsService getDocumentsService;
+	
 	private GetDocumentsByUserIdService getDocumentsByUserIdService;
 
 	private GetDocumentByIdService getDocumentByIdService;

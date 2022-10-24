@@ -15,6 +15,9 @@ import lombok.Setter;
 public class DocumentInsertDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@NotNull(message = "User ID is mandatory")
+	private @Getter @Setter Long userId;
+	
 	@NotNull(message = "Document type ID is mandatory")
 	private @Getter @Setter Long documentTypeId;
 	

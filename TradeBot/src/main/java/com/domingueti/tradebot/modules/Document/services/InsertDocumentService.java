@@ -28,6 +28,7 @@ public class InsertDocumentService {
 	}
 
 	private void copyDtoToModel(DocumentInsertDTO dto, Document model) {
+		model.setUserId(dto.getUserId());
 		model.setDocumentTypeId(dto.getDocumentTypeId());
 		model.setNumber(dto.getNumber());
 		model.setIssuingEntity(dto.getIssuingEntity());
