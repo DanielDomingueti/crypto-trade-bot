@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.Document.services;
+package com.domingueti.tradebot.modules.Document.services.types;
 
 import java.util.List;
 

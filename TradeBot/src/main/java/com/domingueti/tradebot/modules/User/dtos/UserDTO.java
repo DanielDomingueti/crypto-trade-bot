@@ -2,6 +2,8 @@ package com.domingueti.tradebot.modules.User.dtos;
 
 import java.io.Serializable;
 
+import com.domingueti.tradebot.modules.User.models.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +21,12 @@ public class UserDTO implements Serializable {
 	private @Getter @Setter String email;
 
 	private @Getter @Setter Boolean isAdmin;
+	
+	public UserDTO(User model) {
+		this.id = model.getId();
+		this.name = model.getName();
+		this.email = model.getEmail();
+		this.isAdmin = model.getIsAdmin()
+	}
 	
 }

@@ -27,10 +27,10 @@ public class PatchInvestmentByIdService {
 		return new InvestmentDTO(investment);
 	}
 
-	private void copyDtoToModel(InvestmentPatchDTO investmentDTO, Investment investment) {
-		investment.setInitialValue(investmentDTO.getInitialValue());
-		investment.setUnitValue(investmentDTO.getUnitValue());
-		investment.setActive(investmentDTO.getActive());
+	private void copyDtoToModel(InvestmentPatchDTO dto, Investment model) {
+		model.setInitialValue(dto.getInitialValue() != null ? dto.getInitialValue() : model.getInitialValue());
+		model.setUnitValue(dto.getUnitValue() != null ? dto.getUnitValue() : model.getUnitValue());
+		model.setActive(dto.getActive() != null ? dto.getActive() : model.getActive());
 	}
 	
 }

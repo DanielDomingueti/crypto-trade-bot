@@ -1,4 +1,6 @@
-package com.domingueti.tradebot.modules.DocumentType.controllers;
+package com.domingueti.tradebot.modules.Document.controllers;
+
+import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,21 +13,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.domingueti.tradebot.modules.Document.controllers.openapi.DocumentTypeControllerOpenApi;
 import com.domingueti.tradebot.modules.Document.dtos.DocumentTypeDTO;
 import com.domingueti.tradebot.modules.Document.dtos.DocumentTypeInsertDTO;
-import com.domingueti.tradebot.modules.Document.services.DeleteDocumentTypeByIdService;
-import com.domingueti.tradebot.modules.Document.services.GetDocumentTypeByIdService;
-import com.domingueti.tradebot.modules.Document.services.GetDocumentTypesService;
-import com.domingueti.tradebot.modules.Document.services.InsertDocumentTypeService;
-import com.domingueti.tradebot.modules.DocumentType.controllers.openapi.DocumentTypeControllerOpenApi;
-import com.domingueti.tradebot.modules.DocumentType.dtos.DocumentTypePatchDTO;
-import com.domingueti.tradebot.modules.DocumentType.services.PatchDocumentTypeByIdService;
+import com.domingueti.tradebot.modules.Document.dtos.DocumentTypePatchDTO;
+import com.domingueti.tradebot.modules.Document.services.types.DeleteDocumentTypeByIdService;
+import com.domingueti.tradebot.modules.Document.services.types.GetDocumentTypeByIdService;
+import com.domingueti.tradebot.modules.Document.services.types.GetDocumentTypesService;
+import com.domingueti.tradebot.modules.Document.services.types.InsertDocumentTypeService;
+import com.domingueti.tradebot.modules.Document.services.types.PatchDocumentTypeByIdService;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/documents", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/documentTypes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 	
 	private GetDocumentTypesService getDocumentTypesService;
@@ -38,6 +40,15 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 	
 	private PatchDocumentTypeByIdService patchDocumentTypeByIdService;
 	
+	@Override
+	@GetMapping
+	public ResponseEntity<List<DocumentTypeDTO>> getDocumentTypes() {
+		
+		List<DocumentTypeDTO> documentTypes = getDocumentTypesService.execute();
+		return ResponseEntity.ok().body(documentTypes);
+	}
+	
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<DocumentTypeDTO> getDocumentTypeById(@PathVariable Long id) {
 		
@@ -45,6 +56,7 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 		return ResponseEntity.ok().body(documentTypeDTO);
 	}
 	
+	@Override
 	@PostMapping
 	public ResponseEntity<DocumentTypeDTO> insertDocumentType(@RequestBody DocumentTypeInsertDTO dto) {
 		
@@ -52,6 +64,7 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 		return ResponseEntity.ok().body(documentTypeDTO);
 	}
 	
+	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteDocumentTypeById(@PathVariable Long id) {
 		
@@ -59,6 +72,7 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@Override
 	@PatchMapping("/{id}")
 	public ResponseEntity<DocumentTypeDTO> patchDocumentTypeById(@PathVariable Long id, @RequestBody DocumentTypePatchDTO dto) {
 		

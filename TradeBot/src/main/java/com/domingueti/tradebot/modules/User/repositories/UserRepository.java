@@ -9,6 +9,8 @@ import com.domingueti.tradebot.modules.User.models.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	User findByEmail(String email);
+	
+	User findByIdAndDeletedAtIsNull(Long id);
 
     @Query(value = ""
     		+ "SELECT DISTINCT userObj.id, userObj.name "

@@ -20,6 +20,7 @@ import com.domingueti.tradebot.modules.Document.dtos.DocumentPatchDTO;
 import com.domingueti.tradebot.modules.Document.services.DeleteDocumentByIdService;
 import com.domingueti.tradebot.modules.Document.services.GetDocumentByIdService;
 import com.domingueti.tradebot.modules.Document.services.GetDocumentsByUserIdService;
+import com.domingueti.tradebot.modules.Document.services.GetDocumentsService;
 import com.domingueti.tradebot.modules.Document.services.InsertDocumentService;
 import com.domingueti.tradebot.modules.Document.services.PatchDocumentByIdService;
 
@@ -41,6 +42,13 @@ public class DocumentController implements DocumentControllerOpenApi {
 	private DeleteDocumentByIdService deleteDocumentByIdService;
 	
 	private PatchDocumentByIdService patchDocumentByIdService;
+	
+	@GetMapping
+	public ResponseEntity<List<DocumentDTO>> getAllDocuments() {
+		
+		List<DocumentDTO> documents = getDocumentsService.execute();
+		return ResponseEntity.ok().body(documents);
+	}
 	
 	@GetMapping("/user/{userId}")
 	public ResponseEntity<List<DocumentDTO>> getDocumentsByUserId(@PathVariable Long userId) {

@@ -14,6 +14,9 @@ import io.swagger.annotations.ApiParam;
 
 @Api(tags = "Documents")
 public interface DocumentControllerOpenApi {
+	
+	@ApiOperation("Fetch all documents")
+	ResponseEntity<List<DocumentDTO>> getAllDocuments();
 
 	@ApiOperation("Fetch all documents of a user")
 	ResponseEntity<List<DocumentDTO>> getDocumentsByUserId(@ApiParam(value = "User ID", example = "1") Long userId);
@@ -28,7 +31,7 @@ public interface DocumentControllerOpenApi {
 	ResponseEntity<Void> deleteDocumentById(@ApiParam(value = "Document ID", example = "1") Long id);
 		
 	@ApiOperation("Update a document by ID")
-	ResponseEntity<DocumentDTO> patchDocumentById(@ApiParam(value = "Document ID and JSON body for DocumentPatchDTO", example = "1") 
+	ResponseEntity<DocumentDTO> patchDocumentById(@ApiParam(value = "Document ID", example = "1") 
 		Long id, DocumentPatchDTO dto);
 	
 }

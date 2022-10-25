@@ -28,8 +28,8 @@ public class PatchDocumentByIdService {
 	}
 
 	private void copyDtoToModel(DocumentPatchDTO dto, Document model) {
-		model.setLink(dto.getLink());
-		model.setMain(dto.getMain());
+		model.setLink(dto.getLink() != null ? dto.getLink() : model.getLink());
+		model.setMain(dto.getMain() != null ? dto.getMain() : model.getMain());
 	}
 	
 }

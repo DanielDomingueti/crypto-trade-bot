@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.Document.services;
+package com.domingueti.tradebot.modules.Document.services.types;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

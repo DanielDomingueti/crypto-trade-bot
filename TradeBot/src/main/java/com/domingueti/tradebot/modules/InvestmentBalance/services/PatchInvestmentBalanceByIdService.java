@@ -28,8 +28,8 @@ public class PatchInvestmentBalanceByIdService {
 	}
 
 	private void copyDtoToModel(InvestmentBalancePatchDTO dto, InvestmentBalance model) {
-		model.setUnits(dto.getUnits());
-		model.setNetValue(dto.getNetValue());
+		model.setUnits(dto.getUnits() != null ? dto.getUnits() : model.getUnits());
+		model.setNetValue(dto.getNetValue() != null ? dto.getNetValue() : model.getNetValue());
 	}
 	
 }
