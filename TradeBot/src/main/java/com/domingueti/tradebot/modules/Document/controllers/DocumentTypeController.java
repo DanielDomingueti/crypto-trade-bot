@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/documentTypes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/documenttypes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 	
 	private GetDocumentTypesService getDocumentTypesService;
@@ -40,15 +40,13 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 	
 	private PatchDocumentTypeByIdService patchDocumentTypeByIdService;
 	
-	@Override
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<DocumentTypeDTO>> getDocumentTypes() {
 		
 		List<DocumentTypeDTO> documentTypes = getDocumentTypesService.execute();
 		return ResponseEntity.ok().body(documentTypes);
 	}
 	
-	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<DocumentTypeDTO> getDocumentTypeById(@PathVariable Long id) {
 		
@@ -56,7 +54,6 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 		return ResponseEntity.ok().body(documentTypeDTO);
 	}
 	
-	@Override
 	@PostMapping
 	public ResponseEntity<DocumentTypeDTO> insertDocumentType(@RequestBody DocumentTypeInsertDTO dto) {
 		
@@ -64,7 +61,6 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 		return ResponseEntity.ok().body(documentTypeDTO);
 	}
 	
-	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteDocumentTypeById(@PathVariable Long id) {
 		
@@ -72,7 +68,6 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@Override
 	@PatchMapping("/{id}")
 	public ResponseEntity<DocumentTypeDTO> patchDocumentTypeById(@PathVariable Long id, @RequestBody DocumentTypePatchDTO dto) {
 		

@@ -43,7 +43,7 @@ public class DocumentController implements DocumentControllerOpenApi {
 	
 	private PatchDocumentByIdService patchDocumentByIdService;
 	
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<DocumentDTO>> getAllDocuments() {
 		
 		List<DocumentDTO> documents = getDocumentsService.execute();

@@ -31,9 +31,11 @@ public class InsertDocumentService {
 		model.setUserId(dto.getUserId());
 		model.setDocumentTypeId(dto.getDocumentTypeId());
 		model.setNumber(dto.getNumber());
+		model.setMain(dto.getMain());
 		model.setIssuingEntity(dto.getIssuingEntity());
 		model.setIssueDate(dto.getIssueDate());
 		model.setDueDate(dto.getDueDate());
+		model.setLink(dto.getLink() == null ? null : dto.getLink());
 	}
 	
 }

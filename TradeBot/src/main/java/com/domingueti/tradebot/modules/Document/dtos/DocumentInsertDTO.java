@@ -24,6 +24,9 @@ public class DocumentInsertDTO implements Serializable {
 	@NotNull(message = "Document number is mandatory")
 	private @Getter @Setter String number;
 	
+	@NotNull(message = "Main option is mandatory")
+	private @Getter @Setter Boolean main;
+	
 	@NotNull(message = "Issuing entity is mandatory")
 	private @Getter @Setter String issuingEntity;
 	
@@ -32,5 +35,7 @@ public class DocumentInsertDTO implements Serializable {
 
 	@NotNull(message = "Due date is mandatory")
 	private @Getter @Setter LocalDate dueDate;
+	
+	private @Getter @Setter String link;
 	
 }

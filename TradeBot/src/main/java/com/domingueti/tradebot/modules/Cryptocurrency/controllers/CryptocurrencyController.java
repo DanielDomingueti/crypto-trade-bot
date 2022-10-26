@@ -40,15 +40,13 @@ public class CryptocurrencyController implements CryptocurrencyControllerOpenApi
 	
 	private PatchCryptocurrencyByIdService patchCryptocurrencyByIdService;
 	
-	@Override
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<CryptocurrencyDTO>> getAllCryptocurrencies() {
 		
 		List<CryptocurrencyDTO> cryptocurrencies = getCryptocurrenciesService.execute();
 		return ResponseEntity.ok().body(cryptocurrencies);
 	}
 	
-	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<CryptocurrencyDTO> getCryptocurrencyById(@PathVariable Long id) {
 		
@@ -56,7 +54,6 @@ public class CryptocurrencyController implements CryptocurrencyControllerOpenApi
 		return ResponseEntity.ok().body(cryptocurrencyDTO);
 	}
 	
-	@Override
 	@PostMapping
 	public ResponseEntity<CryptocurrencyDTO> insertCryptocurrency(@RequestBody CryptocurrencyInsertDTO dto) {
 		
@@ -64,7 +61,6 @@ public class CryptocurrencyController implements CryptocurrencyControllerOpenApi
 		return ResponseEntity.ok().body(cryptocurrencyDTO);
 	}
 	
-	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteCryptocurrencyById(@PathVariable Long id) {
 		
@@ -72,7 +68,6 @@ public class CryptocurrencyController implements CryptocurrencyControllerOpenApi
 		return ResponseEntity.noContent().build();
 	}
 	
-	@Override
 	@PatchMapping("/{id}")
 	public ResponseEntity<CryptocurrencyDTO> patchCryptocurrencyById(@PathVariable Long id, @RequestBody CryptocurrencyPatchDTO dto) {
 		

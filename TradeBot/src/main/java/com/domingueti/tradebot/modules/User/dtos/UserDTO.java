@@ -26,7 +26,7 @@ public class UserDTO implements Serializable {
 		this.id = model.getId();
 		this.name = model.getName();
 		this.email = model.getEmail();
-		this.isAdmin = model.getIsAdmin()
+		this.isAdmin = model.getIsAdmin();
 	}
 	
 }

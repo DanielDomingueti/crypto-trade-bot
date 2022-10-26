@@ -39,7 +39,7 @@ public class CashBalanceController {
 	
 	private PatchCashBalanceByIdService patchCashBalanceByIdService;
 	
-	@GetMapping
+	@GetMapping("/admin/all")
 	public ResponseEntity<List<CashBalanceDTO>> getAllCashBalances() {
 		
 		List<CashBalanceDTO> cashBalances = getCashBalancesService.execute();
