@@ -39,7 +39,6 @@ public class CashBalanceController {
 	
 	private PatchCashBalanceByIdService patchCashBalanceByIdService;
 	
-	@Override
 	@GetMapping
 	public ResponseEntity<List<CashBalanceDTO>> getAllCashBalances() {
 		
@@ -47,7 +46,6 @@ public class CashBalanceController {
 		return ResponseEntity.ok().body(cashBalances);
 	}
 	
-	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<CashBalanceDTO> getCashBalanceById(@PathVariable Long id) {
 		
@@ -55,7 +53,6 @@ public class CashBalanceController {
 		return ResponseEntity.ok().body(cashBalanceDTO);
 	}
 	
-	@Override
 	@PostMapping
 	public ResponseEntity<CashBalanceDTO> insertCashBalance(@RequestBody CashBalanceInsertDTO dto) {
 		
@@ -63,7 +60,6 @@ public class CashBalanceController {
 		return ResponseEntity.ok().body(cashBalanceDTO);
 	}
 	
-	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteCashBalanceById(@PathVariable Long id) {
 		
@@ -71,7 +67,6 @@ public class CashBalanceController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@Override
 	@PatchMapping("/{id}")
 	public ResponseEntity<CashBalanceDTO> patchCashBalanceById(@PathVariable Long id, @RequestBody CashBalancePatchDTO dto) {
 		
