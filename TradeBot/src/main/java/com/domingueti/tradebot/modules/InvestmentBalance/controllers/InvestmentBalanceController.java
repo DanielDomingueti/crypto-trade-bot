@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/investmentBalances")
+@RequestMapping(value = "/investmentbalances")
 public class InvestmentBalanceController implements InvestmentBalanceControllerOpenApi {
 	
 	private GetInvestmentBalancesService getInvestmentBalancesService;
@@ -43,7 +43,7 @@ public class InvestmentBalanceController implements InvestmentBalanceControllerO
 	private PatchInvestmentBalanceByIdService patchInvestmentBalanceByIdService;
 	
 	@Override
-	@GetMapping
+	@GetMapping("/admin/all")
 	public ResponseEntity<List<InvestmentBalanceDTO>> getInvestmentBalances() {
 		List<InvestmentBalanceDTO> investmentBalances = getInvestmentBalancesService.execute();
 		return ResponseEntity.ok().body(investmentBalances);
@@ -64,21 +64,21 @@ public class InvestmentBalanceController implements InvestmentBalanceControllerO
 	}
 	
 	@Override
-	@PostMapping
+	@PostMapping("/admin/insert")
 	public ResponseEntity<InvestmentBalanceDTO> insertInvestmentBalance(@RequestBody InvestmentBalanceInsertDTO dto) {
 		InvestmentBalanceDTO investmentBalanceDTO = insertInvestmentBalanceService.execute(dto);
 		return ResponseEntity.ok().body(investmentBalanceDTO);
 	}
 	
 	@Override
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/admin/delete/{id}")
 	public ResponseEntity<Void> deleteInvestmentBalanceById(@PathVariable Long id) {
 		deleteInvestmentBalanceByIdService.execute(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@Override
-	@PatchMapping("/{id}")
+	@PatchMapping("/admin/patch/{id}")
 	public ResponseEntity<InvestmentBalanceDTO> patchInvestmentBalanceById(@PathVariable Long id, @RequestBody InvestmentBalancePatchDTO dto) {
 		InvestmentBalanceDTO investmentBalanceDTO = patchInvestmentBalanceByIdService.execute(id, dto);
 		return ResponseEntity.ok().body(investmentBalanceDTO);

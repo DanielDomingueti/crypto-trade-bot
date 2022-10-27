@@ -40,6 +40,7 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 	
 	private PatchDocumentTypeByIdService patchDocumentTypeByIdService;
 	
+	@Override
 	@GetMapping("/all")
 	public ResponseEntity<List<DocumentTypeDTO>> getDocumentTypes() {
 		
@@ -47,6 +48,7 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 		return ResponseEntity.ok().body(documentTypes);
 	}
 	
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<DocumentTypeDTO> getDocumentTypeById(@PathVariable Long id) {
 		
@@ -54,21 +56,24 @@ public class DocumentTypeController implements DocumentTypeControllerOpenApi {
 		return ResponseEntity.ok().body(documentTypeDTO);
 	}
 	
-	@PostMapping
+	@Override
+	@PostMapping("/admin/insert")
 	public ResponseEntity<DocumentTypeDTO> insertDocumentType(@RequestBody DocumentTypeInsertDTO dto) {
 		
 		DocumentTypeDTO documentTypeDTO = insertDocumentTypeService.execute(dto);
 		return ResponseEntity.ok().body(documentTypeDTO);
 	}
 	
-	@DeleteMapping("/{id}")
+	@Override
+	@DeleteMapping("/admin/delete/{id}")
 	public ResponseEntity<Void> deleteDocumentTypeById(@PathVariable Long id) {
 		
 		deleteDocumentTypeByIdService.execute(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PatchMapping("/{id}")
+	@Override
+	@PatchMapping("/admin/patch/{id}")
 	public ResponseEntity<DocumentTypeDTO> patchDocumentTypeById(@PathVariable Long id, @RequestBody DocumentTypePatchDTO dto) {
 		
 		DocumentTypeDTO documentTypeDTO = patchDocumentTypeByIdService.execute(id, dto);

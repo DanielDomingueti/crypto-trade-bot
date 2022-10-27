@@ -43,13 +43,15 @@ public class DocumentController implements DocumentControllerOpenApi {
 	
 	private PatchDocumentByIdService patchDocumentByIdService;
 	
-	@GetMapping("/all")
+	@Override
+	@GetMapping("/admin/all")
 	public ResponseEntity<List<DocumentDTO>> getAllDocuments() {
 		
 		List<DocumentDTO> documents = getDocumentsService.execute();
 		return ResponseEntity.ok().body(documents);
 	}
 	
+	@Override
 	@GetMapping("/user/{userId}")
 	public ResponseEntity<List<DocumentDTO>> getDocumentsByUserId(@PathVariable Long userId) {
 		
@@ -57,6 +59,7 @@ public class DocumentController implements DocumentControllerOpenApi {
 		return ResponseEntity.ok().body(documents);
 	}
 	
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<DocumentDTO> getDocumentById(@PathVariable Long id) {
 		
@@ -64,21 +67,24 @@ public class DocumentController implements DocumentControllerOpenApi {
 		return ResponseEntity.ok().body(documentDTO);
 	}
 	
-	@PostMapping
+	@Override
+	@PostMapping("/insert")
 	public ResponseEntity<DocumentDTO> insertDocument(@RequestBody DocumentInsertDTO dto) {
 		
 		DocumentDTO documentDTO = insertDocumentService.execute(dto);
 		return ResponseEntity.ok().body(documentDTO);
 	}
 	
-	@DeleteMapping("/{id}")
+	@Override
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Void> deleteDocumentById(@PathVariable Long id) {
 		
 		deleteDocumentByIdService.execute(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PatchMapping("/{id}")
+	@Override
+	@PatchMapping("/patch/{id}")
 	public ResponseEntity<DocumentDTO> patchDocumentById(@PathVariable Long id, @RequestBody DocumentPatchDTO dto) {
 		
 		DocumentDTO documentDTO = patchDocumentByIdService.execute(id, dto);

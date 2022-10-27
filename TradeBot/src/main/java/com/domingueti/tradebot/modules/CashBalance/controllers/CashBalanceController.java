@@ -53,21 +53,21 @@ public class CashBalanceController {
 		return ResponseEntity.ok().body(cashBalanceDTO);
 	}
 	
-	@PostMapping
+	@PostMapping("/admin/insert")
 	public ResponseEntity<CashBalanceDTO> insertCashBalance(@RequestBody CashBalanceInsertDTO dto) {
 		
 		CashBalanceDTO cashBalanceDTO = insertCashBalanceService.execute(dto);
 		return ResponseEntity.ok().body(cashBalanceDTO);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/admin/delete/{id}")
 	public ResponseEntity<Void> deleteCashBalanceById(@PathVariable Long id) {
 		
 		deleteCashBalanceByIdService.execute(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PatchMapping("/{id}")
+	@PatchMapping("/admin/patch/{id}")
 	public ResponseEntity<CashBalanceDTO> patchCashBalanceById(@PathVariable Long id, @RequestBody CashBalancePatchDTO dto) {
 		
 		CashBalanceDTO cashBalanceDTO = patchCashBalanceByIdService.execute(id, dto);

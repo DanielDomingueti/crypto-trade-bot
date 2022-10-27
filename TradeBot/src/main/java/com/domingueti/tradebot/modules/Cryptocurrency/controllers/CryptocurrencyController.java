@@ -40,6 +40,7 @@ public class CryptocurrencyController implements CryptocurrencyControllerOpenApi
 	
 	private PatchCryptocurrencyByIdService patchCryptocurrencyByIdService;
 	
+	@Override
 	@GetMapping("/all")
 	public ResponseEntity<List<CryptocurrencyDTO>> getAllCryptocurrencies() {
 		
@@ -47,6 +48,7 @@ public class CryptocurrencyController implements CryptocurrencyControllerOpenApi
 		return ResponseEntity.ok().body(cryptocurrencies);
 	}
 	
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<CryptocurrencyDTO> getCryptocurrencyById(@PathVariable Long id) {
 		
@@ -54,21 +56,24 @@ public class CryptocurrencyController implements CryptocurrencyControllerOpenApi
 		return ResponseEntity.ok().body(cryptocurrencyDTO);
 	}
 	
-	@PostMapping
+	@Override
+	@PostMapping("/admin/insert")
 	public ResponseEntity<CryptocurrencyDTO> insertCryptocurrency(@RequestBody CryptocurrencyInsertDTO dto) {
 		
 		CryptocurrencyDTO cryptocurrencyDTO = insertCryptocurrencyService.execute(dto);
 		return ResponseEntity.ok().body(cryptocurrencyDTO);
 	}
 	
-	@DeleteMapping("/{id}")
+	@Override
+	@DeleteMapping("/admin/delete/{id}")
 	public ResponseEntity<Void> deleteCryptocurrencyById(@PathVariable Long id) {
 		
 		deleteCryptocurrencyByIdService.execute(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PatchMapping("/{id}")
+	@Override
+	@PatchMapping("/admin/patch/{id}")
 	public ResponseEntity<CryptocurrencyDTO> patchCryptocurrencyById(@PathVariable Long id, @RequestBody CryptocurrencyPatchDTO dto) {
 		
 		CryptocurrencyDTO cryptocurrencyDTO = patchCryptocurrencyByIdService.execute(id, dto);

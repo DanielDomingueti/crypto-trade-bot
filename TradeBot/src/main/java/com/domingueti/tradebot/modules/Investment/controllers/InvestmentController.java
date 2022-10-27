@@ -43,7 +43,7 @@ public class InvestmentController implements InvestmentControllerOpenApi {
 	private PatchInvestmentByIdService patchInvestmentByIdService;
 
 	@Override
-	@GetMapping
+	@GetMapping("/admin/all")
 	public ResponseEntity<List<InvestmentDTO>> getInvestments() {
 		List<InvestmentDTO> investments = getInvestmentsService.execute();
 		return ResponseEntity.ok().body(investments);
@@ -64,21 +64,21 @@ public class InvestmentController implements InvestmentControllerOpenApi {
 	}
 	
 	@Override
-	@PostMapping
+	@PostMapping("/insert")
 	public ResponseEntity<InvestmentDTO> insertInvestment(@RequestBody InvestmentInsertDTO dto) {
 		InvestmentDTO investmentDTO = insertInvestmentService.execute(dto);
 		return ResponseEntity.ok().body(investmentDTO);
 	}
 	
 	@Override
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Void> deleteInvestmentById(@PathVariable Long id) {
 		deleteInvestmentByIdService.execute(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@Override
-	@PatchMapping("/{id}")
+	@PatchMapping("/admin/patch/{id}")
 	public ResponseEntity<InvestmentDTO> patchInvestmentById(@PathVariable Long id, @RequestBody InvestmentPatchDTO dto) {
 		InvestmentDTO investmentDTO = patchInvestmentByIdService.execute(id, dto);
 		return ResponseEntity.ok().body(investmentDTO);

@@ -40,7 +40,7 @@ public class UserController implements UserControllerOpenApi {
 	private PatchUserByIdService patchUserByIdService;
 
 	@Override
-	@GetMapping
+	@GetMapping("/admin/all")
 	public ResponseEntity<List<UserDTO>> getUsers() {
 		List<UserDTO> users = getUsersService.execute();
 		return ResponseEntity.ok().body(users);
@@ -54,21 +54,21 @@ public class UserController implements UserControllerOpenApi {
 	}
 
 	@Override
-	@PostMapping
+	@PostMapping("/admin/insert")
 	public ResponseEntity<UserDTO> insertUser(@RequestBody UserInsertDTO dto) {
 		UserDTO userDTO = insertUserService.execute(dto);
 		return ResponseEntity.ok().body(userDTO);
 	}
 
 	@Override
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/admin/delete/{id}")
 	public ResponseEntity<Void> deleteUserById(@PathVariable Long id) {
 		deleteUserByIdService.execute(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	@Override
-	@PatchMapping("/{id}")
+	@PatchMapping("/admin/patch/{id}")
 	public ResponseEntity<UserDTO> patchUserById(@PathVariable Long id, @RequestBody UserPatchDTO dto) {
 		UserDTO userDTO = patchUserByIdService.execute(id, dto);
 		return ResponseEntity.ok().body(userDTO);
