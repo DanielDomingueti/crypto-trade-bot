@@ -2,6 +2,7 @@ package com.domingueti.tradebot.modules.CashBalance.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import com.domingueti.tradebot.modules.CashBalance.repositories.CashBalanceRepos
 @Service
 public class GetCashBalancesService {
 
+@Autowired
 private CashBalanceRepository cashBalanceRepository;
 	
 	@Transactional(readOnly = true)

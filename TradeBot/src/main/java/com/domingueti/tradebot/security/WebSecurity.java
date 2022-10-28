@@ -58,9 +58,8 @@ public class WebSecurity {
 			List<UserRouteDTO> adminRoutes = new ArrayList<>();
 			
 			for (UserRouteDTO eachRoute : allUserRoutes) {
-				System.out.println(eachRoute.getRoute());
 
-				if (eachRoute.getRoute().startsWith("/admin")) {
+				if (eachRoute.getRoute().contains("/admin")) {
 					adminRoutes.add(eachRoute);
 				} else {
 					userRoutes.add(eachRoute);

@@ -11,4 +11,6 @@ public interface UserRouteRepository extends JpaRepository<UserRoute, Long>{
 
 	List<UserRouteDTO> findAllByDeletedAtIsNull();
 
+	Long findIdByRouteAndDeletedAtIsNull(String route);
+
 }

@@ -2,6 +2,7 @@ package com.domingueti.tradebot.modules.Cryptocurrency.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import com.domingueti.tradebot.modules.Cryptocurrency.repositories.Cryptocurrenc
 @Service
 public class GetCryptocurrenciesService {
 
+	@Autowired
 	private CryptocurrencyRepository cryptocurrencyRepository;
 	
 	@Transactional(readOnly = true)

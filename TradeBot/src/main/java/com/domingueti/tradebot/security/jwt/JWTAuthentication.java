@@ -48,9 +48,9 @@ public class JWTAuthentication {
 				UserPrincipalDTO userPrincipal = new UserPrincipalDTO(findUser.getId(), findUser.getName(), email);
 
 				return new UsernamePasswordAuthenticationToken(userPrincipal, email, authorities);
-			} else {
-				throw new IllegalAccessError("Unexisting route: " + request.getMethod() + ", " + requestURI + " for the given user.");
-			}
+				
+			} 
+			
 		}
 		
 		return null;
