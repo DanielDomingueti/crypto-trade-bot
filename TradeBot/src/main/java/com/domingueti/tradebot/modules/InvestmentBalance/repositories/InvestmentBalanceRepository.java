@@ -6,4 +6,6 @@ import com.domingueti.tradebot.modules.InvestmentBalance.models.InvestmentBalanc
 
 public interface InvestmentBalanceRepository extends JpaRepository<InvestmentBalance, Long> {
 
+	InvestmentBalance findByIdAndDeletedAtIsNull(Long id);
+	
 }

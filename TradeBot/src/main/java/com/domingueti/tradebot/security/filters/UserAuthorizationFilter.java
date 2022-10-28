@@ -14,8 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.domingueti.tradebot.security.exceptions.TokenExceptionHandler;
+import com.domingueti.tradebot.security.exceptions.UserAccessExceptionHandler;
 import com.domingueti.tradebot.security.jwt.JWTAuthentication;
-import com.domingueti.tradebot.security.jwt.JWTHandler;
 import com.domingueti.tradebot.security.jwt.SecurityConstants;
 import com.domingueti.tradebot.utils.statics.ApplicationContextUtils;
 
@@ -25,6 +25,7 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 	private ApplicationContext appCtx;
 	private SecurityConstants securityConstants;
 	private TokenExceptionHandler tokenExceptionHandler;
+	private UserAccessExceptionHandler userAccessExceptionHandler;
 	
 	public UserAuthorizationFilter(AuthenticationManager authManager) {
 		super(authManager);
@@ -32,6 +33,7 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 		appCtx = ApplicationContextUtils.getAppContext();
 		securityConstants = (SecurityConstants) appCtx.getBean("securityConstants");
 		tokenExceptionHandler = (TokenExceptionHandler) appCtx.getBean("tokenExceptionHandler");
+		userAccessExceptionHandler = (UserAccessExceptionHandler) appCtx.getBean("userAccessExceptionHandler");
 	}
 	
 	@Override
@@ -39,25 +41,27 @@ public class UserAuthorizationFilter extends BasicAuthenticationFilter {
 			throws IOException, ServletException {
 
 		String header = req.getHeader(securityConstants.getHeaderString());
-		UsernamePasswordAuthenticationToken authentication;
-
+		UsernamePasswordAuthenticationToken authentication = null;
+	
 		if (header == null || !header.startsWith(securityConstants.getTokenType())) {
 			chain.doFilter(req, res);
 			return;
 		}
-
+	
 		String token = header.replace(securityConstants.getTokenType(), "");
-
+	
 		if (!tokenExceptionHandler.verify(token, req, res)) {
 			return;
 		}
-
-			authentication = jwtAuth.getUserAuthentication(req);
-		
+	
+		authentication = jwtAuth.getUserAuthentication(req);
+			
 		if (authentication == null) {
-			return;
+			if (!userAccessExceptionHandler.verify(token, req, res)) {
+				return;					
+			}
 		}
-
+	
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		chain.doFilter(req, res);
 	}

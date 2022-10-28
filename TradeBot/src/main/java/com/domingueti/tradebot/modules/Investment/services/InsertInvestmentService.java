@@ -6,9 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertDTO;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @Service
 public class InsertInvestmentService {
 	
