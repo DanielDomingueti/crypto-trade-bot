@@ -43,6 +43,13 @@ INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/a
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/delete/*', 'DELETE', 'Delete user by ID');
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/patch/*', 'PATCH', 'Patch user by ID');
 
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/cashbalancetype/*', 'GET', 'Fetch cash balance type by ID');
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/cashbalancetype/all', 'GET', 'Fetch all cash balance types');
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/cashbalancetype/admin/insert', 'POST', 'Insert new cash balance type');
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/cashbalancetype/admin/delete/*', 'DELETE', 'Delete cash balance type by ID');
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/cashbalancetype/admin/patch/*', 'PATCH', 'Patch cash balance type by ID');
+
+
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 1);
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 6);
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 7);
@@ -60,6 +67,8 @@ INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") 
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 30);
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 30);
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 35);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 39);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 40);
 
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 2);
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 3);
@@ -83,3 +92,6 @@ INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") 
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 36);
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 37);
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 38);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 41);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 42);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 43);
