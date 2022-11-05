@@ -8,7 +8,7 @@ import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
 
 public interface CryptocurrencyRepository extends JpaRepository<Cryptocurrency, Long> {
 
-	Cryptocurrency findByIdAndDeletedAtIsNull(Long id);
+	Cryptocurrency findBySymbolAndDeletedAtIsNull(String symbol);
 	
 	List<Cryptocurrency> findAllByDeletedAtIsNull();
 

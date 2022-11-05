@@ -1,6 +1,7 @@
 package com.domingueti.tradebot.modules.Cryptocurrency.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,7 @@ public class GetCryptocurrenciesService {
 
 		List<Cryptocurrency> cryptocurrencies = cryptocurrencyRepository.findAllByDeletedAtIsNull();
 		
-		return cryptocurrencies.stream()
-				.map(CryptocurrencyDTO::new).toList();
+		return cryptocurrencies.stream().map(CryptocurrencyDTO::new).collect(Collectors.toList());
 	}
 	
 }
