@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.domingueti.tradebot.exceptions.NotFoundException;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentPatchDTO;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
@@ -20,8 +21,11 @@ public class PatchInvestmentByIdService {
 //		investment = validator.execute(id); insert findById inside of validator. 
 		Investment investment = investmentRepository.findByIdAndDeletedAtIsNull(id);
 		
-		copyDtoToModel(investmentDTO, investment);
+		if (investment == null) {
+			throw new NotFoundException("Investment not found with given ID: " + id);
+		}
 		
+		copyDtoToModel(investmentDTO, investment);
 		investment = investmentRepository.save(investment);
 		
 		return new InvestmentDTO(investment);

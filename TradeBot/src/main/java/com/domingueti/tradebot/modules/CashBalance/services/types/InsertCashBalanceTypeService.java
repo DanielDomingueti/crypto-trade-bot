@@ -17,8 +17,6 @@ public class InsertCashBalanceTypeService {
 	
 	@Transactional
 	public CashBalanceTypeDTO execute(CashBalanceTypeInsertDTO cashBalanceTypeInsertDTO) {
-//		validator(cashBalanceInsertDTO);
-		
 		CashBalanceType cashBalanceType = new CashBalanceType();
 		copyDtoToModel(cashBalanceTypeInsertDTO, cashBalanceType);
 		

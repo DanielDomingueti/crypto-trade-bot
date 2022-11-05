@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.domingueti.tradebot.exceptions.NotFoundException;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
+import com.domingueti.tradebot.modules.Investment.models.Investment;
 import com.domingueti.tradebot.modules.Investment.repositories.InvestmentRepository;
 
 @Service
@@ -17,7 +19,13 @@ public class GetInvestmentByIdService {
 	public InvestmentDTO execute(Long id) {
 //		validator.execute(userId); check with authenticated userId;
 		
-		return null;
+		Investment investment = investmentRepository.findByIdAndDeletedAtIsNull(id);
+		
+		if (investment == null) {
+			throw new NotFoundException("Investment not found with given ID: " + id);
+		}
+		
+		return new InvestmentDTO(investment);
 	}
 
 }

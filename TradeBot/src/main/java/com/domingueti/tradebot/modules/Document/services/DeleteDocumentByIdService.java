@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.domingueti.tradebot.exceptions.NotFoundException;
+import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Document.repositories.DocumentRepository;
 
 @Service
@@ -14,7 +16,15 @@ public class DeleteDocumentByIdService {
 	
 	@Transactional
 	public void execute(Long id) {
-//		validator.execute(id); 
-		documentRepository.deleteById(id);
+		
+		Document document = documentRepository.findByIdAndDeletedAtIsNull(id);
+
+//		validator.execute(document);
+		
+		if (document == null) {
+			throw new NotFoundException("Document not found with given ID: " + id);
+		}
+		
+		documentRepository.delete(document);
 	}
 }

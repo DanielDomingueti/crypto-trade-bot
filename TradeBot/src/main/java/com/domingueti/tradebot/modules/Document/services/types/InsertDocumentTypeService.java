@@ -17,8 +17,7 @@ public class InsertDocumentTypeService {
 	
 	@Transactional
 	public DocumentTypeDTO execute(DocumentTypeInsertDTO documentTypeInsertDTO) {
-//		validator(documentInsertDTO);
-		
+
 		DocumentType documentType = new DocumentType();
 		copyDtoToModel(documentTypeInsertDTO, documentType);
 		

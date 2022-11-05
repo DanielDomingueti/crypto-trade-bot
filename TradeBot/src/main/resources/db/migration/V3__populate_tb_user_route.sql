@@ -12,7 +12,7 @@ INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/cryptoc
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/admin/all', 'GET', 'Fetch all documents');
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/user/*', 'GET', 'Fetch all documents by user ID');
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/*', 'GET', 'Fetch document by ID');
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/admin/*', 'GET', 'Fetch document by ID');
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/insert', 'POST', 'Insert new document for the user');
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/delete/*', 'DELETE', 'Delete document by ID');
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/patch/*', 'PATCH', 'Patch a document by ID');

@@ -18,7 +18,7 @@ public class PatchCashBalanceTypeByIdService {
 	
 	@Transactional
 	public CashBalanceTypeDTO execute(Long id, CashBalanceTypePatchDTO cashBalanceTypeDTO) {
-//		cashBalance = validator.execute(id); insert findById inside of validator. 
+
 		CashBalanceType cashBalanceType = cashBalanceTypeRepository.findByIdAndDeletedAtIsNull(id);
 		
 		if (cashBalanceType == null) {

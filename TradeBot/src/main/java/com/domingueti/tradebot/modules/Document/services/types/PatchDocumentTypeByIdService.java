@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.domingueti.tradebot.exceptions.NotFoundException;
 import com.domingueti.tradebot.modules.Document.dtos.DocumentTypeDTO;
 import com.domingueti.tradebot.modules.Document.dtos.DocumentTypePatchDTO;
 import com.domingueti.tradebot.modules.Document.models.DocumentType;
@@ -17,19 +18,21 @@ public class PatchDocumentTypeByIdService {
 	
 	@Transactional
 	public DocumentTypeDTO execute(Long id, DocumentTypePatchDTO documentTypeDTO) {
-//		document = validator.execute(id); insert findById inside of validator. 
 		DocumentType documentType = documentTypeRepository.findByIdAndDeletedAtIsNull(id);
+
+		if (documentType == null) {
+			throw new NotFoundException("Document type not found with given ID: " + id);
+		}
 		
 		copyDtoToModel(documentTypeDTO, documentType);
-		
 		documentType = documentTypeRepository.save(documentType);
 		
 		return new DocumentTypeDTO(documentType);
 	}
 
 	private void copyDtoToModel(DocumentTypePatchDTO documentTypeDTO, DocumentType documentType) {
-		documentType.setType(documentTypeDTO.getType());
-		documentType.setDescription(documentTypeDTO.getDescription());		
+		documentType.setType(documentTypeDTO.getType() != null ? documentTypeDTO.getType() : null);
+		documentType.setDescription(documentTypeDTO.getDescription() != null ? documentTypeDTO.getDescription() : null);		
 	}
 	
 }

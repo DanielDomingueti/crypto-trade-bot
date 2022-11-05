@@ -22,7 +22,7 @@ public class DeleteCashBalanceByIdService {
 //		validator.execute(cashBalance);
 		
 		if (cashBalance == null) {
-			throw new NotFoundException("Cash balance not found with given ID: " + id);
+			throw new NotFoundException("Cash balance not found with given ID: " + id + " while deleting.");
 		}
 
 		cashBalanceRepository.deleteById(id);
