@@ -21,7 +21,7 @@ public class GetCashBalanceTypeByIdService {
 		CashBalanceType cashBalanceType = cashBalanceTypeRepository.findByIdAndDeletedAtIsNull(id);
 
 		if (cashBalanceType == null) {
-			throw new NotFoundException("Cash balance type not found with given ID: " + id);
+			throw new NotFoundException("Cash balance type not found with given ID: " + id + " while fetching.");
 		}
 
 		return new CashBalanceTypeDTO(cashBalanceType);

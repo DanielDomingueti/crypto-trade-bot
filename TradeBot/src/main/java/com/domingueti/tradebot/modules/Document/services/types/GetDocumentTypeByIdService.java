@@ -21,7 +21,7 @@ public class GetDocumentTypeByIdService {
 		DocumentType documentType = documentTypeRepository.findByIdAndDeletedAtIsNull(id);
 		
 		if (documentType == null) {
-			throw new NotFoundException("Document type not found with given ID: " + id);
+			throw new NotFoundException("Document type not found with given ID: " + id + " while fetching.");
 		}
 		
 		return new DocumentTypeDTO(documentType);

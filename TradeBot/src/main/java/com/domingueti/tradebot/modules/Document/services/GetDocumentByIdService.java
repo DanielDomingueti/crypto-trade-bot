@@ -21,7 +21,7 @@ public class GetDocumentByIdService {
 		Document document = documentRepository.findByIdAndDeletedAtIsNull(id);
 
 		if (document == null) {
-			throw new NotFoundException("Document not found with given ID: " + id);
+			throw new NotFoundException("Document not found with given ID: " + id + " while fetching.");
 		}
 		
 		return new DocumentDTO(document);

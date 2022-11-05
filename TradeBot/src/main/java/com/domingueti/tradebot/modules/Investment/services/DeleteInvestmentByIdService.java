@@ -19,11 +19,11 @@ public class DeleteInvestmentByIdService {
 		
 		Investment investment = investmentRepository.findByIdAndDeletedAtIsNull(id);
 		
-//		validator.execute(investment);
-		
 		if (investment == null) {
-			throw new NotFoundException("Investment not found with given ID: " + id);
+			throw new NotFoundException("Investment not found with given ID: " + id + " while deleting.");
 		}
+		
+//		validator.execute(investment);
 		
 		investmentRepository.delete(investment);
 	}

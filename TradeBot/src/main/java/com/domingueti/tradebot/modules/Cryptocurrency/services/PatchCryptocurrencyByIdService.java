@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.domingueti.tradebot.exceptions.NotFoundException;
 import com.domingueti.tradebot.modules.Cryptocurrency.dtos.CryptocurrencyDTO;
 import com.domingueti.tradebot.modules.Cryptocurrency.dtos.CryptocurrencyPatchDTO;
 import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
@@ -20,10 +21,13 @@ public class PatchCryptocurrencyByIdService {
 		
 		Cryptocurrency cryptocurrency = cryptocurrencyRepository.findByIdAndDeletedAtIsNull(id);
 
+		if (cryptocurrency == null) {
+			throw new NotFoundException("Cryptocurrency not found with given ID: " + id + " while patching.");
+		}
+		
 //		validator.execute(cryptocurrency);
 		
 		copyDtoToModel(cryptocurrencyDTO, cryptocurrency);
-		
 		cryptocurrency = cryptocurrencyRepository.save(cryptocurrency);
 		
 		return new CryptocurrencyDTO(cryptocurrency);

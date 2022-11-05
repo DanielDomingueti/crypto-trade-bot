@@ -22,7 +22,7 @@ public class GetCashBalanceByIdService {
 		CashBalance cashBalance = cashBalanceRepository.findByIdAndDeletedAtIsNull(id);
 		
 		if (cashBalance == null) {
-			throw new NotFoundException("Cash balance not found with given ID: " + id);
+			throw new NotFoundException("Cash balance not found with given ID: " + id + " while fetching.");
 		}
 		
 		return new CashBalanceDTO(cashBalance);

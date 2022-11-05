@@ -22,7 +22,7 @@ public class DeleteCryptocurrencyByIdService {
 //		validator.execute(cryptocurrency);
 		
 		if (cryptocurrency == null) {
-			throw new NotFoundException("Cryptocurrency not found with given ID: " + id);
+			throw new NotFoundException("Cryptocurrency not found with given ID: " + id + " while deleting.");
 		}
 
 		cryptocurrencyRepository.deleteById(id);

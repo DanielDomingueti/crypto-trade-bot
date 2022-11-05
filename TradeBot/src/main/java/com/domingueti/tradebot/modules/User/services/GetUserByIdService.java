@@ -22,7 +22,7 @@ public class GetUserByIdService {
 		User user = userRepository.findByIdAndDeletedAtIsNull(id);
 		
 		if (user == null) {
-			throw new NotFoundException("User not found with given ID: " + id + " while deleting.");
+			throw new NotFoundException("User not found with given ID: " + id + " while fetching.");
 		}
 		
 		return new UserDTO(user);

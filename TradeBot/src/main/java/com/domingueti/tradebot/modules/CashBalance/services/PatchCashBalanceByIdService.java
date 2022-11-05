@@ -22,7 +22,7 @@ public class PatchCashBalanceByIdService {
 		CashBalance cashBalance = cashBalanceRepository.findByIdAndDeletedAtIsNull(id);
 		
 		if (cashBalance == null) {
-			throw new NotFoundException("Cash balance not found with given ID: " + id);
+			throw new NotFoundException("Cash balance not found with given ID: " + id + " while patching.");
 		}
 		
 		copyDtoToModel(cashBalanceDTO, cashBalance);

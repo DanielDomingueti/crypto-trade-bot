@@ -21,7 +21,7 @@ public class GetCryptocurrencyByIdService {
 		Cryptocurrency cryptocurrency = cryptocurrencyRepository.findByIdAndDeletedAtIsNull(id);
 
 		if (cryptocurrency == null) {
-			throw new NotFoundException("Cryptocurrency not found with given ID: " + id);
+			throw new NotFoundException("Cryptocurrency not found with given ID: " + id + " while fetching.");
 		}
 		
 		return new CryptocurrencyDTO(cryptocurrency);

@@ -22,7 +22,7 @@ public class DeleteDocumentTypeByIdService {
 //		validator(documentType);
 		
 		if (documentType == null) {
-			throw new NotFoundException("Document type not found with given ID: " + id);
+			throw new NotFoundException("Document type not found with given ID: " + id + " while deleting.");
 		}
 		
 		documentTypeRepository.delete(documentType);

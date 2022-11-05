@@ -22,7 +22,7 @@ public class GetInvestmentBalanceByIdService {
 		InvestmentBalance investmentBalance = investmentBalanceRepository.findByIdAndDeletedAtIsNull(id);
 		
 		if (investmentBalance == null) {
-			throw new NotFoundException("Investment balance not found with given ID: " + id);
+			throw new NotFoundException("Investment balance not found with given ID: " + id + " while fetching.");
 		}
 		
 		return new InvestmentBalanceDTO(investmentBalance);

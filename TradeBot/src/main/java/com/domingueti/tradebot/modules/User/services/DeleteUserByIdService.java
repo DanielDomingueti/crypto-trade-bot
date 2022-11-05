@@ -20,7 +20,7 @@ public class DeleteUserByIdService {
 		User user = userRepository.findByIdAndDeletedAtIsNull(id);	
 		
 		if (user == null) {
-			throw new NotFoundException("User not found with given ID: " + id);
+			throw new NotFoundException("User not found with given ID: " + id + " while deleting.");
 		}
 		
 //		validator.execute(id); 
