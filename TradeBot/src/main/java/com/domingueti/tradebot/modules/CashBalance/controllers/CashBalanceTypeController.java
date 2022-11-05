@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.domingueti.tradebot.modules.CashBalance.controllers.openapi.CashBalanceTypeControllerOpenApi;
 import com.domingueti.tradebot.modules.CashBalance.dtos.CashBalanceTypeDTO;
 import com.domingueti.tradebot.modules.CashBalance.dtos.CashBalanceTypeInsertDTO;
 import com.domingueti.tradebot.modules.CashBalance.dtos.CashBalanceTypePatchDTO;
@@ -27,7 +28,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/cashbalancetype", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CashBalanceTypeController {
+public class CashBalanceTypeController implements CashBalanceTypeControllerOpenApi {
 
 	private GetCashBalanceTypesService getCashBalanceTypesService;
 	
@@ -39,6 +40,7 @@ public class CashBalanceTypeController {
 	
 	private PatchCashBalanceTypeByIdService patchCashBalanceTypeByIdService;
 	
+	@Override
 	@GetMapping("/all")
 	public ResponseEntity<List<CashBalanceTypeDTO>> getAllCashBalanceTypes() {
 		
@@ -46,6 +48,7 @@ public class CashBalanceTypeController {
 		return ResponseEntity.ok().body(cashBalanceTypeTypes);
 	}
 	
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<CashBalanceTypeDTO> getCashBalanceTypeById(@PathVariable Long id) {
 		
@@ -53,6 +56,7 @@ public class CashBalanceTypeController {
 		return ResponseEntity.ok().body(cashBalanceTypeDTO);
 	}
 	
+	@Override
 	@PostMapping("/admin/insert")
 	public ResponseEntity<CashBalanceTypeDTO> insertCashBalanceType(@RequestBody CashBalanceTypeInsertDTO dto) {
 		
@@ -60,6 +64,7 @@ public class CashBalanceTypeController {
 		return ResponseEntity.ok().body(cashBalanceTypeDTO);
 	}
 	
+	@Override
 	@DeleteMapping("/admin/delete/{id}")
 	public ResponseEntity<Void> deleteCashBalanceTypeById(@PathVariable Long id) {
 		
@@ -67,6 +72,7 @@ public class CashBalanceTypeController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@Override
 	@PatchMapping("/admin/patch/{id}")
 	public ResponseEntity<CashBalanceTypeDTO> patchCashBalanceTypeById(@PathVariable Long id, @RequestBody CashBalanceTypePatchDTO dto) {
 		

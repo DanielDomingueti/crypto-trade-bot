@@ -14,5 +14,15 @@ import com.domingueti.tradebot.security.exceptions.UnauthorizedException;
 @ControllerAdvice
 public class CustomizedExceptionResponseHandler {
 
+	@ExceptionHandler(NotFoundException.class)
+	public final ResponseEntity<ExceptionResponse> handleNotFoundException(NotFoundException ex,
+			HttpServletRequest request) {
+		HttpStatus status = HttpStatus.NOT_FOUND;
+
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Not Found", status.value(),
+				ex.getMessage(), request.getRequestURI());
+
+		return ResponseEntity.status(status).body(exceptionResponse);
+	}
 	
 }

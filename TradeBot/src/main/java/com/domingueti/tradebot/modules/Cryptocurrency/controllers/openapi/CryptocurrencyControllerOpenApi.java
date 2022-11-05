@@ -29,6 +29,6 @@ public interface CryptocurrencyControllerOpenApi {
 
 	@ApiOperation("Update a cryptocurrency by ID")
 	ResponseEntity<CryptocurrencyDTO> patchCryptocurrencyById(@ApiParam(value = "Cryptocurrency ID", example = "1") 
-	Long id, CryptocurrencyPatchDTO dto);
+		Long id, CryptocurrencyPatchDTO dto);
 
 }

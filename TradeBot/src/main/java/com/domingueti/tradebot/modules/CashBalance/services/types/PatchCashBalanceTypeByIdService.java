@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.domingueti.tradebot.exceptions.NotFoundException;
 import com.domingueti.tradebot.modules.CashBalance.dtos.CashBalanceTypeDTO;
 import com.domingueti.tradebot.modules.CashBalance.dtos.CashBalanceTypePatchDTO;
 import com.domingueti.tradebot.modules.CashBalance.models.CashBalanceType;
@@ -19,6 +20,10 @@ public class PatchCashBalanceTypeByIdService {
 	public CashBalanceTypeDTO execute(Long id, CashBalanceTypePatchDTO cashBalanceTypeDTO) {
 //		cashBalance = validator.execute(id); insert findById inside of validator. 
 		CashBalanceType cashBalanceType = cashBalanceTypeRepository.findByIdAndDeletedAtIsNull(id);
+		
+		if (cashBalanceType == null) {
+			throw new NotFoundException("Cash balance type not found with given ID: " + id);
+		}
 		
 		copyDtoToModel(cashBalanceTypeDTO, cashBalanceType);
 		

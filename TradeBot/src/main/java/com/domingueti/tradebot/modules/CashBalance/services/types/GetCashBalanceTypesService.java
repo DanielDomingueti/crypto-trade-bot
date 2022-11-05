@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.domingueti.tradebot.modules.CashBalance.dtos.CashBalanceTypeDTO;
+import com.domingueti.tradebot.modules.CashBalance.models.CashBalanceType;
 import com.domingueti.tradebot.modules.CashBalance.repositories.CashBalanceTypeRepository;
 
 @Service
@@ -17,7 +18,8 @@ private CashBalanceTypeRepository cashBalanceTypeRepository;
 	
 	@Transactional(readOnly = true)
 	public List<CashBalanceTypeDTO> execute() {
-//		validator.execute(userId); check with authenticated userId;
+		
+		List<CashBalanceType> cashBalanceTypes = cashBalanceTypeRepository.findAllAndDeletedAtIsNull();
 		
 		return cashBalanceTypeRepository.findAll().stream()
 				.map(CashBalanceTypeDTO::new).toList();
