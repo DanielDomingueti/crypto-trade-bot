@@ -1,6 +1,7 @@
 package com.domingueti.tradebot.modules.CashBalance.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,11 @@ public class GetCashBalancesService {
 private CashBalanceRepository cashBalanceRepository;
 	
 	@Transactional(readOnly = true)
-	public List<CashBalanceDTO> execute(Long userId) {
-//		validator.execute(userId); check with authenticated userId;
+	public List<CashBalanceDTO> execute() {
 		
-		List<CashBalance> cashBalances = cashBalanceRepository.findAllByUserIdAndDeletedAtIsNull(userId);
+		List<CashBalance> cashBalances = cashBalanceRepository.findAllByDeletedAtIsNull();
 		
-		return cashBalances.stream()
-				.map(CashBalanceDTO::new).toList();
+		return cashBalances.stream().map(CashBalanceDTO::new).collect(Collectors.toList());
 	}
 	
 }

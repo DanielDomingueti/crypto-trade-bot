@@ -18,17 +18,7 @@ public interface CashBalanceControllerOpenApi {
 	@ApiOperation("Fetch all cash balances")
 	ResponseEntity<List<CashBalanceDTO>> getAllCashBalances();
 
-	@ApiOperation("Fetch cash balance by ID")
-	ResponseEntity<CashBalanceDTO> getCashBalanceById(@ApiParam(value = "Cash balance ID", example = "1") Long id);
-
-	@ApiOperation("Insert new cash balance")
-	ResponseEntity<CashBalanceDTO> insertCashBalance(@ApiParam(value = "JSON body for CashBalanceInsertDTO") CashBalanceInsertDTO dto);
-
-	@ApiOperation("Delete a cash balance by ID")
-	ResponseEntity<Void> deleteCashBalanceById(@ApiParam(value = "Cash balance ID", example = "1") Long id);
-
-	@ApiOperation("Update a cash balance by ID")
-	ResponseEntity<CashBalanceDTO> patchCashBalanceById(@ApiParam(value = "Cash balance ID", example = "1")
-		Long id, CashBalancePatchDTO dto);
+	@ApiOperation("Fetch cash balance by User ID")
+	ResponseEntity<CashBalanceDTO> getCashBalanceByUserId(@ApiParam(value = "User ID", example = "1") Long userId);
 
 }
