@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.domingueti.tradebot.exceptions.NotFoundException;
 import com.domingueti.tradebot.modules.Cryptocurrency.dtos.CryptocurrencyDTO;
 import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
 import com.domingueti.tradebot.modules.Cryptocurrency.repositories.CryptocurrencyRepository;
@@ -16,13 +17,14 @@ public class GetCryptocurrencyByIdService {
 	
 	@Transactional(readOnly = true)
 	public CryptocurrencyDTO execute(Long id) {
-//		validator.execute(userId); check with authenticated userId;
-		Cryptocurrency doc = cryptocurrencyRepository.findByIdAndDeletedAtIsNull(id);
-		if (doc == null) {
-			return new CryptocurrencyDTO();
-		} else {
-			return new CryptocurrencyDTO(doc);
+	
+		Cryptocurrency cryptocurrency = cryptocurrencyRepository.findByIdAndDeletedAtIsNull(id);
+
+		if (cryptocurrency == null) {
+			throw new NotFoundException("Cryptocurrency not found with given ID: " + id);
 		}
+		
+		return new CryptocurrencyDTO(cryptocurrency);
 		
 	}
 	

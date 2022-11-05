@@ -17,8 +17,10 @@ public class PatchCryptocurrencyByIdService {
 	
 	@Transactional
 	public CryptocurrencyDTO execute(Long id, CryptocurrencyPatchDTO cryptocurrencyDTO) {
-//		cryptocurrency = validator.execute(id); insert findById inside of validator. 
+		
 		Cryptocurrency cryptocurrency = cryptocurrencyRepository.findByIdAndDeletedAtIsNull(id);
+
+//		validator.execute(cryptocurrency);
 		
 		copyDtoToModel(cryptocurrencyDTO, cryptocurrency);
 		

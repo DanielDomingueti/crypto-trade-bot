@@ -17,8 +17,7 @@ public class InsertCryptocurrencyService {
 	
 	@Transactional
 	public CryptocurrencyDTO execute(CryptocurrencyInsertDTO cryptocurrencyInsertDTO) {
-//		validator(cryptocurrencyInsertDTO);
-		
+
 		Cryptocurrency cryptocurrency = new Cryptocurrency();
 		copyDtoToModel(cryptocurrencyInsertDTO, cryptocurrency);
 		

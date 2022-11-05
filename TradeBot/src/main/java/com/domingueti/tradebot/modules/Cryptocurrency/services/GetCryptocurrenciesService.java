@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.domingueti.tradebot.modules.Cryptocurrency.dtos.CryptocurrencyDTO;
+import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
 import com.domingueti.tradebot.modules.Cryptocurrency.repositories.CryptocurrencyRepository;
 
 @Service
@@ -17,9 +18,10 @@ public class GetCryptocurrenciesService {
 	
 	@Transactional(readOnly = true)
 	public List<CryptocurrencyDTO> execute() {
-//		validator.execute(userId); check with authenticated userId;
+
+		List<Cryptocurrency> cryptocurrencies = cryptocurrencyRepository.findAllByDeletedAtIsNull();
 		
-		return cryptocurrencyRepository.findAll().stream()
+		return cryptocurrencies.stream()
 				.map(CryptocurrencyDTO::new).toList();
 	}
 	

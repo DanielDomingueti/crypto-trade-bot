@@ -33,8 +33,8 @@ public class PatchCashBalanceTypeByIdService {
 	}
 
 	private void copyDtoToModel(CashBalanceTypePatchDTO dto, CashBalanceType model) {
-		model.setType(dto.getType());
-		model.setDescription(dto.getDescription());
+		model.setType(dto.getType() != null ? dto.getType() : null);
+		model.setDescription(dto.getDescription() != null ? dto.getDescription() : null);
 	}
 	
 }
