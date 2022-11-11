@@ -1,6 +1,7 @@
 package com.domingueti.tradebot.modules.Document.services.types;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,9 @@ public class GetDocumentTypesService {
 	@Transactional(readOnly = true)
 	public List<DocumentTypeDTO> execute() {
 		
-		List<DocumentType> documentTypes = documentTypeRepository.findAllAndDeletedAtIsNull();
+		List<DocumentType> documentTypes = documentTypeRepository.findAllByDeletedAtIsNull();
 		
-		return documentTypes.stream()
-				.map(DocumentTypeDTO::new).toList();
+		return documentTypes.stream().map(DocumentTypeDTO::new).collect(Collectors.toList());
 	}
 
 }

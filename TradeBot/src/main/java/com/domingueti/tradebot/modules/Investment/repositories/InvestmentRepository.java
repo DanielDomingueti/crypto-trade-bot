@@ -13,5 +13,7 @@ public interface InvestmentRepository extends JpaRepository<Investment, Long> {
 	List<Investment> findByUserIdAndDeletedAtIsNull(Long userId);
 	
 	Investment findByIdAndDeletedAtIsNull(Long id);
+	
+	Investment findByUserIdAndCryptocurrencyIdAndDeletedAtIsNull(Long userId, Long cryptocurrencyId);
 
 }

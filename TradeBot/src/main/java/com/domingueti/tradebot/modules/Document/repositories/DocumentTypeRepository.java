@@ -10,6 +10,6 @@ public interface DocumentTypeRepository extends JpaRepository<DocumentType, Long
 
 	DocumentType findByIdAndDeletedAtIsNull(Long id);
 	
-	List<DocumentType> findAllAndDeletedAtIsNull();
+	List<DocumentType> findAllByDeletedAtIsNull();
 	
 }

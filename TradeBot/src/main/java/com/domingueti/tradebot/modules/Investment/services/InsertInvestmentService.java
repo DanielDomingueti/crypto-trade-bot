@@ -17,7 +17,14 @@ public class InsertInvestmentService {
 	
 	@Transactional
 	public InvestmentDTO execute(InvestmentInsertDTO dto) {
-//		validator.execute(userId); check with authenticated userId;
+//		validator.execute(userId); check with authenticated userId; enough cash_balance, 
+		
+		Investment existingInvestment = investmentRepository.findByUserIdAndCryptocurrencyIdAndDeletedAtIsNull(dto.getUserId(), dto.getCryptocurrencyId());
+		
+		//buy new coins of existing cryptocurrency.
+		if (existingInvestment != null) {
+			
+		}
 		
 		Investment investment = new Investment();
 		copyDtoToModel(dto, investment);

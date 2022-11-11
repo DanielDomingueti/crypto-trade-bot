@@ -27,11 +27,4 @@ public interface InvestmentBalanceControllerOpenApi {
 	@ApiOperation("Insert a new investment balance")
 	ResponseEntity<InvestmentBalanceDTO> insertInvestmentBalance(@ApiParam(value = "JSON body for InvestmentInsertDTO") InvestmentBalanceInsertDTO dto);
 
-	@ApiOperation("Delete an investment balance by ID")
-	ResponseEntity<Void> deleteInvestmentBalanceById(@ApiParam(value = "Investment ID", example = "1") Long id);
-
-	@ApiOperation("Update an investment balance by ID")
-	ResponseEntity<InvestmentBalanceDTO> patchInvestmentBalanceById(@ApiParam(value = "Investment ID", example = "1") 
-		Long id, InvestmentBalancePatchDTO dto);
-
 }
