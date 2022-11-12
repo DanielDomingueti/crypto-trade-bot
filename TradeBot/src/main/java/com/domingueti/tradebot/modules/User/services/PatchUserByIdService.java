@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.domingueti.tradebot.exceptions.NotFoundException;
 import com.domingueti.tradebot.modules.User.dtos.UserDTO;
 import com.domingueti.tradebot.modules.User.dtos.UserPatchDTO;
 import com.domingueti.tradebot.modules.User.models.User;
@@ -19,6 +20,10 @@ public class PatchUserByIdService {
 	public UserDTO execute(Long id, UserPatchDTO userDTO) {
 //		user = validator.execute(id); insert findById inside of validator. 
 		User user = userRepository.findByIdAndDeletedAtIsNull(id);
+		
+		if (user == null) {
+			throw new NotFoundException("User not found with given ID: " + id + " while patching.");
+		}
 		
 		copyDtoToModel(userDTO, user);
 		

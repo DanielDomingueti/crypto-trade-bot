@@ -8,7 +8,9 @@ import com.domingueti.tradebot.modules.Document.models.Document;
 
 public interface DocumentRepository extends JpaRepository<Document, Long>{
 
-	List<Document> findAllByUserId(Long userId);
+	List<Document> findAllByUserIdAndDeletedAtIsNull(Long userId);
+	
+	List<Document> findAllByDeletedAtIsNull();
 	
 	Document findByIdAndDeletedAtIsNull(Long id);
 	
