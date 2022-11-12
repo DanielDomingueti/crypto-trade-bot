@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -68,5 +72,16 @@ public class InvestmentBalance implements Serializable{
 	@ToString.Exclude
 	@OneToOne(mappedBy = "investmentBalance")
 	private @Getter Investment investment;
+	
+	@ToString.Exclude
+	@OneToMany(mappedBy = "investmentBalance", cascade = CascadeType.ALL)
+	private @Getter List<PivotInvestmentBalanceCashBalance> pivotInvestmentBalancesCashBalances = new ArrayList<>();
 
+	@ToString.Exclude
+	@OneToMany(mappedBy = "sourceInvestmentBalance", cascade = CascadeType.ALL)
+	private @Getter List<PivotInvestmentBalances> sourcePivotInvestmentBalances = new ArrayList<>();
+	
+	@ToString.Exclude
+	@OneToMany(mappedBy = "resultInvestmentBalance", cascade = CascadeType.ALL)
+	private @Getter List<PivotInvestmentBalances> resultPivotInvestmentBalances = new ArrayList<>();
 }

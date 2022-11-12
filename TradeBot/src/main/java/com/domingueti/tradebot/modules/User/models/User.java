@@ -51,8 +51,10 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 	
+	@Include
 	private @Getter @Setter String name;
 
+	@Include
 	private @Getter @Setter String email;
 
 	private @Getter @Setter String password;

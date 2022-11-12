@@ -2,6 +2,8 @@ package com.domingueti.tradebot.modules.CashBalance.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +37,9 @@ public class CashBalanceController implements CashBalanceControllerOpenApi {
 	
 	@Override
 	@GetMapping("/{userId}")
-	public ResponseEntity<CashBalanceDTO> getCashBalanceByUserId(@PathVariable Long userId) {
+	public ResponseEntity<CashBalanceDTO> getCashBalanceByUserId(@PathVariable Long userId, HttpServletRequest request) {
 		
-		CashBalanceDTO cashBalanceDTO = getCashBalanceByUserIdService.execute(userId);
+		CashBalanceDTO cashBalanceDTO = getCashBalanceByUserIdService.execute(userId, request);
 		return ResponseEntity.ok().body(cashBalanceDTO);
 	}
 	

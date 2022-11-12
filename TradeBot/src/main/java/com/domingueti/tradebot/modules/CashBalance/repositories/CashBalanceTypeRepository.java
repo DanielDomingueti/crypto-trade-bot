@@ -10,6 +10,6 @@ public interface CashBalanceTypeRepository extends JpaRepository<CashBalanceType
 
 	CashBalanceType findByIdAndDeletedAtIsNull(Long id);
 	
-	List<CashBalanceType> findAllAndDeletedAtIsNull();
+	List<CashBalanceType> findAllByDeletedAtIsNull();
 	
 }

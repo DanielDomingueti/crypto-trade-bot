@@ -14,13 +14,13 @@ import com.domingueti.tradebot.modules.CashBalance.repositories.CashBalanceTypeR
 @Service
 public class GetCashBalanceTypesService {
 
-@Autowired
-private CashBalanceTypeRepository cashBalanceTypeRepository;
+	@Autowired
+	private CashBalanceTypeRepository cashBalanceTypeRepository;
 	
 	@Transactional(readOnly = true)
 	public List<CashBalanceTypeDTO> execute() {
 		
-		List<CashBalanceType> cashBalanceTypes = cashBalanceTypeRepository.findAllAndDeletedAtIsNull();
+		List<CashBalanceType> cashBalanceTypes = cashBalanceTypeRepository.findAllByDeletedAtIsNull();
 		
 		return cashBalanceTypes.stream().map(CashBalanceTypeDTO::new).collect(Collectors.toList());
 	}
