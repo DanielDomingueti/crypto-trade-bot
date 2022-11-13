@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.CashBalance.validator;
+package com.domingueti.tradebot.modules.InvestmentBalance.validators;
 
 import java.util.Map;
 
@@ -13,24 +13,21 @@ import com.domingueti.tradebot.modules.User.repositories.UserRepository;
 import com.domingueti.tradebot.security.dtos.UserPrincipalDTO;
 
 @Component
-public class GetCashBalanceByUserIdValidator {
-	
+public class GetInvestmentBalancesByUserIdValidator {
+
 	private Map<String, String> fieldErrors;	
 	private Boolean validInsert;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 	
 	public void execute(Long userId) {
-		User user = userRepository.findByIdAndDeletedAtIsNull(userId);
+
+		UserPrincipalDTO authUserDTO = (UserPrincipalDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User authUser = userRepository.findByIdAndDeletedAtIsNull(authUserDTO.getId());
 		
-		UserPrincipalDTO authPrincipalDTO = (UserPrincipalDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	
-		User authUser = new User();
-		copyPrincipalToUser(authPrincipalDTO, authUser);
-		
-		if (!user.equals(authUser)) {
-			fieldErrors.put("user.id", "The authenticated user does not have access to other user's cash balance");
+		if (!userId.equals(authUser.getId()) && !authUser.getIsAdmin()) {
+			fieldErrors.put("user.investmentBalance", "The user can only fetch his own investment balances.");
 			validInsert = false;
 		}
 		
@@ -41,13 +38,6 @@ public class GetCashBalanceByUserIdValidator {
 
 			throw exception;
 		}
-		
 	}
-
-	private void copyPrincipalToUser(UserPrincipalDTO dto, User authUser) {
-		authUser.setId(dto.getId());
-		authUser.setName(dto.getName());
-		authUser.setEmail(dto.getCredential());
-	}
-
+	
 }

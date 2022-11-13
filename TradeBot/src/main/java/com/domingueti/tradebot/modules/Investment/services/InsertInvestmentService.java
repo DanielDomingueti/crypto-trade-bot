@@ -1,6 +1,5 @@
 package com.domingueti.tradebot.modules.Investment.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,16 +7,21 @@ import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertDTO;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
 import com.domingueti.tradebot.modules.Investment.repositories.InvestmentRepository;
+import com.domingueti.tradebot.modules.Investment.validators.InsertInvestmentValidator;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Service
 public class InsertInvestmentService {
 	
-	@Autowired
 	private InvestmentRepository investmentRepository;
+	
+	private InsertInvestmentValidator validator;
 	
 	@Transactional
 	public InvestmentDTO execute(InvestmentInsertDTO dto) {
-//		validator.execute(userId); check with authenticated userId; enough cash_balance, 
+		validator.execute(dto); //check with authenticated userId; enough cash_balance, 
 		
 		Investment existingInvestment = investmentRepository.findByUserIdAndCryptocurrencyIdAndDeletedAtIsNull(dto.getUserId(), dto.getCryptocurrencyId());
 		

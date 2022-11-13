@@ -37,9 +37,9 @@ public class CashBalanceController implements CashBalanceControllerOpenApi {
 	
 	@Override
 	@GetMapping("/{userId}")
-	public ResponseEntity<CashBalanceDTO> getCashBalanceByUserId(@PathVariable Long userId, HttpServletRequest request) {
+	public ResponseEntity<CashBalanceDTO> getCashBalanceByUserId(@PathVariable Long userId) {
 		
-		CashBalanceDTO cashBalanceDTO = getCashBalanceByUserIdService.execute(userId, request);
+		CashBalanceDTO cashBalanceDTO = getCashBalanceByUserIdService.execute(userId);
 		return ResponseEntity.ok().body(cashBalanceDTO);
 	}
 	

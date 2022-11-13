@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.domingueti.tradebot.modules.InvestmentBalance.controllers.openapi.InvestmentBalanceControllerOpenApi;
 import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalanceDTO;
 import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalanceInsertDTO;
-import com.domingueti.tradebot.modules.InvestmentBalance.services.GetInvestmentBalanceByIdService;
+import com.domingueti.tradebot.modules.InvestmentBalance.services.GetInvestmentBalanceByInvestmentIdService;
 import com.domingueti.tradebot.modules.InvestmentBalance.services.GetInvestmentBalancesByUserIdService;
 import com.domingueti.tradebot.modules.InvestmentBalance.services.GetInvestmentBalancesService;
 import com.domingueti.tradebot.modules.InvestmentBalance.services.InsertInvestmentBalanceService;
@@ -29,7 +29,7 @@ public class InvestmentBalanceController implements InvestmentBalanceControllerO
 
 	private GetInvestmentBalancesByUserIdService getInvestmentBalancesByUserIdService;
 
-	private GetInvestmentBalanceByIdService getInvestmentBalanceByIdService;
+	private GetInvestmentBalanceByInvestmentIdService getInvestmentBalanceByInvestmentIdService;
 	
 	private InsertInvestmentBalanceService insertInvestmentBalanceService;
 	
@@ -48,9 +48,9 @@ public class InvestmentBalanceController implements InvestmentBalanceControllerO
 	}
 	
 	@Override
-	@GetMapping("/{id}")
-	public ResponseEntity<InvestmentBalanceDTO> getInvestmentBalanceById(@PathVariable Long id) {
-		InvestmentBalanceDTO investmentBalanceDTO = getInvestmentBalanceByIdService.execute(id);
+	@GetMapping("/investment/{id}")
+	public ResponseEntity<InvestmentBalanceDTO> getInvestmentBalanceByInvestmentId(@PathVariable Long investmentId) {
+		InvestmentBalanceDTO investmentBalanceDTO = getInvestmentBalanceByInvestmentIdService.execute(investmentId);
 		return ResponseEntity.ok().body(investmentBalanceDTO);
 	}
 	

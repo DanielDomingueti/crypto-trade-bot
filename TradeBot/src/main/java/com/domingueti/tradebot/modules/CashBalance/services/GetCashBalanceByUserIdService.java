@@ -22,8 +22,8 @@ public class GetCashBalanceByUserIdService {
 	private GetCashBalanceByUserIdValidator validator;
 	
 	@Transactional(readOnly = true)
-	public CashBalanceDTO execute(Long userId, HttpServletRequest request) {
-		validator.execute(userId, request);
+	public CashBalanceDTO execute(Long userId) {
+		validator.execute(userId);
 		
 		CashBalance cashBalance = cashBalanceRepository.findByIdAndDeletedAtIsNull(userId);
 		

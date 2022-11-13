@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.CashBalance.validator;
+package com.domingueti.tradebot.modules.InvestmentBalance.validators;
 
 import java.util.Map;
 
@@ -8,29 +8,35 @@ import org.springframework.stereotype.Component;
 
 import com.domingueti.tradebot.exceptions.FieldMessage;
 import com.domingueti.tradebot.exceptions.InvalidRequestException;
+import com.domingueti.tradebot.modules.Investment.models.Investment;
 import com.domingueti.tradebot.modules.User.models.User;
 import com.domingueti.tradebot.modules.User.repositories.UserRepository;
 import com.domingueti.tradebot.security.dtos.UserPrincipalDTO;
 
 @Component
-public class GetCashBalanceByUserIdValidator {
+public class GetInvestmentBalanceByInvestmentIdValidator {
 	
 	private Map<String, String> fieldErrors;	
 	private Boolean validInsert;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 	
-	public void execute(Long userId) {
-		User user = userRepository.findByIdAndDeletedAtIsNull(userId);
+	public void execute(Long investmentId) {
+
+		UserPrincipalDTO authUserDTO = (UserPrincipalDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User authUser = userRepository.findByIdAndDeletedAtIsNull(authUserDTO.getId());
 		
-		UserPrincipalDTO authPrincipalDTO = (UserPrincipalDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	
-		User authUser = new User();
-		copyPrincipalToUser(authPrincipalDTO, authUser);
+		Boolean isUserInvestment = false;
 		
-		if (!user.equals(authUser)) {
-			fieldErrors.put("user.id", "The authenticated user does not have access to other user's cash balance");
+		for (Investment investment : authUser.getInvestments()) {
+			if (investment.getId().equals(investmentId)) {
+				isUserInvestment = true;
+			}
+		}
+		
+		if (isUserInvestment.equals(false) && !authUser.getIsAdmin()) {
+			fieldErrors.put("user.investmentBalance", "The user can only fetch his own investment balances.");
 			validInsert = false;
 		}
 		
@@ -41,13 +47,5 @@ public class GetCashBalanceByUserIdValidator {
 
 			throw exception;
 		}
-		
 	}
-
-	private void copyPrincipalToUser(UserPrincipalDTO dto, User authUser) {
-		authUser.setId(dto.getId());
-		authUser.setName(dto.getName());
-		authUser.setEmail(dto.getCredential());
-	}
-
 }

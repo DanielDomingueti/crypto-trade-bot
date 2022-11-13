@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class InvestmentInsertDTO implements Serializable {
 	@NotNull(message = "Cryptocurrency ID is mandatory")
 	private @Getter @Setter Long cryptocurrencyId;
 
+	@Positive
 	@NotNull(message = "Initial value is mandatory")
 	private @Getter @Setter BigDecimal initialValue;
 

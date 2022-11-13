@@ -19,53 +19,44 @@ INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/user/*', 'GET', 'Fetch all documents by user ID');
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 7);
 
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/insert', 'POST', 'Insert new document for the user');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 8);
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/admin/all', 'GET', 'Fetch all documents');
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 8);
 
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/delete/*', 'DELETE', 'Delete document by ID');
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investmentbalances/investment/*', 'GET', 'Fetch investment balance by investment ID');
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 9);
 
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/patch/*', 'PATCH', 'Patch a document by ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 10);
-
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/documents/admin/all', 'GET', 'Fetch all documents');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 11);
-
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investmentbalances/*', 'GET', 'Fetch investment balance by ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 12);
-
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investmentbalances/admin/all', 'GET', 'Fetch all investment balances');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 13);
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investmentbalances/admin/all', 'GET', 'Fetch all latest investment balances');
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 10);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investmentbalances/user/*', 'GET', 'Fetch all investment balances by user ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 14);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 11);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investmentbalances/admin/insert', 'POST', 'Insert new investment balance');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 15);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 12);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investments/admin/all', 'GET', 'Fetch all investments');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 16);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 13);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investments/user/*', 'GET', 'Fetch all investments by user ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 17);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 14);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investments/*', 'GET', 'Fetch investment by ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 18);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 15);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investments/insert', 'POST', 'Insert new investment');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 19);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 16);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/all', 'GET', 'Fetch all users');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 20);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 17);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/*', 'GET', 'Fetch user by ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 21);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 18);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/insert', 'POST', 'Insert new user');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 22);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 19);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/delete/*', 'DELETE', 'Delete user by ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 23);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 20);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/patch/*', 'PATCH', 'Patch user by ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 24);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 21);

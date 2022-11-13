@@ -1,6 +1,5 @@
 package com.domingueti.tradebot.modules.InvestmentBalance.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,16 +7,21 @@ import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalanceD
 import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalanceInsertDTO;
 import com.domingueti.tradebot.modules.InvestmentBalance.models.InvestmentBalance;
 import com.domingueti.tradebot.modules.InvestmentBalance.repositories.InvestmentBalanceRepository;
+import com.domingueti.tradebot.modules.InvestmentBalance.validators.InsertInvestmentBalanceValidator;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Service
 public class InsertInvestmentBalanceService {
 
-	@Autowired
 	private InvestmentBalanceRepository investmentBalanceRepository;
+	
+	private InsertInvestmentBalanceValidator validator;
 	
 	@Transactional
 	public InvestmentBalanceDTO execute(InvestmentBalanceInsertDTO dto) {
-//		validator.execute(userId); check with authenticated userId;
+		validator.execute(dto);
 
 		InvestmentBalance investmentBalance = new InvestmentBalance();
 		

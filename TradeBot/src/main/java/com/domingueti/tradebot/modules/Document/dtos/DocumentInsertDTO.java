@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import lombok.Setter;
 public class DocumentInsertDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@NotNull(message = "User ID is mandatory")
+	@Null
 	private @Getter @Setter Long userId;
 	
 	@NotNull(message = "Document type ID is mandatory")
@@ -35,7 +36,5 @@ public class DocumentInsertDTO implements Serializable {
 
 	@NotNull(message = "Due date is mandatory")
 	private @Getter @Setter LocalDate dueDate;
-	
-	private @Getter @Setter String link;
 	
 }

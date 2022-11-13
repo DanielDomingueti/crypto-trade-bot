@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.CashBalance.validator;
+package com.domingueti.tradebot.modules.Investment.validators;
 
 import java.util.Map;
 
@@ -8,46 +8,46 @@ import org.springframework.stereotype.Component;
 
 import com.domingueti.tradebot.exceptions.FieldMessage;
 import com.domingueti.tradebot.exceptions.InvalidRequestException;
+import com.domingueti.tradebot.modules.Investment.models.Investment;
 import com.domingueti.tradebot.modules.User.models.User;
 import com.domingueti.tradebot.modules.User.repositories.UserRepository;
 import com.domingueti.tradebot.security.dtos.UserPrincipalDTO;
 
 @Component
-public class GetCashBalanceByUserIdValidator {
-	
+public class GetInvestmentByIdValidator {
+
 	private Map<String, String> fieldErrors;	
-	private Boolean validInsert;
+	private Boolean validFetch;
 	
 	@Autowired
 	private UserRepository userRepository;
 	
-	public void execute(Long userId) {
-		User user = userRepository.findByIdAndDeletedAtIsNull(userId);
+	public void execute(Long id) {
+
+		UserPrincipalDTO authUserDTO = (UserPrincipalDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User authUser = userRepository.findByIdAndDeletedAtIsNull(authUserDTO.getId());
 		
-		UserPrincipalDTO authPrincipalDTO = (UserPrincipalDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	
-		User authUser = new User();
-		copyPrincipalToUser(authPrincipalDTO, authUser);
+		Boolean isUserInvestment = false;
 		
-		if (!user.equals(authUser)) {
-			fieldErrors.put("user.id", "The authenticated user does not have access to other user's cash balance");
-			validInsert = false;
+		for (Investment investment : authUser.getInvestments()) {
+			if (investment.getId().equals(id)) {
+				isUserInvestment = true;
+			}
 		}
 		
-		if (!validInsert) {
+		if (isUserInvestment.equals(false) && !authUser.getIsAdmin()) {
+			fieldErrors.put("investment.user.id", "The user can only fetch his own investments.");
+			validFetch = false;
+		}
+		
+		if (!validFetch) {
 			InvalidRequestException exception = new InvalidRequestException("Error while validating given data");
 
 			fieldErrors.forEach((field, message) -> exception.getFields().add(new FieldMessage(field, message)));
 
 			throw exception;
 		}
-		
 	}
-
-	private void copyPrincipalToUser(UserPrincipalDTO dto, User authUser) {
-		authUser.setId(dto.getId());
-		authUser.setName(dto.getName());
-		authUser.setEmail(dto.getCredential());
-	}
-
+	
+	
 }
