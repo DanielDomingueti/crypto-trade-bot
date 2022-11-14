@@ -15,6 +15,8 @@ import lombok.Setter;
 public class InvestmentDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private @Getter @Setter Long id;
+	
 	private @Getter @Setter Long userId;
 	
 	private @Getter @Setter BigDecimal initialValue;
@@ -26,6 +28,7 @@ public class InvestmentDTO implements Serializable {
 	private @Getter @Setter Boolean simulated;
 	
 	public InvestmentDTO(Investment investment) {
+		this.id = investment.getId();
 		this.userId = investment.getUserId();
 		this.initialValue = investment.getInitialValue();
 		this.unitValue = investment.getUnitValue();

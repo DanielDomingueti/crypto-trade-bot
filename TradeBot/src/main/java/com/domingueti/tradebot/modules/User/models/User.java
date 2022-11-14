@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -51,10 +52,10 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 	
-	@Include
+	private @Getter @Setter Long userTypeId;
+	
 	private @Getter @Setter String name;
 
-	@Include
 	private @Getter @Setter String email;
 
 	private @Getter @Setter String password;
@@ -73,6 +74,11 @@ public class User implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "cashBalanceId")
 	private @Getter CashBalance cashBalance;
+	
+	@ToString.Exclude
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "userTypeId", insertable = false, updatable = false)
+	private @Getter UserType userType;
 		
 	@ToString.Exclude
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

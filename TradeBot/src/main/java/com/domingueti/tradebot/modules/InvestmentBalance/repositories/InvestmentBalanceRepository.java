@@ -21,6 +21,8 @@ public interface InvestmentBalanceRepository extends JpaRepository<InvestmentBal
 	
 	InvestmentBalance findByIdAndDeletedAtIsNull(Long id);
 	
-	Boolean existsByUserIdAndDeletedAtIsNull(Long userId);
+	InvestmentBalance findByInvestmentIdAndDeletedAtIsNull(Long investmentId);
 	
+	Boolean existsByUserIdAndDeletedAtIsNull(Long userId);
+
 }

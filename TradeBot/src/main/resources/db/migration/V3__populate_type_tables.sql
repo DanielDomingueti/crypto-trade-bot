@@ -6,12 +6,15 @@ INSERT INTO "tb_document_type" ("type", "description") VALUES ('cpf', 'CPF');
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('rg', 'RG');
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('cnpj', 'CNPJ');
 
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('SOLD', 'Sell cryptocurrency');
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('BUY', 'Buy cryptocurrency');
+INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('NEW_CONTRIBUTION', 'Put money on it');
+INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('BUY_EXISTING', 'Buy cryptocurrency');
+INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('SOLD_EXISTING', 'Sell cryptocurrency');
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('SWAP', 'Swap different cryptocurrencies');
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('STEAKING_INCOME', 'Steaking passive income');
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('NEW_CONTRIBUTION', 'Put money on it');
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('LIQUIDITY_POOL_INCOME', 'Liquidity pool passive income');
+
+INSERT INTO "tb_user_type" ("type", "description") VALUES ('natural_person', 'Natural person');
+INSERT INTO "tb_user_type" ("type", "description") VALUES ('legal_person', 'Legal person');
 
 INSERT INTO "tb_cryptocurrency" ("symbol", "name") VALUES ('BTC', 'Bitcoin');
 INSERT INTO "tb_cryptocurrency" ("symbol", "name") VALUES ('ETH', 'Ethereum');

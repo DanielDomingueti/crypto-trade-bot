@@ -21,7 +21,7 @@ public class InsertInvestmentService {
 	
 	@Transactional
 	public InvestmentDTO execute(InvestmentInsertDTO dto) {
-		validator.execute(dto); //check with authenticated userId; enough cash_balance, 
+		validator.execute(dto);
 		
 		Investment existingInvestment = investmentRepository.findByUserIdAndCryptocurrencyIdAndDeletedAtIsNull(dto.getUserId(), dto.getCryptocurrencyId());
 		

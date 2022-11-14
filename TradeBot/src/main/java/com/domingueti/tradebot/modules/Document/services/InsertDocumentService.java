@@ -51,7 +51,6 @@ public class InsertDocumentService {
 		model.setIssuingEntity(dto.getIssuingEntity());
 		model.setIssueDate(dto.getIssueDate());
 		model.setDueDate(dto.getDueDate());
-		model.setLink(dto.getLink() == null ? null : dto.getLink());
 	}
 	
 }

@@ -29,4 +29,7 @@ public class InvestmentInsertDTO implements Serializable {
 	@NotNull(message = "Simulated option is mandatory")
 	private @Getter @Setter Boolean simulated;
 	
+	@NotNull(message = "Fiat or crypto source operation is mandatory")
+	private @Getter @Setter Boolean isFiat;
+	
 }

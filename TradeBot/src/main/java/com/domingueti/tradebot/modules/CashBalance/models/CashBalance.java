@@ -64,12 +64,12 @@ public class CashBalance implements Serializable{
 	
 	@ToString.Exclude
 	@OneToOne(mappedBy = "cashBalance")
-	private @Getter User user;
+	private @Getter @Setter User user;
 	
 	@ToString.Exclude
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cashBalanceTypeId", insertable = false, updatable = false)
-	private @Getter CashBalanceType cashBalanceType;
+	private @Getter @Setter CashBalanceType cashBalanceType;
 	
 	@ToString.Exclude
 	@OneToMany(mappedBy = "cashBalance", cascade = CascadeType.ALL)

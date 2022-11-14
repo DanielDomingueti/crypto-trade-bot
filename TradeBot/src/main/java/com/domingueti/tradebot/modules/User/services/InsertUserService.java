@@ -32,6 +32,7 @@ public class InsertUserService {
 	}
 
 	private void copyDtoToModel(UserInsertDTO dto, User model) {
+		model.setUserTypeId(dto.getUserTypeId());
 		model.setName(dto.getName());
 		model.setEmail(dto.getEmail());
 		model.setPassword(dto.getPassword());

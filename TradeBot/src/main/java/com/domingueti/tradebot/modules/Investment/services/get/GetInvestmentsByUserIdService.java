@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.Investment.services;
+package com.domingueti.tradebot.modules.Investment.services.get;
 
 import java.util.List;
 import java.util.stream.Collectors;

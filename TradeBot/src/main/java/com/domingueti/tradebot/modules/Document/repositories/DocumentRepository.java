@@ -13,5 +13,7 @@ public interface DocumentRepository extends JpaRepository<Document, Long>{
 	List<Document> findAllByDeletedAtIsNull();
 	
 	Document findByIdAndDeletedAtIsNull(Long id);
+
+	Boolean existsDocumentByUserId(Long userId);
 	
 }

@@ -19,6 +19,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserInsertDTO {
 
+	@NotNull(message = "User type is mandatory")
+	private @Getter @Setter Long userTypeId;
+	
 	@NotNull(message = "Name is mandatory")
 	private @Getter @Setter String name;
 

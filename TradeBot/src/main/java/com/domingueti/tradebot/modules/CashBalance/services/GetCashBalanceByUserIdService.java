@@ -1,7 +1,5 @@
 package com.domingueti.tradebot.modules.CashBalance.services;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

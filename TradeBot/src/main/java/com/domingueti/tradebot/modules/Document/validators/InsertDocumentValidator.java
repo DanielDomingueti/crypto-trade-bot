@@ -28,7 +28,7 @@ public class InsertDocumentValidator {
 		}
 
 		if (counter != MAIN_DOCUMENTS_BY_USER) {
-			fieldErrors.put("documents.isMain.over", "Only one main document is permitted by user");
+			fieldErrors.put("documents.main", "Only one main document is allowed by user");
 			validInsert = false;
 		}
 		
