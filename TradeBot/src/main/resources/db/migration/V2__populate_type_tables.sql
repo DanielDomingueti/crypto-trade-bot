@@ -1,3 +1,10 @@
+INSERT INTO tb_config(name, value) VALUES ('TOKEN_SECRET', 'test-token-signature');
+INSERT INTO tb_config(name, value) VALUES ('SIGN_IN_USER_URL', '/user/login');
+INSERT INTO tb_config(name, value) VALUES ('HEADER_STRING', 'Authorization');
+INSERT INTO tb_config(name, value) VALUES ('TOKEN_TYPE', 'Bearer ');
+INSERT INTO tb_config(name, value) VALUES ('TOKEN_EXPIRATION_TIME', '86400000');
+INSERT INTO tb_config(name, value) VALUES ('TOKEN_ADMIN_EXPIRATION_TIME', '86400000');
+
 INSERT INTO "tb_cash_balance_type" ("type", "description") VALUES ('usd', 'USD');
 INSERT INTO "tb_cash_balance_type" ("type", "description") VALUES ('eur', 'EUR');
 INSERT INTO "tb_cash_balance_type" ("type", "description") VALUES ('brl', 'BRL');
@@ -15,6 +22,9 @@ INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('LIQU
 
 INSERT INTO "tb_user_type" ("type", "description") VALUES ('natural_person', 'Natural person');
 INSERT INTO "tb_user_type" ("type", "description") VALUES ('legal_person', 'Legal person');
+
+INSERT INTO tb_user_group(name, description) VALUES ('regular_client', 'REGULAR CLIENT');
+INSERT INTO tb_user_group(name, description) VALUES ('admin', 'ADMIN');
 
 INSERT INTO "tb_cryptocurrency" ("symbol", "name") VALUES ('BTC', 'Bitcoin');
 INSERT INTO "tb_cryptocurrency" ("symbol", "name") VALUES ('ETH', 'Ethereum');

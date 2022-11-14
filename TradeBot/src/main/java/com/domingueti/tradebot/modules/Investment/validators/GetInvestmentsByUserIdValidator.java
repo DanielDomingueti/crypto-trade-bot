@@ -16,7 +16,7 @@ import com.domingueti.tradebot.security.dtos.UserPrincipalDTO;
 public class GetInvestmentsByUserIdValidator {
 
 	private Map<String, String> fieldErrors;	
-	private Boolean validFetch;
+	private Boolean validFetch = true;
 	
 	@Autowired
 	private UserRepository userRepository;

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
-import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertDTO;
+import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertCryptoDTO;
 
 import lombok.AllArgsConstructor;
 
@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 public class InsertNewInvestmentCryptoService {
 
 	@Transactional
-	public InvestmentDTO execute(InvestmentInsertDTO dto) {
+	public InvestmentDTO execute(InvestmentInsertCryptoDTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

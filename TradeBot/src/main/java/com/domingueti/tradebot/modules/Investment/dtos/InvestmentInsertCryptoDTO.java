@@ -13,14 +13,17 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvestmentInsertDTO implements Serializable {
+public class InvestmentInsertCryptoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull(message = "User ID is mandatory")
 	private @Getter @Setter Long userId;
 
-	@NotNull(message = "Cryptocurrency ID is mandatory")
-	private @Getter @Setter Long cryptocurrencyId;
+	@NotNull(message = "Source cryptocurrency ID is mandatory")
+	private @Getter @Setter Long sourceCryptocurrencyId;
+	
+	@NotNull(message = "Result cryptocurrency ID is mandatory")
+	private @Getter @Setter Long resultCryptocurrencyId;
 
 	@Positive
 	@NotNull(message = "Initial value is mandatory")
@@ -28,8 +31,5 @@ public class InvestmentInsertDTO implements Serializable {
 
 	@NotNull(message = "Simulated option is mandatory")
 	private @Getter @Setter Boolean simulated;
-	
-	@NotNull(message = "Fiat or crypto source operation is mandatory")
-	private @Getter @Setter Boolean isFiat;
 	
 }

@@ -14,8 +14,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.domingueti.tradebot.modules.Investment.controllers.openapi.InvestmentControllerOpenApi;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
-import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertDTO;
-import com.domingueti.tradebot.modules.Investment.services.InsertInvestmentManagerService;
+import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertCryptoDTO;
+import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertFiatDTO;
+import com.domingueti.tradebot.modules.Investment.services.InsertInvestmentCryptoManagerService;
+import com.domingueti.tradebot.modules.Investment.services.InsertInvestmentFiatManagerService;
 import com.domingueti.tradebot.modules.Investment.services.get.GetInvestmentByIdService;
 import com.domingueti.tradebot.modules.Investment.services.get.GetInvestmentsByUserIdService;
 import com.domingueti.tradebot.modules.Investment.services.get.GetInvestmentsService;
@@ -33,7 +35,9 @@ public class InvestmentController implements InvestmentControllerOpenApi {
 	
 	private GetInvestmentByIdService getInvestmentByIdService;
 	
-	private InsertInvestmentManagerService insertInvestmentManagerService;
+	private InsertInvestmentFiatManagerService insertInvestmentFiatManagerService;
+	
+	private InsertInvestmentCryptoManagerService insertInvestmentCryptoManagerService;
 	
 	@Override
 	@GetMapping("/admin/all")
@@ -57,9 +61,17 @@ public class InvestmentController implements InvestmentControllerOpenApi {
 	}
 	
 	@Override
-	@PostMapping("/insert")
-	public ResponseEntity<InvestmentDTO> insertInvestment(@RequestBody InvestmentInsertDTO dto) {
-		InvestmentDTO investmentDTO = insertInvestmentManagerService.execute(dto);
+	@PostMapping("/insert/fiat")
+	public ResponseEntity<InvestmentDTO> insertInvestmentFiat(@RequestBody InvestmentInsertFiatDTO dto) {
+		InvestmentDTO investmentDTO = insertInvestmentFiatManagerService.execute(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(investmentDTO.getId()).toUri();
+		return ResponseEntity.created(uri).body(investmentDTO);
+	}
+	
+	@Override
+	@PostMapping("/insert/crypto")
+	public ResponseEntity<InvestmentDTO> insertInvestmentCrypto(@RequestBody InvestmentInsertCryptoDTO dto) {
+		InvestmentDTO investmentDTO = insertInvestmentCryptoManagerService.execute(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(investmentDTO.getId()).toUri();
 		return ResponseEntity.created(uri).body(investmentDTO);
 	}

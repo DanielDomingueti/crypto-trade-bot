@@ -23,10 +23,10 @@ public class GetInvestmentBalanceByInvestmentIdService {
 	public InvestmentBalanceDTO execute(Long investmentId) {
 		validator.execute(investmentId);
 		
-		InvestmentBalance investmentBalance = investmentBalanceRepository.findByIdAndDeletedAtIsNull(id);
+		InvestmentBalance investmentBalance = investmentBalanceRepository.findByIdAndDeletedAtIsNull(investmentId);
 		
 		if (investmentBalance == null) {
-			throw new NotFoundException("Investment balance not found with given ID: " + id + " while fetching.");
+			throw new NotFoundException("Investment balance not found with given InvestmentID: " + investmentId + " while fetching.");
 		}
 		
 		return new InvestmentBalanceDTO(investmentBalance);

@@ -11,13 +11,13 @@ import com.domingueti.tradebot.exceptions.InvalidRequestException;
 import com.domingueti.tradebot.modules.CashBalance.models.CashBalance;
 import com.domingueti.tradebot.modules.CashBalance.repositories.CashBalanceRepository;
 import com.domingueti.tradebot.modules.Cryptocurrency.repositories.CryptocurrencyRepository;
-import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertDTO;
+import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertCryptoDTO;
 import com.domingueti.tradebot.modules.User.models.User;
 import com.domingueti.tradebot.modules.User.repositories.UserRepository;
 import com.domingueti.tradebot.security.dtos.UserPrincipalDTO;
 
 @Component
-public class InsertInvestmentValidator {
+public class InsertInvestmentCryptoValidator {
 
 	private Map<String, String> fieldErrors;	
 	private Boolean validInsert;
@@ -31,7 +31,7 @@ public class InsertInvestmentValidator {
 	@Autowired
 	private CashBalanceRepository cashBalanceRepository;
 	
-	public void execute(InvestmentInsertDTO dto) {
+	public void execute(InvestmentInsertCryptoDTO dto) {
 
 		UserPrincipalDTO authUserDTO = (UserPrincipalDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User authUser = userRepository.findByIdAndDeletedAtIsNull(authUserDTO.getId());
@@ -43,7 +43,7 @@ public class InsertInvestmentValidator {
 			validInsert = false;
 		}
 		
-		if (!cryptocurrencyRepository.existsById(dto.getCryptocurrencyId())) {
+		if (!cryptocurrencyRepository.existsById(dto.getResultCryptocurrencyId())) {
 			fieldErrors.put("investment.cryptocurrency.id", "The given cryptocurrency ID does not exist.");
 			validInsert = false;
 		}

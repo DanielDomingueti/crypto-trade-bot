@@ -23,6 +23,11 @@ public interface InvestmentBalanceRepository extends JpaRepository<InvestmentBal
 	
 	InvestmentBalance findByInvestmentIdAndDeletedAtIsNull(Long investmentId);
 	
+	@Query(value = ""
+			+ "SELECT CAST(CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS BIT) "
+			+ "FROM tb_investment_balance bal ON bal.id = inv.investment_balance_id "
+			+ "INNER JOIN tb_investment inv ON inv.user_id = :userId",
+			nativeQuery = true)
 	Boolean existsByUserIdAndDeletedAtIsNull(Long userId);
 
 }

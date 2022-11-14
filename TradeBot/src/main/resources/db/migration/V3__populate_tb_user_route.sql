@@ -43,20 +43,23 @@ INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investments/*', 'GET', 'Fetch investment by ID');
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 15);
 
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investments/insert', 'POST', 'Insert new investment');
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investments/insert/fiat', 'POST', 'Insert new investment through FIAT');
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 16);
 
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/investments/insert/crypto', 'POST', 'Insert new investment through CRYPTO');
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 17);
+
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/all', 'GET', 'Fetch all users');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 17);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 18);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/*', 'GET', 'Fetch user by ID');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 18);
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (1, 19);
 
 INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/insert', 'POST', 'Insert new user');
-INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 19);
-
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/delete/*', 'DELETE', 'Delete user by ID');
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 20);
 
-INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/patch/*', 'PATCH', 'Patch user by ID');
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/delete/*', 'DELETE', 'Delete user by ID');
 INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 21);
+
+INSERT INTO "tb_user_route" ("route", "method", "description") VALUES ('/users/admin/patch/*', 'PATCH', 'Patch user by ID');
+INSERT INTO "tb_pivot_user_group_user_route" ("user_group_id", "user_route_id") VALUES (2, 22);

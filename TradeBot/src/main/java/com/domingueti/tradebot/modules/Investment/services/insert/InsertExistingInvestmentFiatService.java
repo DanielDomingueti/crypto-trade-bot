@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.domingueti.tradebot.modules.CashBalance.models.CashBalance;
 import com.domingueti.tradebot.modules.CashBalance.repositories.CashBalanceRepository;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
-import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertDTO;
+import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertFiatDTO;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
 import com.domingueti.tradebot.modules.Investment.repositories.InvestmentRepository;
 import com.domingueti.tradebot.modules.InvestmentBalance.models.InvestmentBalance;
@@ -31,7 +31,7 @@ public class InsertExistingInvestmentFiatService {
 	private CashBalanceRepository cashBalanceRepository;
 	
 	@Transactional
-	public InvestmentDTO execute(InvestmentInsertDTO dto) {
+	public InvestmentDTO execute(InvestmentInsertFiatDTO dto) {
 		
 		Investment investment = investmentRepository.findByUserIdAndCryptocurrencyIdAndSimulatedAndDeletedAtIsNull(dto.getUserId(), dto.getCryptocurrencyId(), dto.getSimulated());
 		InvestmentBalance previousInvestmentBalance = investmentBalanceRepository.findByInvestmentIdAndDeletedAtIsNull(investment.getId());
@@ -52,7 +52,7 @@ public class InsertExistingInvestmentFiatService {
 		return new InvestmentDTO(investment);
 	}
 	
-	private void copyDtoToModel(InvestmentInsertDTO dto, CashBalance previousCashBalance, CashBalance newCashBalance) {
+	private void copyDtoToModel(InvestmentInsertFiatDTO dto, CashBalance previousCashBalance, CashBalance newCashBalance) {
 		newCashBalance.setUserId(dto.getUserId());
 		newCashBalance.setCashBalanceTypeId(previousCashBalance.getCashBalanceTypeId());
 		newCashBalance.setValue(previousCashBalance.getValue().subtract(dto.getInitialValue()));
@@ -65,7 +65,7 @@ public class InsertExistingInvestmentFiatService {
 		}
 	}
 
-	private void copyDtoToModel(InvestmentInsertDTO dto, Investment investment, InvestmentBalance lastBalance, InvestmentBalance newBalance) {
+	private void copyDtoToModel(InvestmentInsertFiatDTO dto, Investment investment, InvestmentBalance lastBalance, InvestmentBalance newBalance) {
 		Double liveCryptoValue = 1.0;
 		Double newUnits = dto.getInitialValue().doubleValue() / liveCryptoValue;
 		

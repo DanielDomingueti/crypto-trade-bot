@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.domingueti.tradebot.modules.Document.dtos.DocumentDTO;
 import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Document.repositories.DocumentRepository;
+import com.domingueti.tradebot.modules.Document.validators.GetDocumentsByUserIdValidator;
 
 import lombok.AllArgsConstructor;
 
