@@ -24,7 +24,7 @@ public class DeleteUserByIdValidator {
 	
 	public void execute(Long id) {
 
-		if (cashBalanceRepository.existsByUserIdAndDeletedAtIsNull(id) || !investmentBalanceRepository.existsByUserIdAndDeletedAtIsNull(id)) {
+		if (cashBalanceRepository.existsByUserIdAndDeletedAtIsNull(id) || investmentBalanceRepository.existsByUserIdAndDeletedAtIsNull(id)) {
 			fieldErrors.put("user.balance", "Can't delete a user with active cash or investment balance.");
 			validDelete = false;
 		}
