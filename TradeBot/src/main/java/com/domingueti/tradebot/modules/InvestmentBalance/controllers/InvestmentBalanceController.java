@@ -1,5 +1,6 @@
 package com.domingueti.tradebot.modules.InvestmentBalance.controllers;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -9,11 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.domingueti.tradebot.modules.InvestmentBalance.controllers.openapi.InvestmentBalanceControllerOpenApi;
 import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalanceDTO;
 import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalanceInsertDTO;
-import com.domingueti.tradebot.modules.InvestmentBalance.services.GetInvestmentBalanceByIdService;
+import com.domingueti.tradebot.modules.InvestmentBalance.services.GetInvestmentBalanceByInvestmentIdService;
 import com.domingueti.tradebot.modules.InvestmentBalance.services.GetInvestmentBalancesByUserIdService;
 import com.domingueti.tradebot.modules.InvestmentBalance.services.GetInvestmentBalancesService;
 import com.domingueti.tradebot.modules.InvestmentBalance.services.InsertInvestmentBalanceService;
@@ -29,7 +31,7 @@ public class InvestmentBalanceController implements InvestmentBalanceControllerO
 
 	private GetInvestmentBalancesByUserIdService getInvestmentBalancesByUserIdService;
 
-	private GetInvestmentBalanceByIdService getInvestmentBalanceByIdService;
+	private GetInvestmentBalanceByInvestmentIdService getInvestmentBalanceByInvestmentIdService;
 	
 	private InsertInvestmentBalanceService insertInvestmentBalanceService;
 	
@@ -48,9 +50,9 @@ public class InvestmentBalanceController implements InvestmentBalanceControllerO
 	}
 	
 	@Override
-	@GetMapping("/{id}")
-	public ResponseEntity<InvestmentBalanceDTO> getInvestmentBalanceById(@PathVariable Long id) {
-		InvestmentBalanceDTO investmentBalanceDTO = getInvestmentBalanceByIdService.execute(id);
+	@GetMapping("/investment/{id}")
+	public ResponseEntity<InvestmentBalanceDTO> getInvestmentBalanceByInvestmentId(@PathVariable Long investmentId) {
+		InvestmentBalanceDTO investmentBalanceDTO = getInvestmentBalanceByInvestmentIdService.execute(investmentId);
 		return ResponseEntity.ok().body(investmentBalanceDTO);
 	}
 	
@@ -58,7 +60,8 @@ public class InvestmentBalanceController implements InvestmentBalanceControllerO
 	@PostMapping("/admin/insert")
 	public ResponseEntity<InvestmentBalanceDTO> insertInvestmentBalance(@RequestBody InvestmentBalanceInsertDTO dto) {
 		InvestmentBalanceDTO investmentBalanceDTO = insertInvestmentBalanceService.execute(dto);
-		return ResponseEntity.ok().body(investmentBalanceDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(investmentBalanceDTO.getId()).toUri();
+		return ResponseEntity.created(uri).body(investmentBalanceDTO);
 	}
 	
 }

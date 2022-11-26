@@ -1,5 +1,6 @@
 package com.domingueti.tradebot.modules.User.controllers;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.domingueti.tradebot.modules.User.controllers.openapi.UserControllerOpenApi;
 import com.domingueti.tradebot.modules.User.dtos.UserDTO;
@@ -57,7 +59,8 @@ public class UserController implements UserControllerOpenApi {
 	@PostMapping("/admin/insert")
 	public ResponseEntity<UserDTO> insertUser(@RequestBody UserInsertDTO dto) {
 		UserDTO userDTO = insertUserService.execute(dto);
-		return ResponseEntity.ok().body(userDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userDTO.getId()).toUri();
+		return ResponseEntity.created(uri).body(userDTO);
 	}
 
 	@Override

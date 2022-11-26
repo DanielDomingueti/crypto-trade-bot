@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,9 +19,11 @@ public class InvestmentBalanceInsertDTO implements Serializable {
 	@NotNull(message = "Investment ID is mandatory")
 	private @Getter @Setter Long investmentId;
 
+	@Positive
 	@NotNull(message = "Amount of units is mandatory")
 	private @Getter @Setter Double units;
 	
+	@Positive
 	@NotNull(message = "Net balance is mandatory")
 	private @Getter @Setter BigDecimal netValue;
 	

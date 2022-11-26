@@ -1,6 +1,5 @@
-package com.domingueti.tradebot.modules.Investment.services;
+package com.domingueti.tradebot.modules.Investment.services.get;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,16 +7,21 @@ import com.domingueti.tradebot.exceptions.NotFoundException;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
 import com.domingueti.tradebot.modules.Investment.repositories.InvestmentRepository;
+import com.domingueti.tradebot.modules.Investment.validators.GetInvestmentByIdValidator;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Service
 public class GetInvestmentByIdService {
 	
-	@Autowired
 	private InvestmentRepository investmentRepository;
+	
+	private GetInvestmentByIdValidator validator;
 	
 	@Transactional(readOnly = true)
 	public InvestmentDTO execute(Long id) {
-//		validator.execute(userId); check with authenticated userId;
+		validator.execute(id);
 		
 		Investment investment = investmentRepository.findByIdAndDeletedAtIsNull(id);
 		

@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalanceDTO;
 import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalanceInsertDTO;
-import com.domingueti.tradebot.modules.InvestmentBalance.dtos.InvestmentBalancePatchDTO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,8 +20,8 @@ public interface InvestmentBalanceControllerOpenApi {
 	@ApiOperation("Fetch all investment balances by User ID")
 	ResponseEntity<List<InvestmentBalanceDTO>> getInvestmentBalancesByUserId(@ApiParam(value = "User ID", example = "1") Long userId);
 
-	@ApiOperation("Fetch investment balance by ID")
-	ResponseEntity<InvestmentBalanceDTO> getInvestmentBalanceById(@ApiParam(value = "Investment ID", example = "1") Long id);
+	@ApiOperation("Fetch investment balance by investment ID")
+	ResponseEntity<InvestmentBalanceDTO> getInvestmentBalanceByInvestmentId(@ApiParam(value = "Investment ID", example = "1") Long investmentId);
 
 	@ApiOperation("Insert a new investment balance")
 	ResponseEntity<InvestmentBalanceDTO> insertInvestmentBalance(@ApiParam(value = "JSON body for InvestmentInsertDTO") InvestmentBalanceInsertDTO dto);

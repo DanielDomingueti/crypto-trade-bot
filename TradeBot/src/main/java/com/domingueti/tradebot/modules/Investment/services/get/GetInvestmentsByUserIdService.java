@@ -1,25 +1,29 @@
-package com.domingueti.tradebot.modules.Investment.services;
+package com.domingueti.tradebot.modules.Investment.services.get;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
 import com.domingueti.tradebot.modules.Investment.repositories.InvestmentRepository;
+import com.domingueti.tradebot.modules.Investment.validators.GetInvestmentsByUserIdValidator;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Service
 public class GetInvestmentsByUserIdService {
 
-	@Autowired
 	private InvestmentRepository investmentRepository;
+	
+	private GetInvestmentsByUserIdValidator validator;
 	
 	@Transactional(readOnly = true)
 	public List<InvestmentDTO> execute(Long userId) {
-//		validator.execute(userId); check with authenticated userId;
+		validator.execute(userId);
 		
 		List<Investment> investments = investmentRepository.findByUserIdAndDeletedAtIsNull(userId);
 		

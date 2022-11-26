@@ -16,6 +16,8 @@ public class UserDTO implements Serializable {
 
 	private @Getter @Setter Long id;
 	
+	private @Getter @Setter Long userTypeId;
+	
 	private @Getter @Setter String name;
 
 	private @Getter @Setter String email;
@@ -24,6 +26,7 @@ public class UserDTO implements Serializable {
 	
 	public UserDTO(User model) {
 		this.id = model.getId();
+		this.userTypeId = model.getUserTypeId();
 		this.name = model.getName();
 		this.email = model.getEmail();
 		this.isAdmin = model.getIsAdmin();

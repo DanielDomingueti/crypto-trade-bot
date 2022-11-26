@@ -13,6 +13,8 @@ import lombok.Setter;
 public class InvestmentBalanceDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private @Getter @Setter Long id;
+	
 	private @Getter @Setter Long investmentId;
 
 	private @Getter @Setter Double units;
@@ -28,6 +30,7 @@ public class InvestmentBalanceDTO implements Serializable {
 	private @Getter @Setter Boolean simulated;
 	
 	public InvestmentBalanceDTO(InvestmentBalance model) {
+		id = model.getId();
 		investmentId = model.getInvestmentId();
 		netValue = model.getNetValue();
 		units = model.getUnits();

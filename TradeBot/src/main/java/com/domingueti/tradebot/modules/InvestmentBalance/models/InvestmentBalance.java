@@ -71,7 +71,7 @@ public class InvestmentBalance implements Serializable{
 	
 	@ToString.Exclude
 	@OneToOne(mappedBy = "investmentBalance")
-	private @Getter Investment investment;
+	private @Getter @Setter Investment investment;
 	
 	@ToString.Exclude
 	@OneToMany(mappedBy = "investmentBalance", cascade = CascadeType.ALL)

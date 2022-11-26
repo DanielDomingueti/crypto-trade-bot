@@ -1,6 +1,5 @@
 package com.domingueti.tradebot.modules.User.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,16 +7,21 @@ import com.domingueti.tradebot.modules.User.dtos.UserDTO;
 import com.domingueti.tradebot.modules.User.dtos.UserInsertDTO;
 import com.domingueti.tradebot.modules.User.models.User;
 import com.domingueti.tradebot.modules.User.repositories.UserRepository;
+import com.domingueti.tradebot.modules.User.validators.InsertUserValidator;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Service
 public class InsertUserService {
 
-	@Autowired
 	private UserRepository userRepository;
+	
+	private InsertUserValidator validator;
 	
 	@Transactional
 	public UserDTO execute(UserInsertDTO dto) {
-//		validator.execute(userId); check with authenticated userId;
+		validator.execute(dto);
 		
 		User user = new User();
 		
@@ -28,6 +32,7 @@ public class InsertUserService {
 	}
 
 	private void copyDtoToModel(UserInsertDTO dto, User model) {
+		model.setUserTypeId(dto.getUserTypeId());
 		model.setName(dto.getName());
 		model.setEmail(dto.getEmail());
 		model.setPassword(dto.getPassword());

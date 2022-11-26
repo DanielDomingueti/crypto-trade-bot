@@ -12,4 +12,5 @@ public interface CryptocurrencyRepository extends JpaRepository<Cryptocurrency, 
 	
 	List<Cryptocurrency> findAllByDeletedAtIsNull();
 
+	boolean existsById(Long id);
 }
