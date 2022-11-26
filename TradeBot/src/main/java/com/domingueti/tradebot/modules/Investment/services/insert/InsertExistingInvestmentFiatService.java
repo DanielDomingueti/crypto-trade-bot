@@ -1,7 +1,7 @@
 package com.domingueti.tradebot.modules.Investment.services.insert;
 
-import com.domingueti.tradebot.modules.CashBalance.models.CashBalance;
-import com.domingueti.tradebot.modules.CashBalance.repositories.CashBalanceRepository;
+import com.domingueti.tradebot.modules.UserBankTransaction.models.CashBalance;
+import com.domingueti.tradebot.modules.UserBankTransaction.repositories.CashBalanceRepository;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentDTO;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertFiatDTO;
 import com.domingueti.tradebot.modules.Investment.models.Investment;

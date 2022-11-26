@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.domingueti.tradebot.exceptions.FieldMessage;
 import com.domingueti.tradebot.exceptions.InvalidRequestException;
-import com.domingueti.tradebot.modules.CashBalance.repositories.CashBalanceRepository;
+import com.domingueti.tradebot.modules.UserBankTransaction.repositories.CashBalanceRepository;
 import com.domingueti.tradebot.modules.InvestmentBalance.repositories.InvestmentBalanceRepository;
 
 @Component

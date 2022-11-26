@@ -16,7 +16,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
-import com.domingueti.tradebot.modules.CashBalance.models.CashBalance;
+import com.domingueti.tradebot.modules.UserBankTransaction.models.CashBalance;
 import com.domingueti.tradebot.modules.Investment.models.InvestmentOperationType;
 
 import lombok.AllArgsConstructor;

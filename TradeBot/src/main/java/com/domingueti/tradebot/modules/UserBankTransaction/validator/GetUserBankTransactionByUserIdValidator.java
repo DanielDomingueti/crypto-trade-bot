@@ -1,19 +1,18 @@
-package com.domingueti.tradebot.modules.CashBalance.validator;
-
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
+package com.domingueti.tradebot.modules.UserBankTransaction.validator;
 
 import com.domingueti.tradebot.exceptions.FieldMessage;
 import com.domingueti.tradebot.exceptions.InvalidRequestException;
 import com.domingueti.tradebot.modules.User.models.User;
 import com.domingueti.tradebot.modules.User.repositories.UserRepository;
 import com.domingueti.tradebot.security.dtos.UserPrincipalDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 @Component
-public class GetCashBalanceByUserIdValidator {
+public class GetUserBankTransactionByUserIdValidator {
 	
 	private Map<String, String> fieldErrors;	
 	private Boolean validInsert;

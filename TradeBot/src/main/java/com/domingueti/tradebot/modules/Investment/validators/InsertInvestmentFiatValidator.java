@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.domingueti.tradebot.exceptions.FieldMessage;
 import com.domingueti.tradebot.exceptions.InvalidRequestException;
-import com.domingueti.tradebot.modules.CashBalance.models.CashBalance;
-import com.domingueti.tradebot.modules.CashBalance.repositories.CashBalanceRepository;
+import com.domingueti.tradebot.modules.UserBankTransaction.models.CashBalance;
+import com.domingueti.tradebot.modules.UserBankTransaction.repositories.CashBalanceRepository;
 import com.domingueti.tradebot.modules.Cryptocurrency.repositories.CryptocurrencyRepository;
 import com.domingueti.tradebot.modules.Investment.dtos.InvestmentInsertFiatDTO;
 import com.domingueti.tradebot.modules.User.models.User;
