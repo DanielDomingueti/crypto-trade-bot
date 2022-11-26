@@ -171,7 +171,6 @@ CREATE TABLE "tb_document" (
   "issuing_entity" varchar(255) NOT NULL,
   "issue_date" date NOT NULL, 
   "due_date" date NOT NULL,
-  "link" varchar(255) NOT NULL,
   "main" BOOLEAN NOT NULL,
   "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,

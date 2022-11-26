@@ -5,9 +5,9 @@ INSERT INTO tb_config(name, value) VALUES ('TOKEN_TYPE', 'Bearer ');
 INSERT INTO tb_config(name, value) VALUES ('TOKEN_EXPIRATION_TIME', '86400000');
 INSERT INTO tb_config(name, value) VALUES ('TOKEN_ADMIN_EXPIRATION_TIME', '86400000');
 
-INSERT INTO "tb_cash_balance_type" ("type", "description") VALUES ('usd', 'USD');
-INSERT INTO "tb_cash_balance_type" ("type", "description") VALUES ('eur', 'EUR');
-INSERT INTO "tb_cash_balance_type" ("type", "description") VALUES ('brl', 'BRL');
+INSERT INTO "tb_user_bank_transaction_type" ("type", "description") VALUES ('usd', 'USD');
+INSERT INTO "tb_user_bank_transaction_type" ("type", "description") VALUES ('eur', 'EUR');
+INSERT INTO "tb_user_bank_transaction_type" ("type", "description") VALUES ('brl', 'BRL');
 
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('cpf', 'CPF');
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('rg', 'RG');

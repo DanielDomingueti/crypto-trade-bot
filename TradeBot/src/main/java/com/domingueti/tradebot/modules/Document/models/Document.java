@@ -1,31 +1,16 @@
 package com.domingueti.tradebot.modules.Document.models;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import com.domingueti.tradebot.modules.User.models.User;
+import lombok.*;
+import lombok.EqualsAndHashCode.Include;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
-import com.domingueti.tradebot.modules.User.models.User;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.EqualsAndHashCode.Include;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity(name = "tb_document")
 @ToString
@@ -52,9 +37,6 @@ public class Document {
 	private @Getter @Setter LocalDate issueDate;
 	
 	private @Getter @Setter LocalDate dueDate;
-	
-	@Column(columnDefinition = "TEXT")
-	private @Getter @Setter String link;
 	
 	private @Getter @Setter Boolean main;
 
