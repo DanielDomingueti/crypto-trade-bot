@@ -13,6 +13,9 @@ INSERT INTO "tb_document_type" ("type", "description") VALUES ('cpf', 'CPF');
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('rg', 'RG');
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('cnpj', 'CNPJ');
 
+INSERT INTO "tb_bank_type" ("type", "description") VALUES ('INTER', 'Banco Inter');
+INSERT INTO "tb_bank_type" ("type", "description") VALUES ('CAIXA', 'Caixa Econômica Federal');
+
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('NEW_CONTRIBUTION', 'Put money on it');
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('BUY_EXISTING', 'Buy cryptocurrency');
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('SOLD_EXISTING', 'Sell cryptocurrency');
