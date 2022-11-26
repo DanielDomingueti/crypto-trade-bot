@@ -16,6 +16,11 @@ INSERT INTO "tb_document_type" ("type", "description") VALUES ('cnpj', 'CNPJ');
 INSERT INTO "tb_bank_type" ("type", "description") VALUES ('INTER', 'Banco Inter');
 INSERT INTO "tb_bank_type" ("type", "description") VALUES ('CAIXA', 'Caixa Econômica Federal');
 
+INSERT INTO "tb_pix_type" ("type", "description") VALUES ('phone', 'Phone');
+INSERT INTO "tb_pix_type" ("type", "description") VALUES ('document', 'Document');
+INSERT INTO "tb_pix_type" ("type", "description") VALUES ('email', 'Email');
+INSERT INTO "tb_pix_type" ("type", "description") VALUES ('random_key', 'Random Key');
+
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('NEW_CONTRIBUTION', 'Put money on it');
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('BUY_EXISTING', 'Buy cryptocurrency');
 INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('SOLD_EXISTING', 'Sell cryptocurrency');

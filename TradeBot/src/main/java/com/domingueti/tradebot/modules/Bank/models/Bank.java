@@ -8,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "tb_bank")
 @ToString
@@ -49,5 +51,9 @@ public class Bank {
     @ManyToOne(optional = false)
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private @Getter User user;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "bank")
+    private @Getter List<PixKey> pixKeys = new ArrayList<>();
 
 }
