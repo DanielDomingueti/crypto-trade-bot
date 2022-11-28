@@ -1,30 +1,29 @@
-package com.domingueti.tradebot.modules.Wallet.models;
+package com.domingueti.tradebot.modules.BusinessWallet.models;
 
-import com.domingueti.tradebot.modules.User.models.User;
+import com.domingueti.tradebot.modules.Business.models.Business;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name = "tb_wallet")
+@Entity(name = "tb_business_wallet")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "update tb_wallet set deleted_at = current_timestamp where id=?")
-public class Wallet {
+@SQLDelete(sql = "update tb_business_wallet set deleted_at = current_timestamp where id=?")
+public class BusinessWallet {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private @Getter @Setter Long id;
+    private @Getter
+    @Setter Long id;
 
-    private @Getter @Setter Long userId;
+    private @Getter @Setter Long businessId;
 
     private @Getter @Setter String address;
 
@@ -37,7 +36,7 @@ public class Wallet {
     private @Getter @Setter Timestamp deletedAt;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "wallet")
-    private @Getter User user;
+    @OneToOne(mappedBy = "businessWallet")
+    private @Getter Business business;
 
 }

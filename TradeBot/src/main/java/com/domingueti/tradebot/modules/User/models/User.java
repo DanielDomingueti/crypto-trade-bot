@@ -2,7 +2,7 @@ package com.domingueti.tradebot.modules.User.models;
 
 import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
-import com.domingueti.tradebot.modules.Wallet.models.Wallet;
+import com.domingueti.tradebot.modules.UserWallet.models.UserWallet;
 import lombok.*;
 import lombok.EqualsAndHashCode.Include;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,7 +31,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 
-	private @Getter @Setter Long walletId;
+	private @Getter @Setter Long userWalletId;
 	
 	private @Getter @Setter Long userTypeId;
 	
@@ -53,7 +53,7 @@ public class User {
 
 	@ToString.Exclude
 	@OneToOne(mappedBy = "user")
-	private @Getter Wallet wallet;
+	private @Getter UserWallet userWallet;
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)
