@@ -1,4 +1,4 @@
-package com.domingueti.tradebot.modules.utils.statics;
+package com.domingueti.tradebot.utils.statics;
 
 import java.math.BigDecimal;
 

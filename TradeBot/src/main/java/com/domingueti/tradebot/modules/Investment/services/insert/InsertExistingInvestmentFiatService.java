@@ -11,7 +11,7 @@ import com.domingueti.tradebot.modules.InvestmentBalance.models.InvestmentBalanc
 import com.domingueti.tradebot.modules.InvestmentBalance.models.PivotInvestmentBalanceCashBalance;
 import com.domingueti.tradebot.modules.InvestmentBalance.models.PivotInvestmentBalances;
 import com.domingueti.tradebot.modules.InvestmentBalance.repositories.InvestmentBalanceRepository;
-import com.domingueti.tradebot.modules.utils.statics.CalculateAverageUnitPrice;
+import com.domingueti.tradebot.utils.statics.CalculateAverageUnitPrice;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -2,7 +2,7 @@ package com.domingueti.tradebot.modules.User.models;
 
 import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
-import com.domingueti.tradebot.modules.UserBankTransaction.models.UserBankTransaction;
+import com.domingueti.tradebot.modules.Wallet.models.Wallet;
 import lombok.*;
 import lombok.EqualsAndHashCode.Include;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,7 +11,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,13 +24,14 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Where(clause = "deleted_at IS NULL")
 @SQLDelete(sql = "update tb_user set deleted_at = current_timestamp where id=?")
-public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class User {
 	
 	@Id
 	@Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
+
+	private @Getter @Setter Long walletId;
 	
 	private @Getter @Setter Long userTypeId;
 	
@@ -52,10 +52,9 @@ public class User implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToOne
-	@JoinColumn(name = "userBankTransactionId")
-	private @Getter UserBankTransaction userBankTransaction;
-	
+	@OneToOne(mappedBy = "user")
+	private @Getter Wallet wallet;
+
 	@ToString.Exclude
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "userTypeId", insertable = false, updatable = false)
