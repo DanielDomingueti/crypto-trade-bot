@@ -1,6 +1,7 @@
 package com.domingueti.tradebot.modules.BalanceFuture.controllers;
 
 import com.domingueti.tradebot.modules.BalanceFuture.dtos.BsFutureBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceFuture.services.GetBsFutureBalanceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,9 @@ public class BsFutureBalanceController {
 
     @GetMapping
     public ResponseEntity<BsFutureBalanceDTO> getLatestBusinessFutureBalance() {
+        BsFutureBalanceDTO dto = getBusinessFutureBalanceService.execute();
 
-        return null;
+        return ResponseEntity.ok().body(dto);
     }
 
 }

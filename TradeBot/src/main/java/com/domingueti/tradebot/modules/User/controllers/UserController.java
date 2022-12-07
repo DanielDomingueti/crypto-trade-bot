@@ -23,6 +23,10 @@ public class UserController implements UserControllerOpenApi {
 
 	private GetUserByIdService getUserByIdService;
 
+	private GetUserWalletsService getUserWalletsService;
+
+	private GetUserWalletByUserIdService getUserWalletByUserIdService;
+
 	private InsertUserService insertUserService;
 
 	private DeleteUserByIdService deleteUserByIdService;

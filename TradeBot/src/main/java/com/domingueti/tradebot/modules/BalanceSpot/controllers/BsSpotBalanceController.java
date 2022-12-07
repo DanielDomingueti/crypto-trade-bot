@@ -1,5 +1,8 @@
 package com.domingueti.tradebot.modules.BalanceSpot.controllers;
 
+import com.domingueti.tradebot.modules.BalanceSpot.dtos.BsSpotBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceSpot.services.GetBsSpotBalanceByCryptocurrencyIdService;
+import com.domingueti.tradebot.modules.BalanceSpot.services.GetBsSpotBalanceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +20,16 @@ public class BsSpotBalanceController {
 
     @GetMapping(path = "/cryptocurrency/{cryptoId}")
     public ResponseEntity<BsSpotBalanceDTO> getBusinessSpotBalanceByCryptocurrencyId(@PathVariable Long cryptoId) {
+        BsSpotBalanceDTO dto = getBsSpotBalanceByCryptocurrencyIdService.execute(cryptoId);
 
-        return null;
+        return ResponseEntity.ok().body(dto);
     }
 
     @GetMapping
     public ResponseEntity<BsSpotBalanceDTO> getBusinessSpotBalance() {
+        BsSpotBalanceDTO dto = getBsSpotBalanceService.execute();
 
-        return null;
+        return ResponseEntity.ok().body(dto);
     }
 
 }

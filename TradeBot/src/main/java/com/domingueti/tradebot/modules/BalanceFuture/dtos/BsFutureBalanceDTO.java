@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,8 +16,11 @@ public class BsFutureBalanceDTO implements Serializable {
 
 	private @Getter @Setter Double units;
 
+	private @Getter @Setter LocalDate referenceDate;
+
 	public BsFutureBalanceDTO(BsFutureBalance model) {
 		this.units = model.getUnits();
+		this.referenceDate = model.getReferenceDate();
 	}
 	
 }

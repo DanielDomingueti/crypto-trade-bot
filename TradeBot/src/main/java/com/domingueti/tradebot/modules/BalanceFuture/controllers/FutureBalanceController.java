@@ -1,6 +1,7 @@
 package com.domingueti.tradebot.modules.BalanceFuture.controllers;
 
 import com.domingueti.tradebot.modules.BalanceFuture.dtos.FutureBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceFuture.services.GetFutureBalanceByUserIdService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/futureBalance")
 public class FutureBalanceController {
 
-    private GetFutureBalanceServiceByUserId getFutureBalanceServiceByUserId;
+    private GetFutureBalanceByUserIdService getFutureBalanceByUserIdService;
 
     @GetMapping(path = "/usdt/user/{userId}")
     public ResponseEntity<FutureBalanceDTO> getLatestFutureBalanceByUserId(@PathVariable Long userId) {
+        FutureBalanceDTO dto = getFutureBalanceByUserIdService.execute(userId);
 
-        return null;
+        return ResponseEntity.ok().body(dto);
     }
 
 }
