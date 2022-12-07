@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity(name = "tb_pivot_investment_income_type")
 @ToString
@@ -25,6 +26,8 @@ public class PivotInvestmentIncomeType {
     private @Getter @Setter Long investmentId;
 
     private @Getter @Setter Long incomeTypeId;
+
+    private @Getter @Setter LocalDate referenceDate;
 
     @CreationTimestamp
     private @Getter Timestamp createdAt;

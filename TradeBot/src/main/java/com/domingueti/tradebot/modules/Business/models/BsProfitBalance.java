@@ -6,28 +6,28 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
-@Entity(name = "tb_business")
+@Entity(name = "tb_business_profit_balance")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SQLDelete(sql = "update tb_business set deleted_at = current_timestamp where id=?")
-public class Business {
+@SQLDelete(sql = "update tb_business_profit_balance set deleted_at = current_timestamp where id=?")
+public class BsProfitBalance {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Getter @Setter Long id;
 
-    private @Getter @Setter Long businessWalletId;
+    private @Getter @Setter Long businessId;
 
-    private @Getter @Setter Long businessProfitBalanceId;
+    private @Getter @Setter BigDecimal netValue;
 
-    private @Getter @Setter Long businessProfitBalanceSimulationId;
-
-    private @Getter @Setter String name;
+    private @Getter @Setter LocalDate referenceDate;
 
     @CreationTimestamp
     private @Getter Timestamp createdAt;
@@ -38,14 +38,6 @@ public class Business {
     private @Getter @Setter Timestamp deletedAt;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "business")
-    private @Getter BsWallet businessWallet;
-
-    @ToString.Exclude
-    @OneToOne(mappedBy = "business")
-    private @Getter BsProfitBalance businessProfitBalance;
-
-    @ToString.Exclude
-    @OneToOne(mappedBy = "business")
-    private @Getter BsProfitBalanceSm businessProfitBalanceSimulation;
+    @OneToOne(mappedBy = "businessProfitBalance")
+    private @Getter Business business;
 }

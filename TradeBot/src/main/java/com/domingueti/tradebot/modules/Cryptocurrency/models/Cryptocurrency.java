@@ -1,6 +1,9 @@
 package com.domingueti.tradebot.modules.Cryptocurrency.models;
 
+import com.domingueti.tradebot.modules.Position.models.Aport;
+import com.domingueti.tradebot.modules.BalanceSpot.models.BsSpotBalance;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
+import com.domingueti.tradebot.modules.Position.models.Withdraw;
 import lombok.*;
 import lombok.EqualsAndHashCode.Include;
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,4 +43,16 @@ public class Cryptocurrency {
 	@ToString.Exclude
 	@OneToMany(mappedBy = "cryptocurrency", cascade = CascadeType.ALL)
 	private @Getter List<Investment> investments = new ArrayList<>();
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "cryptocurrency", cascade = CascadeType.ALL)
+	private @Getter List<BsSpotBalance> businessSpotBalances = new ArrayList<>();
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "cryptocurrency", cascade = CascadeType.ALL)
+	private @Getter List<Aport> aports = new ArrayList<>();
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "cryptocurrency", cascade = CascadeType.ALL)
+	private @Getter List<Withdraw> withdraws = new ArrayList<>();
 }

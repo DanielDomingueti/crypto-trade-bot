@@ -1,14 +1,13 @@
 package com.domingueti.tradebot.modules.Investment.dtos;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
 import com.domingueti.tradebot.modules.Investment.models.Investment;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,15 +24,12 @@ public class InvestmentDTO implements Serializable {
 
 	private @Getter @Setter Double units;
 
-	private @Getter @Setter Boolean simulated;
-	
 	public InvestmentDTO(Investment investment) {
 		this.id = investment.getId();
 		this.userId = investment.getUserId();
 		this.initialValue = investment.getInitialValue();
 		this.unitValue = investment.getUnitValue();
 		this.units = investment.getUnits();
-		this.simulated = investment.getSimulated();
 	}
 	
 }

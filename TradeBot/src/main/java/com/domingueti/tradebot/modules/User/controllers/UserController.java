@@ -1,34 +1,22 @@
 package com.domingueti.tradebot.modules.User.controllers;
 
-import java.net.URI;
-import java.util.List;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.domingueti.tradebot.modules.User.controllers.openapi.UserControllerOpenApi;
 import com.domingueti.tradebot.modules.User.dtos.UserDTO;
 import com.domingueti.tradebot.modules.User.dtos.UserInsertDTO;
 import com.domingueti.tradebot.modules.User.dtos.UserPatchDTO;
-import com.domingueti.tradebot.modules.User.services.DeleteUserByIdService;
-import com.domingueti.tradebot.modules.User.services.GetUserByIdService;
-import com.domingueti.tradebot.modules.User.services.GetUsersService;
-import com.domingueti.tradebot.modules.User.services.InsertUserService;
-import com.domingueti.tradebot.modules.User.services.PatchUserByIdService;
-
+import com.domingueti.tradebot.modules.User.dtos.UserWalletDTO;
+import com.domingueti.tradebot.modules.User.services.*;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping
 public class UserController implements UserControllerOpenApi {
 	
 	private GetUsersService getUsersService;
@@ -42,21 +30,33 @@ public class UserController implements UserControllerOpenApi {
 	private PatchUserByIdService patchUserByIdService;
 
 	@Override
-	@GetMapping("/admin/all")
+	@GetMapping("/admin/users/all")
 	public ResponseEntity<List<UserDTO>> getUsers() {
 		List<UserDTO> users = getUsersService.execute();
 		return ResponseEntity.ok().body(users);
 	}
 	
 	@Override
-	@GetMapping("/{id}")
+	@GetMapping("/user/{id}")
 	public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
 		UserDTO userDTO = getUserByIdService.execute(id);
 		return ResponseEntity.ok().body(userDTO);
 	}
 
+	@GetMapping("/admin/user/wallets")
+	public ResponseEntity<List<UserWalletDTO>> getWallets() {
+
+		return null;
+	}
+
+	@GetMapping("/admin/user/wallet/{userId}")
+	public ResponseEntity<List<UserWalletDTO>> getWalletByUserId(@PathVariable Long userId) {
+
+		return null;
+	}
+
 	@Override
-	@PostMapping("/admin/insert")
+	@PostMapping("/admin/user/insert")
 	public ResponseEntity<UserDTO> insertUser(@RequestBody UserInsertDTO dto) {
 		UserDTO userDTO = insertUserService.execute(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userDTO.getId()).toUri();
@@ -64,17 +64,18 @@ public class UserController implements UserControllerOpenApi {
 	}
 
 	@Override
-	@DeleteMapping("/admin/delete/{id}")
+	@DeleteMapping("/admin/user/delete/{id}")
 	public ResponseEntity<Void> deleteUserById(@PathVariable Long id) {
 		deleteUserByIdService.execute(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	@Override
-	@PatchMapping("/admin/patch/{id}")
+	@PatchMapping("/admin/user/patch/{id}")
 	public ResponseEntity<UserDTO> patchUserById(@PathVariable Long id, @RequestBody UserPatchDTO dto) {
 		UserDTO userDTO = patchUserByIdService.execute(id, dto);
 		return ResponseEntity.ok().body(userDTO);
 	} 
+
 
 }

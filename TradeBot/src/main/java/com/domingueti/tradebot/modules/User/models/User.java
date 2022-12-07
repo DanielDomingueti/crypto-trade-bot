@@ -1,8 +1,8 @@
 package com.domingueti.tradebot.modules.User.models;
 
+import com.domingueti.tradebot.modules.BalanceFuture.models.BsFutureBalanceSm;
 import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Investment.models.Investment;
-import com.domingueti.tradebot.modules.UserWallet.models.UserWallet;
 import lombok.*;
 import lombok.EqualsAndHashCode.Include;
 import org.hibernate.annotations.CreationTimestamp;
@@ -67,6 +67,10 @@ public class User {
 	@ToString.Exclude
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private @Getter List<Document> documents = new ArrayList<>();
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private @Getter List<BsFutureBalanceSm> businessFutureBalanceSimulations = new ArrayList<>();
 	
 	@ToString.Exclude
 	@ManyToMany(fetch = FetchType.EAGER)

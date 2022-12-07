@@ -1,10 +1,9 @@
 package com.domingueti.tradebot.modules.Investment.repositories;
 
-import java.util.List;
-
+import com.domingueti.tradebot.modules.Investment.models.Investment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.domingueti.tradebot.modules.Investment.models.Investment;
+import java.util.List;
 
 public interface InvestmentRepository extends JpaRepository<Investment, Long> {
 
@@ -14,10 +13,6 @@ public interface InvestmentRepository extends JpaRepository<Investment, Long> {
 	
 	Investment findByIdAndDeletedAtIsNull(Long id);
 	
-	Investment findByUserIdAndCryptocurrencyIdAndSimulatedAndDeletedAtIsNull(Long userId, Long cryptocurrencyId, Boolean simulated);
-
 	Boolean existsByIdAndDeletedAtIsNull(Long id);
-	
-	Boolean existsByUserIdAndCryptocurrencyIdAndSimulatedAndDeletedAtIsNull(Long userId, Long cryptocurrencyId, Boolean simulated);
 	
 }
