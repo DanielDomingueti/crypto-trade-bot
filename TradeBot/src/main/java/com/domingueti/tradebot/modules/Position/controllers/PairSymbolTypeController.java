@@ -1,6 +1,7 @@
 package com.domingueti.tradebot.modules.Position.controllers;
 
 import com.domingueti.tradebot.modules.Position.dtos.PairSymbolTypeDTO;
+import com.domingueti.tradebot.modules.Position.services.GetPairSymbolTypesService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -20,17 +20,11 @@ import java.util.List;
 public class UserController implements UserControllerOpenApi {
 	
 	private GetUsersService getUsersService;
-
 	private GetUserByIdService getUserByIdService;
-
 	private GetUserWalletsService getUserWalletsService;
-
 	private GetUserWalletByUserIdService getUserWalletByUserIdService;
-
 	private InsertUserService insertUserService;
-
 	private DeleteUserByIdService deleteUserByIdService;
-
 	private PatchUserByIdService patchUserByIdService;
 
 	@Override

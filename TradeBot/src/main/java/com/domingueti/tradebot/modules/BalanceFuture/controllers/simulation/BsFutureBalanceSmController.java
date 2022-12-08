@@ -1,7 +1,7 @@
-package com.domingueti.tradebot.modules.BalanceFuture.controllers;
+package com.domingueti.tradebot.modules.BalanceFuture.controllers.simulation;
 
-import com.domingueti.tradebot.modules.BalanceFuture.dtos.BsFutureBalanceSmDTO;
-import com.domingueti.tradebot.modules.BalanceFuture.services.GetBsFutureBalanceSmService;
+import com.domingueti.tradebot.modules.BalanceFuture.dtos.simulation.BsFutureBalanceSmDTO;
+import com.domingueti.tradebot.modules.BalanceFuture.services.simulation.GetBsFutureBalanceSmService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

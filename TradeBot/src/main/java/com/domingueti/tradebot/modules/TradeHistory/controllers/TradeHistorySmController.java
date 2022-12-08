@@ -1,6 +1,9 @@
 package com.domingueti.tradebot.modules.TradeHistory.controllers;
 
 import com.domingueti.tradebot.modules.TradeHistory.dtos.TradeHistorySmDTO;
+import com.domingueti.tradebot.modules.TradeHistory.services.GetTradeHistorySmBalanceService;
+import com.domingueti.tradebot.modules.TradeHistory.services.GetTradeHistorySmLossService;
+import com.domingueti.tradebot.modules.TradeHistory.services.GetTradeHistorySmProfitService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,10 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/admin/tradeHistory/simulation")
 public class TradeHistorySmController {
+
+	private GetTradeHistorySmBalanceService getTradeHistorySmBalanceService;
+	private GetTradeHistorySmProfitService getTradeHistorySmProfitService;
+	private GetTradeHistorySmLossService getTradeHistorySmLossService;
 
 	@GetMapping("/balance")
 	public ResponseEntity<List<TradeHistorySmDTO>> getTradeHistorySimulationBalanceBetween(@RequestParam LocalDate initialDate,

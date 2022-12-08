@@ -1,6 +1,9 @@
 package com.domingueti.tradebot.modules.Position.controllers;
 
 import com.domingueti.tradebot.modules.Position.dtos.OpenPositionSmDTO;
+import com.domingueti.tradebot.modules.Position.services.GetOpenPositionSmByPairIdService;
+import com.domingueti.tradebot.modules.Position.services.GetOpenPositionSmRoesService;
+import com.domingueti.tradebot.modules.Position.services.GetOpenPositionsSmService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +18,9 @@ import java.util.List;
 @RequestMapping(value = "/admin/openPosition/simulation")
 public class OpenPositionSmController {
 
-	private GetOpenPositionsService getOpenPositionsService;
-	private GetOpenPositionByPairIdService getOpenPositionByPairIdService;
-	private GetOpenPositionRoesService getOpenPositionRoeService;
+	private GetOpenPositionsSmService getOpenPositionsService;
+	private GetOpenPositionSmByPairIdService getOpenPositionByPairIdService;
+	private GetOpenPositionSmRoesService getOpenPositionRoeService;
 
 	@GetMapping
 	public ResponseEntity<List<OpenPositionSmDTO>> getAllOpenPositionSimulations() {

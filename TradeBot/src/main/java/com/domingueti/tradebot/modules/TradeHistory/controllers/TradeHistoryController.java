@@ -1,6 +1,9 @@
 package com.domingueti.tradebot.modules.TradeHistory.controllers;
 
 import com.domingueti.tradebot.modules.TradeHistory.dtos.TradeHistoryDTO;
+import com.domingueti.tradebot.modules.TradeHistory.services.GetTradeHistoryBalanceService;
+import com.domingueti.tradebot.modules.TradeHistory.services.GetTradeHistoryLossService;
+import com.domingueti.tradebot.modules.TradeHistory.services.GetTradeHistoryProfitService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
