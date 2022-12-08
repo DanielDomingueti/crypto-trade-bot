@@ -37,6 +37,8 @@ public class TradeHistory implements Serializable {
 
 	private @Getter @Setter Double fee;
 
+	private @Getter @Setter BigDecimal realizedProfit;
+
 	private @Getter @Setter Double roe;
 
 	private @Getter @Setter LocalDate referenceDate;

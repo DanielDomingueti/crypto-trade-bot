@@ -15,13 +15,13 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-@Entity(name = "tb_open_position_simulation")
+@Entity(name = "tb_open_position_sm")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "update tb_open_position_simulation set deleted_at = current_timestamp where id=?")
+@SQLDelete(sql = "update tb_open_position_sm set deleted_at = current_timestamp where id=?")
 public class OpenPositionSm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -30,13 +30,13 @@ public class OpenPositionSm implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 
-	private @Getter @Setter Long businessFutureBalanceSimulationId;
+	private @Getter @Setter Long bsFutureBalanceSmId;
 
 	private @Getter @Setter Long openPositionTypeId;
 
 	private @Getter @Setter Long pairSymbolTypeId;
 
-	private @Getter @Setter Long tradeHistorySimulationId;
+	private @Getter @Setter Long tradeHistorySmId;
 
 	private @Getter @Setter Integer leverage;
 
@@ -66,8 +66,8 @@ public class OpenPositionSm implements Serializable {
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "businessFutureBalanceSimulationId", insertable = false, updatable = false)
-	private @Getter BsFutureBalanceSm businessFutureBalanceSimulation;
+	@JoinColumn(name = "bsFutureBalanceSmId", insertable = false, updatable = false)
+	private @Getter BsFutureBalanceSm bsFutureBalanceSm;
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)
@@ -80,8 +80,8 @@ public class OpenPositionSm implements Serializable {
 	private @Getter PairSymbolType pairSymbolType;
 
 	@ToString.Exclude
-	@OneToOne(mappedBy = "openPositionSimulation")
-	@JoinColumn(name = "tradeHistorySimulationId", insertable = false, updatable = false)
-	private @Getter TradeHistorySm tradeHistorySimulation;
+	@OneToOne(mappedBy = "openPositionSm")
+	@JoinColumn(name = "tradeHistorySmId", insertable = false, updatable = false)
+	private @Getter TradeHistorySm tradeHistorySm;
 
 }

@@ -14,13 +14,13 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-@Entity(name = "tb_trade_history_simulation")
+@Entity(name = "tb_trade_history_sm")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "update tb_trade_history_simulation set deleted_at = current_timestamp where id=?")
+@SQLDelete(sql = "update tb_trade_history_sm set deleted_at = current_timestamp where id=?")
 public class TradeHistorySm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -29,7 +29,7 @@ public class TradeHistorySm implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 
-	private @Getter @Setter Long openPositionSimulationId;
+	private @Getter @Setter Long openPositionSmId;
 
 	private @Getter @Setter BigDecimal price; //sold at
 
@@ -52,8 +52,8 @@ public class TradeHistorySm implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToOne(mappedBy = "tradeHistorySimulation")
-	@JoinColumn(name = "openPositionSimulationId", insertable = false, updatable = false)
-	private @Getter OpenPositionSm openPositionSimulation;
+	@OneToOne(mappedBy = "tradeHistorySm")
+	@JoinColumn(name = "openPositionSmId", insertable = false, updatable = false)
+	private @Getter OpenPositionSm openPositionSm;
 
 }
