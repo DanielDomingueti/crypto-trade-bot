@@ -32,7 +32,7 @@ public class SpotBalance implements Serializable {
 
 	private @Getter @Setter Long investmentId;
 
-	private @Getter @Setter Long businessSpotBalanceId;
+	private @Getter @Setter Long bsSpotBalanceId;
 
 	private @Getter @Setter Long balanceOriginTypeId;
 
@@ -59,8 +59,8 @@ public class SpotBalance implements Serializable {
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "businessSpotBalanceId", insertable = false, updatable = false)
-	private @Getter BsSpotBalance businessSpotBalance;
+	@JoinColumn(name = "bsSpotBalanceId", insertable = false, updatable = false)
+	private @Getter BsSpotBalance bsSpotBalance;
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)

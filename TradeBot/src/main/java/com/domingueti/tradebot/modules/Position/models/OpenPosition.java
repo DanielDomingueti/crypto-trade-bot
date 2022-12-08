@@ -30,7 +30,7 @@ public class OpenPosition implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private @Getter @Setter Long id;
 
-	private @Getter @Setter Long businessFutureBalanceId;
+	private @Getter @Setter Long bsFutureBalanceId;
 
 	private @Getter @Setter Long openPositionTypeId;
 
@@ -66,8 +66,8 @@ public class OpenPosition implements Serializable {
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "businessFutureBalanceId", insertable = false, updatable = false)
-	private @Getter BsFutureBalance businessFutureBalance;
+	@JoinColumn(name = "bsFutureBalanceId", insertable = false, updatable = false)
+	private @Getter BsFutureBalance bsFutureBalance;
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)

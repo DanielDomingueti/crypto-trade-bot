@@ -39,7 +39,4 @@ public class IncomeType {
     @OneToMany(mappedBy = "incomeType")
     private @Getter List<PivotInvestmentIncomeType> pivotInvestmentIncomeTypes;
 
-//    @ToString.Exclude
-//    @OneToMany(mappedBy = "incomeType")
-//    private @Getter List<PivotInvestmentSimulationIncomeType> pivotInvestmentSimulationIncomeTypes;
 }

@@ -8,12 +8,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name = "tb_business")
+@Entity(name = "tb_bs")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SQLDelete(sql = "update tb_business set deleted_at = current_timestamp where id=?")
+@SQLDelete(sql = "update tb_bs set deleted_at = current_timestamp where id=?")
 public class Business {
 
     @Id
@@ -21,11 +21,11 @@ public class Business {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Getter @Setter Long id;
 
-    private @Getter @Setter Long businessWalletId;
+    private @Getter @Setter Long bsWalletId;
 
-    private @Getter @Setter Long businessProfitBalanceId;
+    private @Getter @Setter Long bsProfitBalanceId;
 
-    private @Getter @Setter Long businessProfitBalanceSimulationId;
+    private @Getter @Setter Long bsProfitBalanceSmId;
 
     private @Getter @Setter String name;
 
@@ -38,14 +38,14 @@ public class Business {
     private @Getter @Setter Timestamp deletedAt;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "business")
-    private @Getter BsWallet businessWallet;
+    @OneToOne(mappedBy = "bs")
+    private @Getter BsWallet bsWallet;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "business")
-    private @Getter BsProfitBalance businessProfitBalance;
+    @OneToOne(mappedBy = "bs")
+    private @Getter BsProfitBalance bsProfitBalance;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "business")
-    private @Getter BsProfitBalanceSm businessProfitBalanceSimulation;
+    @OneToOne(mappedBy = "bs")
+    private @Getter BsProfitBalanceSm bsProfitBalanceSm;
 }

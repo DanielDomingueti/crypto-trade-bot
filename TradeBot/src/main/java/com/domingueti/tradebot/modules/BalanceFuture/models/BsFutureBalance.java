@@ -16,13 +16,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "tb_business_future_balance")
+@Entity(name = "tb_bs_future_balance")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Where(clause = "deleted_at IS NULL")
-@SQLDelete(sql = "update tb_business_future_balance set deleted_at = current_timestamp where id=?")
+@SQLDelete(sql = "update tb_bs_future_balance set deleted_at = current_timestamp where id=?")
 public class BsFutureBalance implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -51,11 +51,11 @@ public class BsFutureBalance implements Serializable {
 	private @Getter BalanceOriginType balanceOriginType;
 
 	@ToString.Exclude
-	@OneToMany(mappedBy = "businessFutureBalance")
+	@OneToMany(mappedBy = "bsFutureBalance")
 	private @Getter List<FutureBalance> futureBalances = new ArrayList<>();
 
 	@ToString.Exclude
-	@OneToMany(mappedBy = "businessFutureBalance")
+	@OneToMany(mappedBy = "bsFutureBalance")
 	private @Getter List<OpenPosition> openPositions = new ArrayList<>();
 
 }

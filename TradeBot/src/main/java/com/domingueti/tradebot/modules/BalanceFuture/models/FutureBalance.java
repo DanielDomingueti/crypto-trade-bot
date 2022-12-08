@@ -32,7 +32,7 @@ public class FutureBalance implements Serializable {
 
 	private @Getter @Setter Long investmentId;
 
-	private @Getter @Setter Long businessFutureBalanceId;
+	private @Getter @Setter Long bsFutureBalanceId;
 
 	private @Getter @Setter Long balanceOriginTypeId;
 
@@ -59,8 +59,8 @@ public class FutureBalance implements Serializable {
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "businessFutureBalanceId", insertable = false, updatable = false)
-	private @Getter BsFutureBalance businessFutureBalance;
+	@JoinColumn(name = "bsFutureBalanceId", insertable = false, updatable = false)
+	private @Getter BsFutureBalance bsFutureBalance;
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)

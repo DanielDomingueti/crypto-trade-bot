@@ -10,12 +10,12 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-@Entity(name = "tb_business_profit_balance")
+@Entity(name = "tb_bs_profit_balance")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SQLDelete(sql = "update tb_business_profit_balance set deleted_at = current_timestamp where id=?")
+@SQLDelete(sql = "update tb_bs_profit_balance set deleted_at = current_timestamp where id=?")
 public class BsProfitBalance {
 
     @Id
@@ -23,7 +23,7 @@ public class BsProfitBalance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Getter @Setter Long id;
 
-    private @Getter @Setter Long businessId;
+    private @Getter @Setter Long bsId;
 
     private @Getter @Setter BigDecimal netValue;
 
@@ -38,6 +38,6 @@ public class BsProfitBalance {
     private @Getter @Setter Timestamp deletedAt;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "businessProfitBalance")
-    private @Getter Business business;
+    @OneToOne(mappedBy = "bsProfitBalance")
+    private @Getter Business bs;
 }

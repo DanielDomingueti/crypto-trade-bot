@@ -8,12 +8,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name = "tb_business_wallet")
+@Entity(name = "tb_bs_wallet")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SQLDelete(sql = "update tb_business_wallet set deleted_at = current_timestamp where id=?")
+@SQLDelete(sql = "update tb_bs_wallet set deleted_at = current_timestamp where id=?")
 public class BsWallet {
 
     @Id
@@ -22,7 +22,7 @@ public class BsWallet {
     private @Getter
     @Setter Long id;
 
-    private @Getter @Setter Long businessId;
+    private @Getter @Setter Long bsId;
 
     private @Getter @Setter String address;
 
@@ -35,7 +35,7 @@ public class BsWallet {
     private @Getter @Setter Timestamp deletedAt;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "businessWallet")
-    private @Getter Business business;
+    @OneToOne(mappedBy = "bsWallet")
+    private @Getter Business bs;
 
 }
