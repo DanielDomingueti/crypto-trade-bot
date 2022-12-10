@@ -43,7 +43,7 @@ public class GetSpotBalanceByUserIdServiceTest {
         Assertions.assertDoesNotThrow(() -> {
             service.execute(validUserId);
         });
-        verify(spotBalanceRepository, times(1)).findAllTop1OrderByReferenceDateDescAndInvestment_userId(validUserId);
+        verify(spotBalanceRepository, times(1)).findAllTop1ByInvestment_userIdOrderByReferenceDateDesc(validUserId);
     }
 
 }

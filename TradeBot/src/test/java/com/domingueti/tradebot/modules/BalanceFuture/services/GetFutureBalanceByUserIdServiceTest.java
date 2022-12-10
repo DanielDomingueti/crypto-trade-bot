@@ -38,7 +38,7 @@ public class GetFutureBalanceByUserIdServiceTest {
 
         //invalid gets
         invalidUserId = 9999L;
-        doThrow(NotFoundException.class).when(futureBalanceRepository).findTop1OrderByReferenceDateDescAndInvestment_userId(invalidUserId);
+        doThrow(NotFoundException.class).when(futureBalanceRepository).findTop1ByInvestment_userIdOrderByReferenceDateDesc(invalidUserId);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class GetFutureBalanceByUserIdServiceTest {
         Assertions.assertDoesNotThrow(() -> {
             service.execute(userId);
         });
-        verify(futureBalanceRepository, times(1)).findTop1OrderByReferenceDateDescAndInvestment_userId(userId);
+        verify(futureBalanceRepository, times(1)).findTop1ByInvestment_userIdOrderByReferenceDateDesc(userId);
     }
 
     @Test
@@ -57,6 +57,6 @@ public class GetFutureBalanceByUserIdServiceTest {
            service.execute(invalidUserId);
         });
 
-        verify(futureBalanceRepository, times(1)).findTop1OrderByReferenceDateDescAndInvestment_userId(invalidUserId);
+        verify(futureBalanceRepository, times(1)).findTop1ByInvestment_userIdOrderByReferenceDateDesc(invalidUserId);
     }
 }

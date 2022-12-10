@@ -14,7 +14,7 @@ public class GetFutureBalanceByUserIdService {
 
     @Transactional(readOnly = true)
     public FutureBalanceDTO execute(Long userId) {
-        FutureBalanceDTO dto = futureBalanceRepository.findTop1OrderByReferenceDateDescAndInvestment_userId(userId);
+        FutureBalanceDTO dto = new FutureBalanceDTO(futureBalanceRepository.findTop1ByInvestment_userIdOrderByReferenceDateDesc(userId));
 
         return dto;
     }

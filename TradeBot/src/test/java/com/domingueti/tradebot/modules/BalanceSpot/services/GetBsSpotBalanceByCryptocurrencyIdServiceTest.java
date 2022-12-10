@@ -38,7 +38,7 @@ public class GetBsSpotBalanceByCryptocurrencyIdServiceTest {
 
         //invalid gets
         invalidCryptoId = 9999L;
-        doThrow(NotFoundException.class).when(bsSpotBalanceRepository).findTop1OrderByReferenceDateDescAndCryptocurrencyId(invalidCryptoId);
+        doThrow(NotFoundException.class).when(bsSpotBalanceRepository).findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(invalidCryptoId);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class GetBsSpotBalanceByCryptocurrencyIdServiceTest {
         Assertions.assertDoesNotThrow(() -> {
             service.execute(validCryptoId);
         });
-        verify(bsSpotBalanceRepository, times(1)).findTop1OrderByReferenceDateDescAndCryptocurrencyId(validCryptoId);
+        verify(bsSpotBalanceRepository, times(1)).findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(validCryptoId);
     }
 
     @Test

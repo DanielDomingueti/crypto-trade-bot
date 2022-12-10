@@ -18,7 +18,7 @@ public class GetSpotBalanceByUserIdService {
 
         SpotBalanceDTO calculatedDTO = new SpotBalanceDTO();
 
-        for (SpotBalance model : bsSpotBalanceRepository.findAllTop1OrderByReferenceDateDescAndInvestment_userId(userId)) {
+        for (SpotBalance model : bsSpotBalanceRepository.findAllTop1ByInvestment_userIdOrderByReferenceDateDesc(userId)) {
             calculatedDTO.setNetValue(calculatedDTO.getNetValue().add(model.getNetValue()));
             calculatedDTO.setProfit(calculatedDTO.getProfit().add(model.getProfit()));
             calculatedDTO.setUnits(calculatedDTO.getUnits() + model.getUnits());

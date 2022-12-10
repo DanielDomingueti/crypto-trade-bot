@@ -14,7 +14,7 @@ public class GetSpotBalanceByCryptocurrencyIdService {
 
     @Transactional(readOnly = true)
     public SpotBalanceDTO execute(Long cryptocurrencyId) {
-        SpotBalanceDTO dto = spotBalanceRepository.findTop1OrderByReferenceDateDescAndCryptocurrencyId(cryptocurrencyId);
+        SpotBalanceDTO dto = new SpotBalanceDTO(spotBalanceRepository.findTop1ByInvestment_cryptocurrencyIdOrderByReferenceDateDesc(cryptocurrencyId));
 
         return dto;
     }

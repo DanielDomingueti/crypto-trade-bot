@@ -38,7 +38,7 @@ public class GetSpotBalanceByCryptocurrencyIdServiceTest {
 
         //invalid gets
         invalidCryptoId = 9999L;
-        doThrow(NotFoundException.class).when(spotBalanceRepository).findTop1OrderByReferenceDateDescAndCryptocurrencyId(invalidCryptoId);
+        doThrow(NotFoundException.class).when(spotBalanceRepository).findTop1ByInvestment_cryptocurrencyIdOrderByReferenceDateDesc(invalidCryptoId);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class GetSpotBalanceByCryptocurrencyIdServiceTest {
         Assertions.assertDoesNotThrow(() -> {
             service.execute(validCryptoId);
         });
-        verify(spotBalanceRepository, times(1)).findTop1OrderByReferenceDateDescAndCryptocurrencyId(validCryptoId);
+        verify(spotBalanceRepository, times(1)).findTop1ByInvestment_cryptocurrencyIdOrderByReferenceDateDesc(validCryptoId);
     }
 
     @Test

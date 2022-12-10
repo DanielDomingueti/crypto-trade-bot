@@ -38,6 +38,6 @@ public class GetBsFutureBalanceSmServiceTest {
         Assertions.assertDoesNotThrow(() -> {
             service.execute();
         });
-        verify(bsFutureBalanceSmRepository, times(1)).findTop1OrderByReferenceDateDesc();
+        verify(bsFutureBalanceSmRepository, times(1)).findTop1ByOrderByReferenceDateDesc();
     }
 }

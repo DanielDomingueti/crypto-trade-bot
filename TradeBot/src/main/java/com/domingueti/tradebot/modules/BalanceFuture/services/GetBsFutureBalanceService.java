@@ -14,7 +14,7 @@ public class GetBsFutureBalanceService {
 
     @Transactional(readOnly = true)
     public BsFutureBalanceDTO execute() {
-        BsFutureBalanceDTO dto = bsFutureBalanceRepository.findTop1OrderByReferenceDateDesc();
+        BsFutureBalanceDTO dto = new BsFutureBalanceDTO(bsFutureBalanceRepository.findTop1ByOrderByReferenceDateDesc());
 
         return dto;
     }

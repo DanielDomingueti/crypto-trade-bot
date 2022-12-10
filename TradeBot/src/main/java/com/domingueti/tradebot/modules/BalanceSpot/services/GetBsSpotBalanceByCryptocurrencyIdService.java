@@ -14,7 +14,7 @@ public class GetBsSpotBalanceByCryptocurrencyIdService {
 
     @Transactional(readOnly = true)
     public BsSpotBalanceDTO execute(Long cryptocurrencyId) {
-        BsSpotBalanceDTO dto = bsSpotBalanceRepository.findTop1OrderByReferenceDateDescAndCryptocurrencyId(cryptocurrencyId);
+        BsSpotBalanceDTO dto = new BsSpotBalanceDTO(bsSpotBalanceRepository.findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(cryptocurrencyId));
 
         return dto;
     }

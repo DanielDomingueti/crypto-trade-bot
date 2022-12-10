@@ -27,7 +27,7 @@ public class GetBsSpotBalanceService {
                 .stream().map(crypto -> crypto.getId()).collect(Collectors.toList());
 
         for (Long cryptocurrencyId : cryptocurrencyIds) {
-            BsSpotBalanceDTO dto = bsSpotBalanceRepository.findTop1OrderByReferenceDateDescAndCryptocurrencyId(cryptocurrencyId);
+            BsSpotBalanceDTO dto = new BsSpotBalanceDTO(bsSpotBalanceRepository.findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(cryptocurrencyId));
 
             calculatedDTO.setNetValue(calculatedDTO.getNetValue().add(dto.getNetValue()));
             calculatedDTO.setUnits(calculatedDTO.getUnits() + dto.getUnits());

@@ -24,10 +24,10 @@ public class FutureBalanceDTO implements Serializable {
 	private @Getter @Setter LocalDate referenceDate;
 
 	public FutureBalanceDTO(FutureBalance model) {
-		this.netValue = model.getNetValue();
-		this.units = model.getUnits();
-		this.profit = model.getProfit();
-		this.referenceDate = model.getReferenceDate();
+		this.netValue = model.getNetValue() == null ? null : model.getNetValue();
+		this.units = model.getUnits() == null ? null : model.getUnits();
+		this.profit = model.getProfit() == null ? null : model.getProfit();
+		this.referenceDate = model.getReferenceDate() == null ? null : model.getReferenceDate();
 	}
 	
 }

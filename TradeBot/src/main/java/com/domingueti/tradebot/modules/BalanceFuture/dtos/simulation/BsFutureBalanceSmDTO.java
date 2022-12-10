@@ -18,8 +18,8 @@ public class BsFutureBalanceSmDTO implements Serializable {
 
 	private @Getter @Setter LocalDate referenceDate;
 	public BsFutureBalanceSmDTO(BsFutureBalanceSm model) {
-		this.units = model.getUnits();
-		this.referenceDate = model.getReferenceDate();
+		this.units = model.getUnits() == null ? null : model.getUnits();
+		this.referenceDate = model.getReferenceDate() == null ? null : model.getReferenceDate();
 	}
-	
+
 }
