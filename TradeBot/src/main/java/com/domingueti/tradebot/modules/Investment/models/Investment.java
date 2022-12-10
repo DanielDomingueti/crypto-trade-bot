@@ -1,35 +1,28 @@
 package com.domingueti.tradebot.modules.Investment.models;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
+import com.domingueti.tradebot.modules.AportHistory.models.AportHistory;
+import com.domingueti.tradebot.modules.BalanceFuture.models.FutureBalance;
+import com.domingueti.tradebot.modules.BalanceSpot.models.SpotBalance;
+import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
+import com.domingueti.tradebot.modules.Income.models.IncomeType;
+import com.domingueti.tradebot.modules.User.models.User;
+import com.domingueti.tradebot.modules.WithdrawHistory.models.WithdrawHistory;
+import lombok.*;
+import lombok.EqualsAndHashCode.Include;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
-import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
-import com.domingueti.tradebot.modules.InvestmentBalance.models.InvestmentBalance;
-import com.domingueti.tradebot.modules.User.models.User;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.EqualsAndHashCode.Include;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity(name = "tb_investment")
 @ToString
@@ -56,10 +49,6 @@ public class Investment implements Serializable {
 
 	private @Getter @Setter Double units;
 
-	private @Getter @Setter Boolean active;
-	
-	private @Getter @Setter Boolean simulated;
-
 	@CreationTimestamp
 	private @Getter Timestamp createdAt;
 
@@ -67,6 +56,18 @@ public class Investment implements Serializable {
 	private @Getter Timestamp updatedAt;
 
 	private @Getter @Setter Timestamp deletedAt;
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "investment")
+	private @Getter List<PivotInvestmentIncomeType> incomeTypes = new ArrayList<>();
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
+	private @Getter List<AportHistory> aportHistories = new ArrayList<>();
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
+	private @Getter List<WithdrawHistory> withdrawHistories = new ArrayList<>();
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)
@@ -78,9 +79,20 @@ public class Investment implements Serializable {
 	@JoinColumn(name = "cryptocurrencyId", insertable = false, updatable = false)
 	private @Getter Cryptocurrency cryptocurrency;
 
+	@ToString.Exclude
+	@OneToOne(optional = false)
+	private @Getter SpotBalance spotBalance;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "investmentBalanceId")
-	private @Getter InvestmentBalance investmentBalance;
-	
+	@ToString.Exclude
+	@OneToOne(optional = false)
+	private @Getter FutureBalance futureBalance;
+
+	public IncomeType getLastIncomeType() {
+		List<PivotInvestmentIncomeType> currentIncomeTypes = incomeTypes.stream()
+				.filter(ic -> !ic.getReferenceDate().isAfter(LocalDate.now())).collect(Collectors.toList());
+
+		currentIncomeTypes.sort(Comparator.comparing(PivotInvestmentIncomeType::getReferenceDate));
+
+		return currentIncomeTypes.get(currentIncomeTypes.size() - 1).getIncomeType();
+	}
 }

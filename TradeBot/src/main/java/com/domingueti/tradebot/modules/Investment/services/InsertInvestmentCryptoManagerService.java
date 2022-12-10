@@ -25,17 +25,7 @@ public class InsertInvestmentCryptoManagerService {
 	public InvestmentDTO execute(InvestmentInsertCryptoDTO dto) {
 		validator.execute(dto);
 		
-		InvestmentDTO investmentDTO = null;
-		Boolean existingInvestment = investmentRepository.existsByUserIdAndCryptocurrencyIdAndSimulatedAndDeletedAtIsNull(dto.getUserId(), dto.getResultCryptocurrencyId(), dto.getSimulated());
-		
-		if (existingInvestment) {
-			investmentDTO = insertExistingInvestmentCryptoService.execute(dto);
-		
-		} else {
-			investmentDTO = insertNewInvestmentCryptoService.execute(dto);
-		
-		}
-		
-		return investmentDTO;
+
+		return null;
 	}
 }

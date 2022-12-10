@@ -1,7 +1,11 @@
 package com.domingueti.tradebot.modules.Document.controllers;
 
-import java.util.List;
-
+import com.domingueti.tradebot.modules.Document.controllers.openapi.DocumentControllerOpenApi;
+import com.domingueti.tradebot.modules.Document.dtos.DocumentDTO;
+import com.domingueti.tradebot.modules.Document.services.GetDocumentByIdService;
+import com.domingueti.tradebot.modules.Document.services.GetDocumentsByUserIdService;
+import com.domingueti.tradebot.modules.Document.services.GetDocumentsService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,17 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.domingueti.tradebot.modules.Document.controllers.openapi.DocumentControllerOpenApi;
-import com.domingueti.tradebot.modules.Document.dtos.DocumentDTO;
-import com.domingueti.tradebot.modules.Document.services.GetDocumentByIdService;
-import com.domingueti.tradebot.modules.Document.services.GetDocumentsByUserIdService;
-import com.domingueti.tradebot.modules.Document.services.GetDocumentsService;
-
-import lombok.AllArgsConstructor;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/documents", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class DocumentController implements DocumentControllerOpenApi {
 
 	private GetDocumentsService getDocumentsService;
@@ -29,7 +27,7 @@ public class DocumentController implements DocumentControllerOpenApi {
 	private GetDocumentByIdService getDocumentByIdService;
 	
 	@Override
-	@GetMapping("/admin/all")
+	@GetMapping("/admin/document/all")
 	public ResponseEntity<List<DocumentDTO>> getAllDocuments() {
 		
 		List<DocumentDTO> documents = getDocumentsService.execute();
@@ -37,7 +35,7 @@ public class DocumentController implements DocumentControllerOpenApi {
 	}
 	
 	@Override
-	@GetMapping("/user/{userId}")
+	@GetMapping("/document/user/{userId}")
 	public ResponseEntity<List<DocumentDTO>> getDocumentsByUserId(@PathVariable Long userId) {
 		
 		List<DocumentDTO> documents = getDocumentsByUserIdService.execute(userId);
@@ -45,7 +43,7 @@ public class DocumentController implements DocumentControllerOpenApi {
 	}
 	
 	@Override
-	@GetMapping("/{id}")
+	@GetMapping("/document/{id}")
 	public ResponseEntity<DocumentDTO> getDocumentById(@PathVariable Long id) {
 		
 		DocumentDTO documentDTO = getDocumentByIdService.execute(id);
