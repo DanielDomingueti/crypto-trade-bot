@@ -55,11 +55,11 @@ public class BsFutureBalanceSm implements Serializable {
 
 	@ToString.Exclude
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "userId", insertable = false, updatable = false)
 	private @Getter User user;
 
 	@ToString.Exclude
-	@OneToMany(mappedBy = "businessFutureBalanceSimulation")
-	private @Getter List<OpenPositionSm> openPositionSimulations = new ArrayList<>();
+	@OneToMany(mappedBy = "bsFutureBalanceSm")
+	private @Getter List<OpenPositionSm> openPositionSm = new ArrayList<>();
 
 }

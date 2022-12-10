@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/admin/businessFutureBalance/simulation")
+@RequestMapping("/admin/bsFutureBalance/sm")
 public class BsFutureBalanceSmController {
 
     private GetBsFutureBalanceSmService getBusinessFutureBalanceSimulationService;

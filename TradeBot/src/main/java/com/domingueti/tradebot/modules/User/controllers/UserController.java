@@ -41,14 +41,14 @@ public class UserController implements UserControllerOpenApi {
 		return ResponseEntity.ok().body(userDTO);
 	}
 
-	@GetMapping("/admin/user/wallets")
-	public ResponseEntity<List<UserWalletDTO>> getWallets() {
+	@GetMapping("/admin/user/wallet/all")
+	public ResponseEntity<List<UserWalletDTO>> getUserWallets() {
 
 		return null;
 	}
 
 	@GetMapping("/admin/user/wallet/{userId}")
-	public ResponseEntity<List<UserWalletDTO>> getWalletByUserId(@PathVariable Long userId) {
+	public ResponseEntity<UserWalletDTO> getUserWalletByUserId(@PathVariable Long userId) {
 
 		return null;
 	}

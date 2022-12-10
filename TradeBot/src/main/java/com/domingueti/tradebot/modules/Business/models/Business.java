@@ -38,14 +38,17 @@ public class Business {
     private @Getter @Setter Timestamp deletedAt;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "bs")
+    @OneToOne(optional = false)
+    @JoinColumn(name = "bsWalletId", insertable = false, updatable = false)
     private @Getter BsWallet bsWallet;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "bs")
+    @OneToOne(optional = false)
+    @JoinColumn(name = "bsProfitBalanceId", insertable = false, updatable = false)
     private @Getter BsProfitBalance bsProfitBalance;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "bs")
+    @OneToOne(optional = false)
+    @JoinColumn(name = "bsProfitBalanceSmId", insertable = false, updatable = false)
     private @Getter BsProfitBalanceSm bsProfitBalanceSm;
 }

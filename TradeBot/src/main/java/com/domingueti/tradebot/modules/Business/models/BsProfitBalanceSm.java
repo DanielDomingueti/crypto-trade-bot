@@ -23,8 +23,6 @@ public class BsProfitBalanceSm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Getter @Setter Long id;
 
-    private @Getter @Setter Long bsId;
-
     private @Getter @Setter BigDecimal netValue;
 
     private @Getter @Setter LocalDate referenceDate;

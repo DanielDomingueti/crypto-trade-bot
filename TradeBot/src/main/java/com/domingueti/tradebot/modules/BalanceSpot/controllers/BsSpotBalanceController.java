@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/admin/businessSpotBalance")
+@RequestMapping("/admin/bsSpotBalance")
 public class BsSpotBalanceController {
 
     private GetBsSpotBalanceByCryptocurrencyIdService getBsSpotBalanceByCryptocurrencyIdService;
     private GetBsSpotBalanceService getBsSpotBalanceService;
 
     @GetMapping(path = "/cryptocurrency/{cryptoId}")
-    public ResponseEntity<BsSpotBalanceDTO> getBusinessSpotBalanceByCryptocurrencyId(@PathVariable Long cryptoId) {
+    public ResponseEntity<BsSpotBalanceDTO> getLatestBusinessSpotBalanceByCryptocurrencyId(@PathVariable Long cryptoId) {
         BsSpotBalanceDTO dto = getBsSpotBalanceByCryptocurrencyIdService.execute(cryptoId);
 
         return ResponseEntity.ok().body(dto);
     }
 
     @GetMapping
-    public ResponseEntity<BsSpotBalanceDTO> getBusinessSpotBalance() {
+    public ResponseEntity<BsSpotBalanceDTO> getTotalLatestBusinessSpotBalance() {
         BsSpotBalanceDTO dto = getBsSpotBalanceService.execute();
 
         return ResponseEntity.ok().body(dto);

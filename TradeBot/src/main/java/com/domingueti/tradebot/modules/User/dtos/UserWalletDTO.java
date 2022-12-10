@@ -13,12 +13,9 @@ import java.io.Serializable;
 public class UserWalletDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private @Getter @Setter Long userId;
-
 	private @Getter @Setter String address;
 
 	public UserWalletDTO(UserWallet model) {
-		this.userId = model.getUserId();
 		this.address = model.getAddress();
 	}
 	

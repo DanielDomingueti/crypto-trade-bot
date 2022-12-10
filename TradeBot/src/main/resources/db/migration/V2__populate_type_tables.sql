@@ -1,38 +1,42 @@
-INSERT INTO tb_config(name, value) VALUES ('TOKEN_SECRET', 'test-token-signature');
-INSERT INTO tb_config(name, value) VALUES ('SIGN_IN_USER_URL', '/user/login');
-INSERT INTO tb_config(name, value) VALUES ('HEADER_STRING', 'Authorization');
-INSERT INTO tb_config(name, value) VALUES ('TOKEN_TYPE', 'Bearer ');
-INSERT INTO tb_config(name, value) VALUES ('TOKEN_EXPIRATION_TIME', '86400000');
-INSERT INTO tb_config(name, value) VALUES ('TOKEN_ADMIN_EXPIRATION_TIME', '86400000');
+INSERT INTO "tb_config"("name", "value") VALUES ('TOKEN_SECRET', 'test-token-signature');
+INSERT INTO "tb_config"("name", "value") VALUES ('SIGN_IN_USER_URL', '/user/login');
+INSERT INTO "tb_config"("name", "value") VALUES ('HEADER_STRING', 'Authorization');
+INSERT INTO "tb_config"("name", "value") VALUES ('TOKEN_TYPE', 'Bearer ');
+INSERT INTO "tb_config"("name", "value") VALUES ('TOKEN_EXPIRATION_TIME', '86400000');
+INSERT INTO "tb_config"("name", "value") VALUES ('TOKEN_ADMIN_EXPIRATION_TIME', '86400000');
 
-INSERT INTO "tb_user_bank_transaction_type" ("type", "description") VALUES ('usd', 'USD');
-INSERT INTO "tb_user_bank_transaction_type" ("type", "description") VALUES ('eur', 'EUR');
-INSERT INTO "tb_user_bank_transaction_type" ("type", "description") VALUES ('brl', 'BRL');
+INSERT INTO "tb_user_type" ("type", "description") VALUES ('natural_person', 'Natural person');
+INSERT INTO "tb_user_type" ("type", "description") VALUES ('legal_person', 'Legal person');
+
+INSERT INTO "tb_user_group"("name", "description") VALUES ('regular_client', 'REGULAR CLIENT');
+INSERT INTO "tb_user_group"("name", "description") VALUES ('admin', 'ADMIN');
 
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('cpf', 'CPF');
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('rg', 'RG');
 INSERT INTO "tb_document_type" ("type", "description") VALUES ('cnpj', 'CNPJ');
 
-INSERT INTO "tb_bank_type" ("type", "description") VALUES ('INTER', 'Banco Inter');
-INSERT INTO "tb_bank_type" ("type", "description") VALUES ('CAIXA', 'Caixa Econômica Federal');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('aport', 'USDT transfer from user to business [spot balance]');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('withdraw', 'USDT withdraw from business to user [spot balance]');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('swap_entry', 'Income from swap transaction');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('swap_exit', 'Exit from swap transaction');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('from_future', 'Aport from future balance to spot balance');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('to_future', 'Aport to future balance from spot balance');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('long_return', 'Future balance after long position output');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('short_return', 'Future balance after short position output');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('from_spot', 'Aport from spot balance to future balance');
+INSERT INTO "tb_balance_origin_type" ("type", "description") VALUES ('to_spot', 'Aport to spot balance from future balance');
 
-INSERT INTO "tb_pix_type" ("type", "description") VALUES ('phone', 'Phone');
-INSERT INTO "tb_pix_type" ("type", "description") VALUES ('document', 'Document');
-INSERT INTO "tb_pix_type" ("type", "description") VALUES ('email', 'Email');
-INSERT INTO "tb_pix_type" ("type", "description") VALUES ('random_key', 'Random Key');
+INSERT INTO "tb_open_position_type" ("type", "description") VALUES ('long', 'LONG');
+INSERT INTO "tb_open_position_type" ("type", "description") VALUES ('short', 'SHORT');
 
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('NEW_CONTRIBUTION', 'Put money on it');
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('BUY_EXISTING', 'Buy cryptocurrency');
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('SOLD_EXISTING', 'Sell cryptocurrency');
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('SWAP', 'Swap different cryptocurrencies');
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('STEAKING_INCOME', 'Steaking passive income');
-INSERT INTO "tb_investment_operation_type" ("type", "description") VALUES ('LIQUIDITY_POOL_INCOME', 'Liquidity pool passive income');
 
-INSERT INTO "tb_user_type" ("type", "description") VALUES ('natural_person', 'Natural person');
-INSERT INTO "tb_user_type" ("type", "description") VALUES ('legal_person', 'Legal person');
+INSERT INTO "tb_income_type" ("type", "description") VALUES ('coupon', 'After closing a position the user gets his proportional profit through his digital wallet');
+INSERT INTO "tb_income_type" ("type", "description") VALUES ('reinvest', 'After closing a position the users proportional profit goes into his investment again');
 
-INSERT INTO tb_user_group(name, description) VALUES ('regular_client', 'REGULAR CLIENT');
-INSERT INTO tb_user_group(name, description) VALUES ('admin', 'ADMIN');
+INSERT INTO "tb_pair_symbol_type" ("type", "description") VALUES ('btcusdt', 'BTCUSDT');
+INSERT INTO "tb_pair_symbol_type" ("type", "description") VALUES ('ethusdt', 'ETHUSDT');
+INSERT INTO "tb_pair_symbol_type" ("type", "description") VALUES ('maticusdt', 'MATICUSDT');
+INSERT INTO "tb_pair_symbol_type" ("type", "description") VALUES ('dotusdt', 'DOTUSDT');
 
 INSERT INTO "tb_cryptocurrency" ("symbol", "name") VALUES ('BTC', 'Bitcoin');
 INSERT INTO "tb_cryptocurrency" ("symbol", "name") VALUES ('ETH', 'Ethereum');

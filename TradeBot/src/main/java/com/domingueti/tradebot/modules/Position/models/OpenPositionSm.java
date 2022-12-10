@@ -36,8 +36,6 @@ public class OpenPositionSm implements Serializable {
 
 	private @Getter @Setter Long pairSymbolTypeId;
 
-	private @Getter @Setter Long tradeHistorySmId;
-
 	private @Getter @Setter Integer leverage;
 
 	private @Getter @Setter BigDecimal size;
@@ -81,7 +79,6 @@ public class OpenPositionSm implements Serializable {
 
 	@ToString.Exclude
 	@OneToOne(mappedBy = "openPositionSm")
-	@JoinColumn(name = "tradeHistorySmId", insertable = false, updatable = false)
 	private @Getter TradeHistorySm tradeHistorySm;
 
 }

@@ -52,7 +52,7 @@ public class TradeHistorySm implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToOne(mappedBy = "tradeHistorySm")
+	@OneToOne(optional = false)
 	@JoinColumn(name = "openPositionSmId", insertable = false, updatable = false)
 	private @Getter OpenPositionSm openPositionSm;
 

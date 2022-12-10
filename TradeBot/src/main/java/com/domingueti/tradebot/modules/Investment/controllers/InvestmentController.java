@@ -17,7 +17,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/investments")
+@RequestMapping
 public class InvestmentController implements InvestmentControllerOpenApi {
 	
 	private GetInvestmentsService getInvestmentsService;
@@ -29,28 +29,28 @@ public class InvestmentController implements InvestmentControllerOpenApi {
 	private InsertInvestmentCryptoManagerService insertInvestmentCryptoManagerService;
 	
 	@Override
-	@GetMapping("/admin/all")
+	@GetMapping("/admin/investment/all")
 	public ResponseEntity<List<InvestmentDTO>> getInvestments() {
 		List<InvestmentDTO> investments = getInvestmentsService.execute();
 		return ResponseEntity.ok().body(investments);
 	}
 	
 	@Override
-	@GetMapping("/user/{userId}")
+	@GetMapping("/investment/user/{userId}")
 	public ResponseEntity<List<InvestmentDTO>> getInvestmentsByUserId(@PathVariable Long userId) {
 		List<InvestmentDTO> investments = getInvestmentsByUserIdService.execute(userId);
 		return ResponseEntity.ok().body(investments);
 	}
 	
 	@Override
-	@GetMapping("/{id}")
+	@GetMapping("/investment/{id}")
 	public ResponseEntity<InvestmentDTO> getInvestmentById(@PathVariable Long id) {
 		InvestmentDTO investmentDTO = getInvestmentByIdService.execute(id);
 		return ResponseEntity.ok().body(investmentDTO);
 	}
 	
 	@Override
-	@PostMapping("/insert/crypto")
+	@PostMapping("/investment/insert")
 	public ResponseEntity<InvestmentDTO> insertInvestmentCrypto(@RequestBody InvestmentInsertCryptoDTO dto) {
 		InvestmentDTO investmentDTO = insertInvestmentCryptoManagerService.execute(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(investmentDTO.getId()).toUri();

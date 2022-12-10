@@ -52,7 +52,8 @@ public class User {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToOne(mappedBy = "user")
+	@OneToOne(optional = false)
+	@JoinColumn(name = "userWalletId", insertable = false, updatable = false)
 	private @Getter UserWallet userWallet;
 
 	@ToString.Exclude

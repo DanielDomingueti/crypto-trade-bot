@@ -16,7 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/admin/tradeHistory")
+@RequestMapping(value = "/admin/tradehistory")
 public class TradeHistoryController {
 
 	private GetTradeHistoryBalanceService getTradeHistoryBalanceService;

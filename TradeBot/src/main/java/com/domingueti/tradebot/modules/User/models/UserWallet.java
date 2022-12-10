@@ -23,8 +23,6 @@ public class UserWallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Getter @Setter Long id;
 
-    private @Getter @Setter Long userId;
-
     private @Getter @Setter String address;
 
     @CreationTimestamp

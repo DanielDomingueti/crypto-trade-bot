@@ -19,20 +19,19 @@ public class BusinessController {
     private GetBsWalletService getBsWalletService;
     private GetBsProfitService getBsProfitService;
 
-
-    @GetMapping("/business/wallet")
+    @GetMapping("/bs/wallet")
     public ResponseEntity<BsWalletDTO> getBusinessWallet() {
         //returns the business wallet
         return null;
     }
 
-    @GetMapping("/admin/business/profit")
+    @GetMapping("/admin/bs/profit")
     public ResponseEntity<BsProfitBalanceDTO> getBusinessProfit() {
         //returns the business profit (gains from future balance)
         return null;
     }
 
-    @GetMapping("/admin/business/profit/simulation")
+    @GetMapping("/admin/bs/profit/sm")
     public ResponseEntity<BsProfitBalanceSmDTO> getBusinessProfitSimulation() {
         //returns the business profit simulation (gains from future balance simulation)
         return null;

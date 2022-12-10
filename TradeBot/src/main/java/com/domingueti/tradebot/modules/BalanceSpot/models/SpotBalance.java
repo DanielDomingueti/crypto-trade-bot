@@ -53,7 +53,7 @@ public class SpotBalance implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "spotBalance")
 	@JoinColumn(name = "investmentId")
 	private @Getter Investment investment;
 

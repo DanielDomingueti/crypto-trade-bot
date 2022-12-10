@@ -41,12 +41,16 @@ public class PairSymbolType implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToMany(mappedBy = "pairSymbolTypeId")
+	@OneToMany(mappedBy = "pairSymbolType")
 	private @Getter List<OpenPosition> openPositions = new ArrayList<>();
 
 	@ToString.Exclude
-	@OneToOne(mappedBy = "openPosition")
-	@JoinColumn(name = "openPositionId", insertable = false, updatable = false)
-	private @Getter OpenPosition openPosition;
+	@OneToMany(mappedBy = "pairSymbolType")
+	private @Getter List<OpenPositionSm> openPositionsSm = new ArrayList<>();
+
+//	@ToString.Exclude
+//	@OneToOne(mappedBy = "openPosition")
+//	@JoinColumn(name = "openPositionId", insertable = false, updatable = false)
+//	private @Getter OpenPosition openPosition;
 
 }

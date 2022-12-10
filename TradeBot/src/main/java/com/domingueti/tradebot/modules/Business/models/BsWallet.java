@@ -19,10 +19,7 @@ public class BsWallet {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private @Getter
-    @Setter Long id;
-
-    private @Getter @Setter Long bsId;
+    private @Getter @Setter Long id;
 
     private @Getter @Setter String address;
 

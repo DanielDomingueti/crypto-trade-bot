@@ -53,7 +53,7 @@ public class FutureBalance implements Serializable {
 	private @Getter @Setter Timestamp deletedAt;
 
 	@ToString.Exclude
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "futureBalance")
 	@JoinColumn(name = "investmentId")
 	private @Getter Investment investment;
 

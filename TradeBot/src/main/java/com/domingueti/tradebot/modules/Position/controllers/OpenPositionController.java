@@ -15,14 +15,14 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/admin/openPosition")
+@RequestMapping(value = "/admin/openposition")
 public class OpenPositionController {
 
 	private GetOpenPositionsService getOpenPositionsService;
 	private GetOpenPositionByPairIdService getOpenPositionByPairIdService;
 	private GetOpenPositionRoesService getOpenPositionRoeService;
 
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<OpenPositionDTO>> getAllOpenPositions() {
 		//returns all open positions
 		return null;

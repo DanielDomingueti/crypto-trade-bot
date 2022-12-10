@@ -1,10 +1,12 @@
 package com.domingueti.tradebot.modules.Investment.models;
 
+import com.domingueti.tradebot.modules.AportHistory.models.AportHistory;
 import com.domingueti.tradebot.modules.BalanceFuture.models.FutureBalance;
 import com.domingueti.tradebot.modules.BalanceSpot.models.SpotBalance;
 import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
 import com.domingueti.tradebot.modules.Income.models.IncomeType;
 import com.domingueti.tradebot.modules.User.models.User;
+import com.domingueti.tradebot.modules.WithdrawHistory.models.WithdrawHistory;
 import lombok.*;
 import lombok.EqualsAndHashCode.Include;
 import org.hibernate.annotations.CreationTimestamp;
@@ -41,10 +43,6 @@ public class Investment implements Serializable {
 
 	private @Getter @Setter Long cryptocurrencyId;
 
-	private @Getter @Setter Long spotBalanceId;
-
-	private @Getter @Setter Long futureBalanceId;
-
 	private @Getter @Setter BigDecimal initialValue;
 
 	private @Getter @Setter BigDecimal unitValue;
@@ -64,6 +62,14 @@ public class Investment implements Serializable {
 	private @Getter List<PivotInvestmentIncomeType> incomeTypes = new ArrayList<>();
 
 	@ToString.Exclude
+	@OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
+	private @Getter List<AportHistory> aportHistories = new ArrayList<>();
+
+	@ToString.Exclude
+	@OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
+	private @Getter List<WithdrawHistory> withdrawHistories = new ArrayList<>();
+
+	@ToString.Exclude
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "userId", insertable = false, updatable = false)
 	private @Getter User user;
@@ -74,13 +80,11 @@ public class Investment implements Serializable {
 	private @Getter Cryptocurrency cryptocurrency;
 
 	@ToString.Exclude
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "spotBalanceId")
+	@OneToOne(optional = false)
 	private @Getter SpotBalance spotBalance;
 
 	@ToString.Exclude
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "futureBalanceId")
+	@OneToOne(optional = false)
 	private @Getter FutureBalance futureBalance;
 
 	public IncomeType getLastIncomeType() {

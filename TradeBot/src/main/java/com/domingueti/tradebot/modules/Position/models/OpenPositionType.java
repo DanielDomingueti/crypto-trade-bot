@@ -46,6 +46,6 @@ public class OpenPositionType implements Serializable {
 
 	@ToString.Exclude
 	@OneToMany(mappedBy = "openPositionType")
-	private @Getter List<OpenPositionSm> openPositionSimulations = new ArrayList<>();
+	private @Getter List<OpenPositionSm> openPositionsSm = new ArrayList<>();
 
 }

@@ -1,7 +1,7 @@
 package com.domingueti.tradebot.modules.Position.controllers;
 
-import com.domingueti.tradebot.modules.Position.dtos.PairSymbolTypeDTO;
-import com.domingueti.tradebot.modules.Position.services.GetPairSymbolTypesService;
+import com.domingueti.tradebot.modules.Position.dtos.OpenPositionTypeDTO;
+import com.domingueti.tradebot.modules.Position.services.GetOpenPositionTypesService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,14 +12,14 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/pairsymboltype")
-public class PairSymbolTypeController {
+@RequestMapping(value = "/openpositiontype")
+public class OpenPositionTypeController {
 
-	private GetPairSymbolTypesService getPairSymbolTypesService;
+	private GetOpenPositionTypesService getOpenPositionTypesService;
 
 	@GetMapping("/all")
-	public ResponseEntity<List<PairSymbolTypeDTO>> getAllPairSymbolTypes() {
-		//returns all pair symbol types
+	public ResponseEntity<List<OpenPositionTypeDTO>> getAllOpenPositionTypes() {
+		//returns all open position types
 		return null;
 	}
 
