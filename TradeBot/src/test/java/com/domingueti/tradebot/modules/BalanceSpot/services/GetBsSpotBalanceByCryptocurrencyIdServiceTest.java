@@ -1,7 +1,7 @@
 package com.domingueti.tradebot.modules.BalanceSpot.services;
 
 import com.domingueti.tradebot.exceptions.NotFoundException;
-import com.domingueti.tradebot.modules.BalanceSpot.dtos.BsSpotBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceSpot.models.BsSpotBalance;
 import com.domingueti.tradebot.modules.BalanceSpot.repositories.BsSpotBalanceRepository;
 import com.domingueti.tradebot.tests.Factory;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class GetBsSpotBalanceByCryptocurrencyIdServiceTest {
 
     private Long validCryptoId;
-    private BsSpotBalanceDTO validBsSpotBalanceDTO;
+    private BsSpotBalance validBsSpotBalance;
 
     private Long invalidCryptoId;
 
@@ -33,8 +33,8 @@ public class GetBsSpotBalanceByCryptocurrencyIdServiceTest {
     void setup() {
         //valid gets
         validCryptoId = 1L;
-        validBsSpotBalanceDTO = Factory.createBsSpotBalanceDTO();
-        when(service.execute(validCryptoId)).thenReturn(validBsSpotBalanceDTO);
+        validBsSpotBalance = Factory.createBsSpotBalance();
+        when(bsSpotBalanceRepository.findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(validCryptoId)).thenReturn(validBsSpotBalance);
 
         //invalid gets
         invalidCryptoId = 9999L;

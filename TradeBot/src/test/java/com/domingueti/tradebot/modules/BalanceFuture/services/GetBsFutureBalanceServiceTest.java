@@ -1,6 +1,6 @@
 package com.domingueti.tradebot.modules.BalanceFuture.services;
 
-import com.domingueti.tradebot.modules.BalanceFuture.dtos.BsFutureBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceFuture.models.BsFutureBalance;
 import com.domingueti.tradebot.modules.BalanceFuture.repositories.BsFutureBalanceRepository;
 import com.domingueti.tradebot.tests.Factory;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 public class GetBsFutureBalanceServiceTest {
 
-    private BsFutureBalanceDTO validBsFutureBalanceDTO;
+    private BsFutureBalance validBsFutureBalance;
 
     @InjectMocks
     private GetBsFutureBalanceService service;
@@ -28,8 +28,8 @@ public class GetBsFutureBalanceServiceTest {
     @BeforeEach
     void setup() {
         //valid insertions
-        validBsFutureBalanceDTO = Factory.createBsFutureBalanceDTO();
-        when(service.execute()).thenReturn(validBsFutureBalanceDTO);
+        validBsFutureBalance = Factory.createBsFutureBalance();
+        when(bsFutureBalanceRepository.findTop1ByOrderByReferenceDateDesc()).thenReturn(validBsFutureBalance);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.domingueti.tradebot.modules.BalanceFuture.services;
 
 import com.domingueti.tradebot.modules.BalanceFuture.dtos.FutureBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceFuture.models.FutureBalance;
 import com.domingueti.tradebot.modules.BalanceFuture.repositories.FutureBalanceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,9 @@ public class GetFutureBalanceByUserIdService {
 
     @Transactional(readOnly = true)
     public FutureBalanceDTO execute(Long userId) {
-        FutureBalanceDTO dto = new FutureBalanceDTO(futureBalanceRepository.findTop1ByInvestment_userIdOrderByReferenceDateDesc(userId));
+        FutureBalance futureBalance = futureBalanceRepository.findTop1ByInvestment_userIdOrderByReferenceDateDesc(userId);
 
-        return dto;
+        return new FutureBalanceDTO(futureBalance);
     }
 
 }

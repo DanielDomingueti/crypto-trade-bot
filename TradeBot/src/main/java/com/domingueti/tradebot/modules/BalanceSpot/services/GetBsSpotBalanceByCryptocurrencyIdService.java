@@ -1,6 +1,7 @@
 package com.domingueti.tradebot.modules.BalanceSpot.services;
 
 import com.domingueti.tradebot.modules.BalanceSpot.dtos.BsSpotBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceSpot.models.BsSpotBalance;
 import com.domingueti.tradebot.modules.BalanceSpot.repositories.BsSpotBalanceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,9 @@ public class GetBsSpotBalanceByCryptocurrencyIdService {
 
     @Transactional(readOnly = true)
     public BsSpotBalanceDTO execute(Long cryptocurrencyId) {
-        BsSpotBalanceDTO dto = new BsSpotBalanceDTO(bsSpotBalanceRepository.findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(cryptocurrencyId));
+        BsSpotBalance bsSpotBalance = bsSpotBalanceRepository.findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(cryptocurrencyId);
 
-        return dto;
+        return new BsSpotBalanceDTO(bsSpotBalance);
     }
 
 }

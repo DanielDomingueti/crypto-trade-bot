@@ -1,12 +1,15 @@
 package com.domingueti.tradebot.modules.BalanceSpot.services;
 
 import com.domingueti.tradebot.modules.BalanceSpot.dtos.BsSpotBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceSpot.models.BsSpotBalance;
 import com.domingueti.tradebot.modules.BalanceSpot.repositories.BsSpotBalanceRepository;
 import com.domingueti.tradebot.modules.Cryptocurrency.repositories.CryptocurrencyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,20 +24,23 @@ public class GetBsSpotBalanceService {
     @Transactional(readOnly = true)
     public BsSpotBalanceDTO execute() {
 
-        BsSpotBalanceDTO calculatedDTO = new BsSpotBalanceDTO();
+        Double totalUnits = 0.0;
+        BigDecimal totalNetValue = new BigDecimal("0.0");
+        BigDecimal totalProfit = new BigDecimal("0.0");
 
         List<Long> cryptocurrencyIds = cryptocurrencyRepository.findAllByDeletedAtIsNull()
-                .stream().map(crypto -> crypto.getId()).collect(Collectors.toList());
+                .stream().map(cryptocurrency ->  cryptocurrency.getId()).collect(Collectors.toList());
 
         for (Long cryptocurrencyId : cryptocurrencyIds) {
-            BsSpotBalanceDTO dto = new BsSpotBalanceDTO(bsSpotBalanceRepository.findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(cryptocurrencyId));
-
-            calculatedDTO.setNetValue(calculatedDTO.getNetValue().add(dto.getNetValue()));
-            calculatedDTO.setUnits(calculatedDTO.getUnits() + dto.getUnits());
-            calculatedDTO.setProfit(calculatedDTO.getProfit().add(dto.getProfit()));
+            BsSpotBalance bsSpotBalance = bsSpotBalanceRepository.findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(cryptocurrencyId);
+            if (bsSpotBalance != null) {
+                totalUnits += bsSpotBalance.getUnits();
+                totalNetValue = totalNetValue.add(bsSpotBalance.getNetValue());
+                totalProfit = totalProfit.add(bsSpotBalance.getProfit());
+            }
         }
 
-        return calculatedDTO;
+        return new BsSpotBalanceDTO(totalNetValue, totalUnits, totalProfit, LocalDate.now());
     }
 
 }

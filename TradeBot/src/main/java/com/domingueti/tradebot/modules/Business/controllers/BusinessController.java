@@ -3,7 +3,8 @@ package com.domingueti.tradebot.modules.Business.controllers;
 import com.domingueti.tradebot.modules.Business.dtos.BsProfitBalanceDTO;
 import com.domingueti.tradebot.modules.Business.dtos.BsProfitBalanceSmDTO;
 import com.domingueti.tradebot.modules.Business.dtos.BsWalletDTO;
-import com.domingueti.tradebot.modules.Business.services.GetBsProfitService;
+import com.domingueti.tradebot.modules.Business.services.GetBsProfitBalanceService;
+import com.domingueti.tradebot.modules.Business.services.GetBsProfitBalanceSmService;
 import com.domingueti.tradebot.modules.Business.services.GetBsWalletService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class BusinessController {
 
     private GetBsWalletService getBsWalletService;
-    private GetBsProfitService getBsProfitService;
+    private GetBsProfitBalanceService getBsProfitBalanceService;
+    private GetBsProfitBalanceSmService getBsProfitBalanceSmService;
 
     @GetMapping("/bs/wallet")
     public ResponseEntity<BsWalletDTO> getBusinessWallet() {
-        //returns the business wallet
-        return null;
+        BsWalletDTO dto = getBsWalletService.execute();
+
+        return ResponseEntity.ok().body(dto);
     }
 
     @GetMapping("/admin/bs/profit")
-    public ResponseEntity<BsProfitBalanceDTO> getBusinessProfit() {
+    public ResponseEntity<BsProfitBalanceDTO> getBusinessProfitBalance() {
         //returns the business profit (gains from future balance)
-        return null;
+        BsProfitBalanceDTO dto = getBsProfitBalanceService.execute();
+
+        return ResponseEntity.ok().body(dto);
     }
 
     @GetMapping("/admin/bs/profit/sm")
     public ResponseEntity<BsProfitBalanceSmDTO> getBusinessProfitSimulation() {
         //returns the business profit simulation (gains from future balance simulation)
-        return null;
+        BsProfitBalanceSmDTO dto = getBsProfitBalanceSmService.execute();
+
+        return ResponseEntity.ok().body(dto);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.domingueti.tradebot.modules.BalanceFuture.services;
 
 import com.domingueti.tradebot.exceptions.NotFoundException;
-import com.domingueti.tradebot.modules.BalanceFuture.dtos.FutureBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceFuture.models.FutureBalance;
 import com.domingueti.tradebot.modules.BalanceFuture.repositories.FutureBalanceRepository;
 import com.domingueti.tradebot.tests.Factory;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +21,7 @@ public class GetFutureBalanceByUserIdServiceTest {
     private Long invalidUserId;
 
     private Long userId;
-    private FutureBalanceDTO validFutureBalanceDTO;
+    private FutureBalance validFutureBalance;
 
     @InjectMocks
     private GetFutureBalanceByUserIdService service;
@@ -33,8 +33,8 @@ public class GetFutureBalanceByUserIdServiceTest {
     void setup() {
         //valid gets
         userId = 1L;
-        validFutureBalanceDTO = Factory.createFutureBalanceDTO();
-        when(service.execute(userId)).thenReturn(validFutureBalanceDTO);
+        validFutureBalance = Factory.createFutureBalance();
+        when(futureBalanceRepository.findTop1ByInvestment_userIdOrderByReferenceDateDesc(userId)).thenReturn(validFutureBalance);
 
         //invalid gets
         invalidUserId = 9999L;

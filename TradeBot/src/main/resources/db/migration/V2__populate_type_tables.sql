@@ -8,6 +8,8 @@ INSERT INTO "tb_config"("name", "value") VALUES ('TOKEN_ADMIN_EXPIRATION_TIME', 
 INSERT INTO "tb_user_type" ("type", "description") VALUES ('natural_person', 'Natural person');
 INSERT INTO "tb_user_type" ("type", "description") VALUES ('legal_person', 'Legal person');
 
+INSERT INTO "tb_bs_wallet" ("address") VALUES ('business_wallet_address_test');
+
 INSERT INTO "tb_user_group"("name", "description") VALUES ('regular_client', 'REGULAR CLIENT');
 INSERT INTO "tb_user_group"("name", "description") VALUES ('admin', 'ADMIN');
 

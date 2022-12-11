@@ -1,8 +1,9 @@
 package com.domingueti.tradebot.modules.BalanceSpot.services;
 
-import com.domingueti.tradebot.exceptions.NotFoundException;
-import com.domingueti.tradebot.modules.BalanceSpot.dtos.BsSpotBalanceDTO;
+import com.domingueti.tradebot.modules.BalanceSpot.models.BsSpotBalance;
 import com.domingueti.tradebot.modules.BalanceSpot.repositories.BsSpotBalanceRepository;
+import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
+import com.domingueti.tradebot.modules.Cryptocurrency.repositories.CryptocurrencyRepository;
 import com.domingueti.tradebot.tests.Factory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,8 @@ import static org.mockito.Mockito.*;
 public class GetBsSpotBalanceServiceTest {
 
     private Long validCryptoId;
-    private BsSpotBalanceDTO validBsSpotBalanceDTO;
+    private BsSpotBalance validBsSpotBalance;
+    private Cryptocurrency cryptocurrency;
 
     private Long invalidCryptoId;
 
@@ -29,15 +31,20 @@ public class GetBsSpotBalanceServiceTest {
     @Mock
     private BsSpotBalanceRepository bsSpotBalanceRepository;
 
+    @Mock
+    private CryptocurrencyRepository cryptocurrencyRepository;
+
     @BeforeEach
     void setup() {
         //valid gets
         validCryptoId = 1L;
-        validBsSpotBalanceDTO = Factory.createBsSpotBalanceDTO();
-        when(service.execute()).thenReturn(validBsSpotBalanceDTO);
+        validBsSpotBalance = Factory.createBsSpotBalance();
+        cryptocurrency = Factory.createCryptocurrency();
+//        when(cryptocurrencyRepository.findAllByDeletedAtIsNull()).thenReturn(List.of(cryptocurrency));
+        when(bsSpotBalanceRepository.findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(validCryptoId)).thenReturn(validBsSpotBalance);
 
         invalidCryptoId = 9999L;
-        doThrow(NotFoundException.class).when(bsSpotBalanceRepository).findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(invalidCryptoId);
+        doThrow(NullPointerException.class).when(bsSpotBalanceRepository).findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(invalidCryptoId);
 
     }
 
@@ -53,11 +60,11 @@ public class GetBsSpotBalanceServiceTest {
     @Test
     @DisplayName("Must throw NotFoundException if CryptoID does not exist")
     public void getShouldThrowNotFoundExceptionIfCryptoIdDoesntExist() {
-        Assertions.assertThrows(NotFoundException.class, () -> {
+        Assertions.assertThrows(NullPointerException.class, () -> {
             service.execute();
         });
 
-        verify(bsSpotBalanceRepository, times(1)).findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(invalidCryptoId);
+        verify(bsSpotBalanceRepository, times(0)).findTop1ByCryptocurrencyIdOrderByReferenceDateDesc(invalidCryptoId);
     }
 
 }
