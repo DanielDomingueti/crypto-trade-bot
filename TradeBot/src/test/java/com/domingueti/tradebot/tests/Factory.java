@@ -9,6 +9,8 @@ import com.domingueti.tradebot.modules.Business.models.BsProfitBalance;
 import com.domingueti.tradebot.modules.Business.models.BsProfitBalanceSm;
 import com.domingueti.tradebot.modules.Business.models.BsWallet;
 import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
+import com.domingueti.tradebot.modules.Document.models.Document;
+import com.domingueti.tradebot.modules.Document.models.DocumentType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -106,6 +108,30 @@ public class Factory {
         model.setId(1L);
         model.setName("bitcoin");
         model.setSymbol("BTC");
+        model.setDeletedAt(null);
+        return model;
+    }
+
+    public static DocumentType createDocumentType() {
+        DocumentType model = new DocumentType();
+        model.setId(1L);
+        model.setType("cpf");
+        model.setDescription("CPF");
+        model.setExpirationTime(360000);
+        model.setDeletedAt(null);
+        return model;
+    }
+
+    public static Document createDocument() {
+        Document model = new Document();
+        model.setId(1L);
+        model.setDocumentTypeId(1L);
+        model.setMain(true);
+        model.setUserId(1L);
+        model.setNumber("14204938242");
+        model.setDueDate(LocalDate.now().plusYears(3));
+        model.setIssueDate(LocalDate.now().minusYears(2));
+        model.setIssuingEntity("SSP");
         model.setDeletedAt(null);
         return model;
     }
