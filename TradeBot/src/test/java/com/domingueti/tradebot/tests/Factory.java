@@ -9,6 +9,7 @@ import com.domingueti.tradebot.modules.Business.models.BsProfitBalance;
 import com.domingueti.tradebot.modules.Business.models.BsProfitBalanceSm;
 import com.domingueti.tradebot.modules.Business.models.BsWallet;
 import com.domingueti.tradebot.modules.Cryptocurrency.models.Cryptocurrency;
+import com.domingueti.tradebot.modules.Document.dtos.DocumentInsertDTO;
 import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Document.models.DocumentType;
 
@@ -134,5 +135,16 @@ public class Factory {
         model.setIssuingEntity("SSP");
         model.setDeletedAt(null);
         return model;
+    }
+
+    public static DocumentInsertDTO createDocumentInsertDTO() {
+        DocumentInsertDTO dto = new DocumentInsertDTO();
+        dto.setUserId(1L);
+        dto.setDocumentTypeId(1L);
+        dto.setMain(true);
+        dto.setNumber("12312312345");
+        dto.setDueDate(LocalDate.now().plusYears(1));
+        dto.setIssuingEntity("issuing entity");
+        return dto;
     }
 }

@@ -6,6 +6,7 @@ import com.domingueti.tradebot.modules.Document.services.GetDocumentByIdService;
 import com.domingueti.tradebot.modules.Document.services.GetDocumentsByUserIdService;
 import com.domingueti.tradebot.modules.Document.services.GetDocumentsService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +29,9 @@ public class DocumentController implements DocumentControllerOpenApi {
 	
 	@Override
 	@GetMapping("/admin/document/all")
-	public ResponseEntity<List<DocumentDTO>> getAllDocuments() {
+	public ResponseEntity<List<DocumentDTO>> getAllDocuments(Pageable pageable) {
 		
-		List<DocumentDTO> documents = getDocumentsService.execute();
+		List<DocumentDTO> documents = getDocumentsService.execute(pageable);
 		return ResponseEntity.ok().body(documents);
 	}
 	

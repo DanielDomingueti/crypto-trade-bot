@@ -4,6 +4,8 @@ import com.domingueti.tradebot.modules.Document.dtos.DocumentDTO;
 import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Document.repositories.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +19,9 @@ public class GetDocumentsService {
 	private DocumentRepository documentRepository;
 	
 	@Transactional(readOnly = true)
-	public List<DocumentDTO> execute() {
+	public List<DocumentDTO> execute(Pageable pageable) {
 		
-		List<Document> documents = documentRepository.findAllByDeletedAtIsNull();
+		Page<Document> documents = documentRepository.findAll(pageable);
 		
 		return documents.stream().map(DocumentDTO::new).collect(Collectors.toList());
 	}

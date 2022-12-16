@@ -1,24 +1,21 @@
 package com.domingueti.tradebot.modules.Document.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.domingueti.tradebot.modules.Document.dtos.DocumentDTO;
 import com.domingueti.tradebot.modules.Document.dtos.DocumentInsertDTO;
 import com.domingueti.tradebot.modules.Document.models.Document;
 import com.domingueti.tradebot.modules.Document.repositories.DocumentRepository;
 import com.domingueti.tradebot.modules.Document.validators.InsertDocumentValidator;
-
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class InsertDocumentService {
+public class InsertDocumentsService {
 
 	private DocumentRepository documentRepository;
 
